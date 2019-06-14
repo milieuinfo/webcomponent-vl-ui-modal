@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>vl-modal voorbeeld</title>
+    </head>
+    
+    <script type="module" src="../vl-modal.src.js"></script>
+    <script type="module" src="../node_modules/vl-ui-button/vl-button.js"></script>
+    <script type="module" src="demo.js"></script>
+
+	<body>
+        <h1>vl-ui-modal demo</h1>
+        <p>
+            <a href="https://overheid.vlaanderen.be/webuniversum/v3/documentation/js-components/vl-ui-modal">Meer voorbeelden en documentatie</a>.
+        </p>
+
+        <div>
+            <h2>Modal</h2>
+            <pre>
+                <code class="line-numbers language-markup">
+                    &lt;button is="vl-button" data-vl-modal-open="modal-1"&gt;Open&lt;/button&gt;
+                    &lt;vl-modal&gt;&lt;/vl-modal&gt;
+                </code>
+            </pre>
+            <div class="demo">
+                <button is="vl-button" data-vl-modal-open="modal-1">Open</button>
+                <vl-modal id="modal-1"></vl-modal>
+            </div>
+        </div>
+
+        <div>
+            <h2>Modal closable</h2>
+            <pre>
+                <code class="line-numbers language-markup">
+                    &lt;button is="vl-button" data-vl-modal-open="modal-2"&gt;Open&lt;/button&gt;
+                    &lt;vl-modal id="modal-2" title="Modal 2" closable&gt;
+                        &lt;span slot="content"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/span&gt;
+                        &lt;button is="vl-button" slot="button"&gt;aanvraag starten&lt;/button&gt;
+                    &lt;/vl-modal&gt;
+                </code>
+            </pre>
+            <div class="demo">
+                <button is="vl-button" data-vl-modal-open="modal-2">Open</button>
+                <vl-modal id="modal-2" title="Modal 2" closable>
+                    <span slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                    <button is="vl-button" slot="button">aanvraag starten</button>
+                </vl-modal>
+            </div>
+        </div>
+    </body>
+</html>
