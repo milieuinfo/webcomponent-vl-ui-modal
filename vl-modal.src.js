@@ -3,7 +3,7 @@ import { VlElement } from '/node_modules/vl-ui-core/vl-core.js';
 (() => {
     loadScript('util.js', '/node_modules/@govflanders/vl-ui-util/dist/js/util.min.js', () => {
         loadScript('core.js', '/node_modules/@govflanders/vl-ui-core/dist/js/core.min.js', () => {
-            loadScript('modal.js', '/node_modules/@govflanders/vl-ui-modal/dist/js/modal.js');
+            loadScript('modal.js', '/dist/modal.js');
         });
     });
   
@@ -120,7 +120,6 @@ export class VlModal extends VlElement(HTMLElement) {
 
         if (newValue != undefined) {
             const closeButtonTemplate = this._getCloseButtonTemplate();
-            closeButtonTemplate.querySelector('button').addEventListener('click', () => this._element.remove());
             this._dialogElement.setAttribute('data-vl-modal-closable', '');
             this._dialogElement.appendChild(closeButtonTemplate);
         }
