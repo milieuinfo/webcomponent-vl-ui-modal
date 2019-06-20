@@ -95,6 +95,20 @@ export class VlModal extends VlElement(HTMLElement) {
     })();
   }
 
+  /**
+   * Handmatig openen van modal.
+   */
+  open() {
+    (async () => {
+      while (!window.vl || !window.vl.modal) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+
+      vl.modal.lastClickedToggle = this._dialog;
+      vl.modal.toggle(this._dialog);
+    })();
+  }
+
   _getCloseButtonTemplate() {
     return this._template(`
             <button type="button" class="vl-modal-dialog__close" data-vl-modal-close>

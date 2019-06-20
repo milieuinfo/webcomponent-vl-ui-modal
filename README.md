@@ -24,6 +24,7 @@ npm run demo
 - De modal element heeft 2 slots, 1 voor content en 1 voor een button (zie [Gebruik](#gebruik))
 - De styling van de `button` slot is terug te vinden in [vl-ui-action-group](https://github.com/milieuinfo/webcomponent-vl-ui-action-group)
 - Deze component laadt de volgende javascript bestanden in (minified versies): util.js, core.js en modal.js
+- Om de component te laten werken met shadowroot is er een methode voorzien om de modal manueel te openen. Het normaal sluiten van de component werkt wel zoals het moet.
 
 ## Credits
 Zie de lijst van [ontwikkelaars](https://github.com/milieuinfo/webcomponent-vl-ui-select/graphs/contributors) die meegewerkt hebben aan de webcomponent.

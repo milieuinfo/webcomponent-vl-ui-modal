@@ -32,7 +32,8 @@
 
         window.vl = {
           modal: {
-            dress: sinon.fake()
+            dress: sinon.fake(),
+            toggle: sinon.fake()
           }
         }
       });
@@ -40,6 +41,12 @@
       test('de dress methode called vl.modal.select met de dialog', () => {
         modal.dress();
         assert(window.vl.modal.dress.calledWith(modal._dialog));
+      });
+
+      test('de toggle methode called vl.modal.toggle met de dialog', () => {
+        modal.open();
+        assert(window.vl.modal.toggle.calledWith(modal._dialog));
+        assert(window.vl.modal.lastClickedToggle === modal._dialog);
       });
 
       test('verander de closable attribute van de modal', () => {

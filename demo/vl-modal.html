@@ -8,6 +8,7 @@
     <script type="module" src="../node_modules/vl-ui-button/vl-button.js"></script>
     <script type="module" src="demo.js"></script>
 
+
 	<body>
         <h1>vl-ui-modal demo</h1>
         <p>
@@ -45,6 +46,38 @@
                     <span slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
                     <button is="vl-button" slot="button">aanvraag starten</button>
                 </vl-modal>
+            </div>
+        </div>
+
+        <div>
+            <h2>Modal manual open</h2>
+            <pre>
+                <code class="line-numbers language-markup">
+                    &lt;button is="vl-button" onclick="openModal('modal-3')"&gt;Open&lt;/button&gt;
+                    &lt;vl-modal id="modal-3" title="Modal 3" closable&gt;
+                        &lt;span slot="content"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/span&gt;
+                        &lt;button is="vl-button" slot="button"&gt;aanvraag starten&lt;/button&gt;
+                    &lt;/vl-modal&gt;
+
+                    &lt;script type="text/javascript"&gt;
+                        function openModal(id) {
+                            document.querySelector("vl-modal[id=\""+id+"\"]").open();
+                        }
+                    &lt;/script&gt;
+                </code>
+            </pre>
+            <div class="demo">
+                <button is="vl-button" onclick="openModal('modal-3')">Open</button>
+                <vl-modal id="modal-3" title="Modal 3" closable>
+                    <span slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                    <button is="vl-button" slot="button">aanvraag starten</button>
+                </vl-modal>
+
+                <script type="text/javascript">
+                    function openModal(id) {
+                        document.querySelector("vl-modal[id=\""+id+"\"]").open();
+                    }
+                </script>
             </div>
         </div>
     </body>
