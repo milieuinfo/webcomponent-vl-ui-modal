@@ -8,7 +8,7 @@ import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.sr
       '/node_modules/@govflanders/vl-ui-util/dist/js/util.min.js', () => {
         loadScript('core.js',
             '/node_modules/@govflanders/vl-ui-core/dist/js/core.min.js', () => {
-              loadScript('modal.js', '/dist/modal.js');
+              loadScript('modal.js', '../dist/modal.js');
             });
       });
 
