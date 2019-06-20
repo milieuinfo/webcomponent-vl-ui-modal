@@ -4,3 +4,4 @@ vl-modal.js
 *.css.map
 *.iml
 .idea/
+node_modules/
