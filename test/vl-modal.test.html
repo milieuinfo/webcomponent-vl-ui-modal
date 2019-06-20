@@ -6,18 +6,74 @@
   <script src="../../@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../web-component-tester/browser.js"></script>
 
+  <script type="module" src="../node_modules/vl-ui-button/vl-button.js"></script>
   <script type="module" src="../vl-modal.src.js"></script>
+  <script src="../node_modules/sinon/pkg/sinon.js"></script>
 </head>
 
 <body>
+
   <test-fixture id="vl-modal-fixture">
     <template>
+      <button is="vl-button" data-vl-modal-open="modal-1">Open</button>
+      <vl-modal id="modal-1"></vl-modal>
     </template>
   </test-fixture>
 
   <script>
     suite('<vl-modal>', () => {
-      const should = chai.should();
+
+      let modal, button;
+
+      setup(() => {
+        let parent = fixture('vl-modal-fixture');
+        modal = parent[1];
+        button = parent[0];
+
+        window.vl = {
+          modal: {
+            dress: sinon.fake()
+          }
+        }
+      });
+
+      test('de dress methode called vl.modal.select met de dialog', () => {
+        modal.dress();
+        assert(window.vl.modal.dress.calledWith(modal._dialog));
+      });
+
+      test('verander de closable attribute van de modal', () => {
+        assert.isFalse(modal._dialog.hasAttribute('data-vl-modal-closable'));
+        assert.isFalse(
+            modal._dialog.lastElementChild.classList.contains('vl-modal-dialog__close'));
+        assert.isFalse(modal._dialog.lastElementChild.hasAttribute('data-vl-modal-close'));
+
+        modal.setAttribute('closable', '');
+
+        assert.isTrue(modal._dialog.hasAttribute('data-vl-modal-closable'));
+        assert.isTrue(
+            modal._dialog.lastElementChild.classList.contains('vl-modal-dialog__close'));
+        assert.isTrue(modal._dialog.lastElementChild.hasAttribute('data-vl-modal-close'))
+      });
+
+      test('verander de id attribute van de modal', () => {
+        assert.isTrue(modal._dialog.id === 'modal-1');
+        modal.setAttribute('id', 'modal-new');
+        assert.isTrue(modal._dialog.id === 'modal-new');
+      });
+
+      test('verander de open attribute van de modal', () => {
+        assert.isFalse(modal._dialog.hasAttribute('open'));
+        modal.setAttribute('open', '');
+        assert.isTrue(modal._dialog.hasAttribute('open'));
+      });
+
+      test('verander de title attribute van de modal', () => {
+        assert.isTrue(modal._titleElement.innerText === 'Modal titel');
+        modal.setAttribute('title', 'title');
+        assert.isTrue(modal._titleElement.innerText === 'title');
+      });
+
     });
   </script>
 </body>

@@ -29,7 +29,9 @@
   "dependencies": {
     "vl-ui-core": "1.4.1",
     "vl-ui-button": "1.0.6",
-    "vl-ui-icon": "2.0.3"
+    "vl-ui-icon": "2.0.3",
+    "vl-ui-link": "1.0.3",
+    "vl-ui-action-group": "milieuinfo/webcomponent-vl-ui-action-group"
   },
   "peerDependencies": {
     "vl-ui-core": "^1.4.1",
@@ -46,6 +48,7 @@
     "np": "3.0.4",
     "uglify-js-es6": "2.8.9",
     "http-server": "0.11.1",
+    "sinon": "7.3.1",
     "vl-ui-util": "1.0.6"
   }
 }
