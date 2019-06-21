@@ -43,10 +43,27 @@
         assert(window.vl.modal.dress.calledWith(modal._dialog));
       });
 
-      test('de toggle methode called vl.modal.toggle met de dialog', () => {
+      test('de open methode called vl.modal.toggle met de dialog', () => {
         modal.open();
         assert(window.vl.modal.toggle.calledWith(modal._dialog));
         assert(window.vl.modal.lastClickedToggle === modal._dialog);
+      });
+
+      test('de open methode called niet vl.modal.toggle met de dialog als al open', () => {
+        modal.setAttribute('open','');
+        modal.open();
+        assert.isFalse(window.vl.modal.toggle.calledWith(modal._dialog));
+      });
+
+      test('de close methode called vl.modal.toggle met de dialog', () => {
+        modal.setAttribute('open','');
+        modal.close();
+        assert(window.vl.modal.toggle.calledWith(modal._dialog));
+      });
+
+      test('de close methode called niet vl.modal.toggle met de dialog als al closed', () => {
+        modal.close();
+        assert.isFalse(window.vl.modal.toggle.calledWith(modal._dialog));
       });
 
       test('verander de closable attribute van de modal', () => {

@@ -105,7 +105,24 @@ export class VlModal extends VlElement(HTMLElement) {
       }
 
       vl.modal.lastClickedToggle = this._dialog;
-      vl.modal.toggle(this._dialog);
+      if (!this._dialog.hasAttribute("open")) {
+        vl.modal.toggle(this._dialog);
+      }
+    })();
+  }
+
+  /**
+   * Handmatig sluiten van modal.
+   */
+  close() {
+    (async () => {
+      while (!window.vl || !window.vl.modal) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+
+      if (this._dialog.hasAttribute("open")) {
+        vl.modal.toggle(this._dialog);
+      }
     })();
   }
 

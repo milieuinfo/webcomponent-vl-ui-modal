@@ -80,5 +80,43 @@
                 </script>
             </div>
         </div>
+
+        <div>
+            <h2>Modal manual close</h2>
+            <pre>
+                <code class="line-numbers language-markup">
+                    &lt;button is="vl-button" onclick="openModal('modal-4')"&gt;Open&lt;/button&gt;
+                    &lt;vl-modal id="modal-4" title="Modal 4" closable&gt;
+                        &lt;span slot="content"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/span&gt;
+                        &lt;button is="vl-button" slot="button" onclick="closeModal('modal-4')"&gt;aanvraag starten&lt;/button&gt;
+                    &lt;/vl-modal&gt;
+
+                    &lt;script type="text/javascript"&gt;
+                        function openModal(id) {
+                            document.querySelector("vl-modal[id=\""+id+"\"]").open();
+                        }
+                        function closeModal(id) {
+                            document.querySelector("vl-modal[id=\""+id+"\"]").close();
+                        }
+                    &lt;/script&gt;
+                </code>
+            </pre>
+            <div class="demo">
+                <button is="vl-button" onclick="openModal('modal-4')">Open</button>
+                <vl-modal id="modal-4" title="Modal 4" closable>
+                    <span slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                    <button is="vl-button" slot="button" onclick="closeModal('modal-4')">aanvraag starten</button>
+                </vl-modal>
+
+                <script type="text/javascript">
+                    function openModal(id) {
+                        document.querySelector("vl-modal[id=\""+id+"\"]").open();
+                    }
+                    function closeModal(id) {
+                        document.querySelector("vl-modal[id=\""+id+"\"]").close();
+                    }
+                </script>
+            </div>
+        </div>
     </body>
 </html>
