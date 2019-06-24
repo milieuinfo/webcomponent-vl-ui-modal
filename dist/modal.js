@@ -228,7 +228,7 @@
          * longer open or is no longer part of the DOM.
          */
         maybeHideModal: function maybeHideModal() {
-          if (this.dialog_.hasAttribute('open') && document.body.contains(this.dialog_)) {
+          if (this.dialog_.hasAttribute('open')) {
             return;
           }
 
