@@ -1,6 +1,6 @@
 import {VlElement} from '/node_modules/vl-ui-core/vl-core.js';
 import {VlIcon} from '/node_modules/vl-ui-icon/vl-icon.js';
-import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.src.js';
+import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js';
 
 (() => {
   loadScript('util.js',
