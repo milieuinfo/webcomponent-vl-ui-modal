@@ -358,10 +358,6 @@
             throw new Error('Failed to execute \'showModal\' on dialog: The element is already open, and therefore cannot be opened modally.');
           }
 
-          if (!document.body.contains(this.dialog_)) {
-            throw new Error('Failed to execute \'showModal\' on dialog: The element is not in a Document.');
-          }
-
           if (!dialogPolyfill.dm.pushDialog(this)) {
             throw new Error('Failed to execute \'showModal\' on dialog: There are too many open modal dialogs.');
           }
