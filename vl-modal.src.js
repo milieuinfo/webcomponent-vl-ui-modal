@@ -1,5 +1,4 @@
 import {VlElement} from '/node_modules/vl-ui-core/vl-core.js';
-import {VlLink} from '/node_modules/vl-ui-link/vl-link.js';
 import {VlIcon} from '/node_modules/vl-ui-icon/vl-icon.js';
 import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.src.js';
 
@@ -55,9 +54,9 @@ export class VlModal extends VlElement(HTMLElement) {
                     </div>
                     <div is="vl-action-group">
                         <slot name="button"></slot>
-                        <a href="#" is="vl-link" data-vl-modal-close>
+                        <button is="vl-button-link" data-vl-modal-close>
                             <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
-                        </a>
+                        </button>
                     </div>
                 </dialog>
             </div>

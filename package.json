@@ -30,9 +30,8 @@
   },
   "dependencies": {
     "vl-ui-core": "1.4.1",
-    "vl-ui-button": "1.0.6",
+    "vl-ui-button": "1.0.7",
     "vl-ui-icon": "2.0.3",
-    "vl-ui-link": "1.0.3",
     "vl-ui-action-group": "0.0.1"
   },
   "peerDependencies": {
@@ -40,10 +39,13 @@
     "dialog-polyfill": "0.5.0"
   },
   "devDependencies": {
+    "@govflanders/vl-ui-button": "3.7.2",
+    "@govflanders/vl-ui-link": "3.7.2",
+    "@govflanders/vl-ui-core": "3.7.2",
+    "@govflanders/vl-ui-icon": "3.7.2",
+    "@govflanders/vl-ui-util": "3.7.2",
     "@govflanders/vl-ui-modal": "3.7.2",
     "@govflanders/vl-ui-action-group": "3.7.2",
-    "@govflanders/vl-ui-input-field": "3.7.2",
-    "@govflanders/vl-ui-link": "3.7.2",
     "wct-browser-legacy": "1.0.2",
     "web-component-tester": "6.9.2",
     "replace": "1.0.0",
