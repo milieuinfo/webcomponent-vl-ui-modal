@@ -36,7 +36,9 @@
   },
   "peerDependencies": {
     "vl-ui-core": "^1.4.1",
-    "vl-ui-button": "^1.0.7"
+    "vl-ui-button": "^1.0.7",
+    "vl-ui-icon": "2.0.3",
+    "vl-ui-action-group": "0.0.1"
   },
   "devDependencies": {
     "@govflanders/vl-ui-core": "3.7.2",
