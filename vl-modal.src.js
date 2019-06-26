@@ -1,4 +1,4 @@
-import {VlElement} from '/node_modules/vl-ui-core/vl-core.js';
+import {VlElement, define} from '/node_modules/vl-ui-core/vl-core.js';
 import {VlIcon} from '/node_modules/vl-ui-icon/vl-icon.js';
 import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js';
 
@@ -159,6 +159,6 @@ export class VlModal extends VlElement(HTMLElement) {
     }
   }
 
-};
+}
 
-customElements.define('vl-modal', VlModal);
+define('vl-modal', VlModal);
