@@ -1,5 +1,6 @@
 import {VlElement, define} from '/node_modules/vl-ui-core/vl-core.js';
 import {VlIcon} from '/node_modules/vl-ui-icon/vl-icon.js';
+import {VlButton} from '/node_modules/vl-ui-button/vl-button.js';
 import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js';
 
 (() => {
@@ -44,6 +45,7 @@ export class VlModal extends VlElement(HTMLElement) {
                 @import '/node_modules/vl-ui-icon/style.css';
                 @import '/node_modules/vl-ui-link/style.css';
                 @import '/node_modules/vl-ui-action-group/style.css';
+                @import '/node_modules/vl-ui-button/style.css';
             </style>
 
             <div class="vl-modal">
@@ -67,7 +69,7 @@ export class VlModal extends VlElement(HTMLElement) {
     this.dress();
   }
 
-  get _dialog() {
+  get _dialogElement() {
     return this._element.querySelector('dialog');
   }
 
@@ -89,7 +91,7 @@ export class VlModal extends VlElement(HTMLElement) {
       }
 
       if (!this._dressed) {
-        vl.modal.dress(this._dialog);
+        vl.modal.dress(this._dialogElement);
       }
     })();
   }
@@ -98,31 +100,19 @@ export class VlModal extends VlElement(HTMLElement) {
    * Handmatig openen van modal.
    */
   open() {
-    (async () => {
-      while (!window.vl || !window.vl.modal) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-
-      vl.modal.lastClickedToggle = this._dialog;
-      if (!this._dialog.hasAttribute("open")) {
-        vl.modal.toggle(this._dialog);
-      }
-    })();
+    vl.modal.lastClickedToggle = this._dialogElement;
+    if (!this._dialogElement.hasAttribute("open")) {
+      vl.modal.toggle(this._dialogElement);
+    }
   }
 
   /**
    * Handmatig sluiten van modal.
    */
   close() {
-    (async () => {
-      while (!window.vl || !window.vl.modal) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-
-      if (this._dialog.hasAttribute("open")) {
-        vl.modal.toggle(this._dialog);
-      }
-    })();
+    if (this._dialogElement.hasAttribute("open")) {
+      vl.modal.toggle(this._dialogElement);
+    }
   }
 
   _getCloseButtonTemplate() {
@@ -135,7 +125,7 @@ export class VlModal extends VlElement(HTMLElement) {
   }
 
   _idChangedCallback(oldValue, newValue) {
-    this._dialog.id = newValue;
+    this._dialogElement.id = newValue;
   }
 
   _titleChangedCallback(oldValue, newValue) {
@@ -143,18 +133,18 @@ export class VlModal extends VlElement(HTMLElement) {
   }
 
   _openChangedCallback(oldValue, newValue) {
-    this._dialog.setAttribute('open', newValue);
+    this._dialogElement.setAttribute('open', newValue);
   }
 
   _closableChangedCallback(oldValue, newValue) {
     if (newValue !== undefined) {
       this._closeButtonElement = this._getCloseButtonTemplate();
-      this._dialog.setAttribute('data-vl-modal-closable', '');
-      this._dialog.appendChild(this._closeButtonElement);
+      this._dialogElement.setAttribute('data-vl-modal-closable', '');
+      this._dialogElement.appendChild(this._closeButtonElement);
     } else {
       if (this._closeButtonElement) {
         this._closeButtonElement.remove();
-        this._dialog.removeAttribute('data-vl-modal-closable', '');
+        this._dialogElement.removeAttribute('data-vl-modal-closable');
       }
     }
   }

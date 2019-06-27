@@ -41,52 +41,52 @@
 
     test('de dress methode called vl.modal.dress met de dialog', () => {
       modal.dress();
-      assert(window.vl.modal.dress.calledWith(modal._dialog));
+      assert(window.vl.modal.dress.calledWith(modal._dialogElement));
     });
 
     test('de open methode called vl.modal.toggle met de dialog', () => {
       modal.open();
-      assert(window.vl.modal.toggle.calledWith(modal._dialog));
-      assert(window.vl.modal.lastClickedToggle === modal._dialog);
+      assert(window.vl.modal.toggle.calledWith(modal._dialogElement));
+      assert(window.vl.modal.lastClickedToggle === modal._dialogElement);
     });
 
     test('de open methode called niet vl.modal.toggle met de dialog als al open', () => {
       modal.setAttribute('open', '');
       modal.open();
-      assert.isFalse(window.vl.modal.toggle.calledWith(modal._dialog));
+      assert.isFalse(window.vl.modal.toggle.calledWith(modal._dialogElement));
     });
 
     test('de close methode called vl.modal.toggle met de dialog', () => {
       modal.setAttribute('open', '');
       modal.close();
-      assert(window.vl.modal.toggle.calledWith(modal._dialog));
+      assert(window.vl.modal.toggle.calledWith(modal._dialogElement));
     });
 
     test('de close methode called niet vl.modal.toggle met de dialog als al closed', () => {
       modal.close();
-      assert.isFalse(window.vl.modal.toggle.calledWith(modal._dialog));
+      assert.isFalse(window.vl.modal.toggle.calledWith(modal._dialogElement));
     });
 
     test('verander de closable attribute van de modal', () => {
-      assert.isFalse(modal._dialog.hasAttribute('data-vl-modal-closable'));
-      should.not.exist(modal._dialog.querySelector('.vl-modal-dialog__close'));
+      assert.isFalse(modal._dialogElement.hasAttribute('data-vl-modal-closable'));
+      should.not.exist(modal._dialogElement.querySelector('.vl-modal-dialog__close'));
 
       modal.setAttribute('closable', '');
 
-      assert.isTrue(modal._dialog.hasAttribute('data-vl-modal-closable'));
-      should.exist(modal._dialog.querySelector('.vl-modal-dialog__close'));
+      assert.isTrue(modal._dialogElement.hasAttribute('data-vl-modal-closable'));
+      should.exist(modal._dialogElement.querySelector('.vl-modal-dialog__close'));
     });
 
     test('verander de id attribute van de modal', () => {
-      assert.isTrue(modal._dialog.id === 'modal-1');
+      assert.isTrue(modal._dialogElement.id === 'modal-1');
       modal.setAttribute('id', 'modal-new');
-      assert.isTrue(modal._dialog.id === 'modal-new');
+      assert.isTrue(modal._dialogElement.id === 'modal-new');
     });
 
     test('verander de open attribute van de modal', () => {
-      assert.isFalse(modal._dialog.hasAttribute('open'));
+      assert.isFalse(modal._dialogElement.hasAttribute('open'));
       modal.setAttribute('open', '');
-      assert.isTrue(modal._dialog.hasAttribute('open'));
+      assert.isTrue(modal._dialogElement.hasAttribute('open'));
     });
 
     test('verander de title attribute van de modal', () => {
