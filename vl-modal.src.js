@@ -75,9 +75,9 @@ export class VlModal extends VlElement(HTMLElement) {
     return this._element.querySelector('dialog');
   }
 
-  // get _titleElement() {
-  //   return this._element.querySelector('#modal-toggle-1-title');
-  // }
+  get _titleElement() {
+    return this._element.querySelector('#modal-toggle-1-title');
+  }
 
   get _dressed() {
     return !!this.getAttribute('data-vl-modal-dressed');
@@ -142,12 +142,10 @@ export class VlModal extends VlElement(HTMLElement) {
         this._titleElement.innerText = newValue;
       } else {
         this._dialogElement.prepend(this._getTitleTemplate(newValue));
-        this._titleElement = this._dialogElement.querySelector("#modal-toggle-1-title");
       }
     } else {
       if (this._titleElement) {
         this._titleElement.remove();
-        this._titleElement = undefined;
       }
     }
   }

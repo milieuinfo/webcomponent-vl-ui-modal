@@ -104,7 +104,7 @@
     });
 
     test('verander de title attribute van de modal', () => {
-      assert.isUndefined(modal._titleElement);
+      assert.isNull(modal._titleElement);
 
       modal.setAttribute('title', 'title');
 
@@ -125,8 +125,7 @@
 
       modal2.setAttribute('title', '');
 
-      assert.isNull(modal2._dialogElement.querySelector('#modal-toggle-1-title'));
-      assert.isUndefined(modal2._titleElement);
+      assert.isNull(modal2._titleElement);
     });
 
     test('de annuleer knop is beschikbaar als de standaard actions gedefineerd zijn', () => {
