@@ -143,6 +143,26 @@
       assert.strictEqual(modal2._element.querySelector('button').offsetWidth, 0);
     });
 
+    test('verander de title attribute van de modal meerdere keren', () => {
+      assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-1-title'));
+
+      modal.setAttribute('title', 'title');
+      assert.equal(modal.shadowRoot.querySelector('#modal-toggle-1-title').innerText, 'title');
+
+      modal.removeAttribute("title")
+      assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-1-title'));
+
+      modal.setAttribute('title', 'title2');
+      assert.equal(modal.shadowRoot.querySelector('#modal-toggle-1-title').innerText, 'title2');
+
+      modal.setAttribute('title', 'title update3');
+      assert.equal(modal.shadowRoot.querySelector('#modal-toggle-1-title').innerText,
+          'title update3');
+
+      modal.removeAttribute("title");
+      assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-1-title'));
+    });
+
   });
 </script>
 </body>
