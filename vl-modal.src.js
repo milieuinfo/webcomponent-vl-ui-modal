@@ -30,6 +30,7 @@ import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js
  *
  * @extends VlElement
  *
+ * @property {boolean} title - Attribuut wordt gebruikt om de titel (in een h2) te zetten. Indien leeg of weggelaten, wordt er geen titel element gezet.
  * @property {boolean} open - Attribuut wordt gebruikt om aan te duiden dat de modal onmiddellijk geopend moet worden na het renderen.
  * @property {boolean} closable - Attribuut wordt gebruikt om aan te duiden dat de modal sluitbaar is.
  */
@@ -53,12 +54,14 @@ export class VlModal extends VlElement(HTMLElement) {
                     <div class="vl-modal-dialog__content" id="modal-toggle-1-description">
                         <slot name="content">Modal content</slot>
                     </div>
-                    <div is="vl-action-group">
-                        <slot name="button"></slot>
-                        <button is="vl-button-link" data-vl-modal-close>
-                            <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
-                        </button>
-                    </div>
+                    <slot name="actions">
+                      <div is="vl-action-group" id="modal-action-group">
+                          <slot name="button"></slot>
+                          <button is="vl-button-link" data-vl-modal-close>
+                              <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
+                          </button>
+                      </div>
+                    </slot>
                 </dialog>
             </div>
         `);
@@ -72,9 +75,9 @@ export class VlModal extends VlElement(HTMLElement) {
     return this._element.querySelector('dialog');
   }
 
-  get _titleElement() {
-    return this._element.querySelector('#modal-toggle-1-title');
-  }
+  // get _titleElement() {
+  //   return this._element.querySelector('#modal-toggle-1-title');
+  // }
 
   get _dressed() {
     return !!this.getAttribute('data-vl-modal-dressed');
@@ -123,30 +126,34 @@ export class VlModal extends VlElement(HTMLElement) {
         `);
   }
 
-  _getTitleTemplate(title) {
+  _getTitleTemplate(titel) {
     return this._template(`
-        <h2 class="vl-modal-dialog__title" id="modal-toggle-1-title">${title}</h2>
-    `);
+      <h2 class="vl-modal-dialog__title" id="modal-toggle-1-title">${titel}</h2>
+        `);
   }
 
   _idChangedCallback(oldValue, newValue) {
     this._dialogElement.id = newValue;
   }
 
-  _openChangedCallback(oldValue, newValue) {
-    this._dialogElement.setAttribute('open', newValue);
-  }
-
   _titleChangedCallback(oldValue, newValue) {
-    if (newValue !== undefined && newValue !== null && newValue.trim() !== '') {
-      this._dialogElement.insertBefore(this._getTitleTemplate(newValue),
-          this._dialogElement.firstChild);
-    } else if (this._titleElement) {
-      this._dialogElement.removeChild(this._titleElement);
+    if (newValue) {
+      if (this._titleElement) {
+        this._titleElement.innerText = newValue;
+      } else {
+        this._dialogElement.prepend(this._getTitleTemplate(newValue));
+        this._titleElement = this._dialogElement.querySelector("#modal-toggle-1-title");
+      }
+    } else {
       if (this._titleElement) {
         this._titleElement.remove();
+        this._titleElement = undefined;
       }
     }
+  }
+
+  _openChangedCallback(oldValue, newValue) {
+    this._dialogElement.setAttribute('open', newValue);
   }
 
   _closableChangedCallback(oldValue, newValue) {
