@@ -50,7 +50,6 @@ export class VlModal extends VlElement(HTMLElement) {
 
             <div class="vl-modal">
                 <dialog class="vl-modal-dialog" data-vl-modal tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-toggle-1-title" aria-describedby="modal-toggle-1-description">
-                    <h2 class="vl-modal-dialog__title" id="modal-toggle-1-title">Modal titel</h2>
                     <div class="vl-modal-dialog__content" id="modal-toggle-1-description">
                         <slot name="content">Modal content</slot>
                     </div>
@@ -124,16 +123,30 @@ export class VlModal extends VlElement(HTMLElement) {
         `);
   }
 
+  _getTitleTemplate(title) {
+    return this._template(`
+        <h2 class="vl-modal-dialog__title" id="modal-toggle-1-title">${title}</h2>
+    `);
+  }
+
   _idChangedCallback(oldValue, newValue) {
     this._dialogElement.id = newValue;
   }
 
-  _titleChangedCallback(oldValue, newValue) {
-    this._titleElement.innerText = newValue;
-  }
-
   _openChangedCallback(oldValue, newValue) {
     this._dialogElement.setAttribute('open', newValue);
+  }
+
+  _titleChangedCallback(oldValue, newValue) {
+    if (newValue !== undefined && newValue !== null && newValue.trim() !== '') {
+      this._dialogElement.insertBefore(this._getTitleTemplate(newValue),
+          this._dialogElement.firstChild);
+    } else if (this._titleElement) {
+      this._dialogElement.removeChild(this._titleElement);
+      if (this._titleElement) {
+        this._titleElement.remove();
+      }
+    }
   }
 
   _closableChangedCallback(oldValue, newValue) {
