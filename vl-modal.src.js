@@ -50,16 +50,17 @@ export class VlModal extends VlElement(HTMLElement) {
 
             <div class="vl-modal">
                 <dialog class="vl-modal-dialog" data-vl-modal tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-toggle-1-title" aria-describedby="modal-toggle-1-description">
-                    <h2 class="vl-modal-dialog__title" id="modal-toggle-1-title">Modal titel</h2>
                     <div class="vl-modal-dialog__content" id="modal-toggle-1-description">
                         <slot name="content">Modal content</slot>
                     </div>
-                    <div is="vl-action-group">
-                        <slot name="button"></slot>
-                        <button is="vl-button-link" data-vl-modal-close>
-                            <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
-                        </button>
-                    </div>
+                    <slot name="actions">
+                      <div is="vl-action-group" id="modal-action-group">
+                          <slot name="button"></slot>
+                          <button is="vl-button-link" data-vl-modal-close>
+                              <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
+                          </button>
+                      </div>
+                    </slot>
                 </dialog>
             </div>
         `);
@@ -73,9 +74,9 @@ export class VlModal extends VlElement(HTMLElement) {
     return this._element.querySelector('dialog');
   }
 
-  get _titleElement() {
-    return this._element.querySelector('#modal-toggle-1-title');
-  }
+  // get _titleElement() {
+  //   return this._element.querySelector('#modal-toggle-1-title');
+  // }
 
   get _dressed() {
     return !!this.getAttribute('data-vl-modal-dressed');
@@ -124,12 +125,30 @@ export class VlModal extends VlElement(HTMLElement) {
         `);
   }
 
+  _getTitleTemplate(titel) {
+    return this._template(`
+      <h2 class="vl-modal-dialog__title" id="modal-toggle-1-title">${titel}</h2>
+        `);
+  }
+
   _idChangedCallback(oldValue, newValue) {
     this._dialogElement.id = newValue;
   }
 
   _titleChangedCallback(oldValue, newValue) {
-    this._titleElement.innerText = newValue;
+    if (newValue) {
+      if (this._titleElement) {
+        this._titleElement.innerText = newValue;
+      } else {
+        this._dialogElement.prepend(this._getTitleTemplate(newValue));
+        this._titleElement = this._dialogElement.querySelector("#modal-toggle-1-title");
+      }
+    } else {
+      if (this._titleElement) {
+        this._titleElement.remove();
+        this._titleElement = undefined;
+      }
+    }
   }
 
   _openChangedCallback(oldValue, newValue) {

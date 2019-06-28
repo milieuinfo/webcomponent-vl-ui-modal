@@ -20,23 +20,37 @@
   </template>
 </test-fixture>
 
+<test-fixture id="vl-modal-zonder-actions-fixture">
+  <template>
+    <vl-modal id="modal-2" title="al-een-title">
+      <div slot="actions"></div>
+    </vl-modal>
+  </template>
+</test-fixture>
+
 <script>
   suite('<vl-modal>', () => {
     const should = chai.should();
 
-    let modal, button;
+    let modal, modal2, button;
 
     setup(() => {
-      let parent = fixture('vl-modal-fixture');
-      modal = parent.filter(element => element.id === "modal-1")[0];
-      button = parent.filter(element => element.id === "button-1")[0];
-
       window.vl = {
         modal: {
           dress: sinon.fake(),
           toggle: sinon.fake()
         }
-      }
+      };
+    // });
+    //
+    // setup(() => {
+      let parent = fixture('vl-modal-fixture');
+      modal = parent.filter(element => element.id === "modal-1")[0];
+      button = parent.filter(element => element.id === "button-1")[0];
+    // });
+    //
+    // setup(() => {
+      modal2 = fixture('vl-modal-zonder-actions-fixture');
     });
 
     test('de dress methode called vl.modal.dress met de dialog', () => {
@@ -90,9 +104,43 @@
     });
 
     test('verander de title attribute van de modal', () => {
-      assert.isTrue(modal._titleElement.innerText === 'Modal titel');
+      assert.isUndefined(modal._titleElement);
+
       modal.setAttribute('title', 'title');
-      assert.isTrue(modal._titleElement.innerText === 'title');
+
+      assert.isTrue(modal._dialogElement.querySelector('#modal-toggle-1-title').innerText === 'title');
+    });
+
+    test('verander de title attribute van de modal als er al een title gedefineerd was', () => {
+      assert.isDefined(modal2._titleElement);
+
+      modal2.setAttribute('title', 'andere-titel');
+
+      assert.strictEqual(modal2._dialogElement.querySelector('#modal-toggle-1-title').innerText, 'andere-titel');
+      assert.strictEqual(modal2._titleElement.innerText, 'andere-titel');
+    });
+
+    test('verander de title attribute van de modal terug naar undefined en titleElement wordt leeggemaakt', () => {
+      assert.isDefined(modal2._titleElement);
+
+      modal2.setAttribute('title', '');
+
+      assert.isNull(modal2._dialogElement.querySelector('#modal-toggle-1-title'));
+      assert.isUndefined(modal2._titleElement);
+    });
+
+    test('de annuleer knop is beschikbaar als de standaard actions gedefineerd zijn', () => {
+      modal._dialogElement.setAttribute('open', '');
+
+      assert.isAbove(modal._element.querySelector('button').offsetHeight, 0);
+      assert.isAbove(modal._element.querySelector('button').offsetWidth, 0);
+    });
+
+    test('de annuleer knop is niet beschikbaar als er geen actions gedefineerd zijn', () => {
+      modal2._dialogElement.setAttribute('open', '');
+
+      assert.strictEqual(modal2._element.querySelector('button').offsetHeight, 0);
+      assert.strictEqual(modal2._element.querySelector('button').offsetWidth, 0);
     });
 
   });
