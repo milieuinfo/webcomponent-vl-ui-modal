@@ -36,7 +36,7 @@ import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js
  */
 export class VlModal extends VlElement(HTMLElement) {
   static get _observedAttributes() {
-    return ['id', 'title', 'closable', 'open'];
+    return ['id', 'title', 'closable', 'cancellable', 'open'];
   }
 
   constructor() {
@@ -56,12 +56,10 @@ export class VlModal extends VlElement(HTMLElement) {
                     </div>
                       <slot name="action-group">
                         <div is="vl-action-group" id="modal-action-group">
-                          <slot name="actions">
-                              <slot name="button"></slot>
-                              <button is="vl-button-link" data-vl-modal-close>
-                                  <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
-                              </button>
-                          </slot>
+                          <slot name="button"></slot>
+                          <button is="vl-button-link" data-vl-modal-close id="modal-toggle-1-cancellable">
+                              <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
+                          </button>
                         </div>
                       </slot>
                 </dialog>
@@ -79,6 +77,10 @@ export class VlModal extends VlElement(HTMLElement) {
 
   get _titleElement() {
     return this._element.querySelector('#modal-toggle-1-title');
+  }
+
+  get _cancelElement() {
+    return this._element.querySelector('#modal-toggle-1-cancellable');
   }
 
   get _dressed() {
@@ -119,6 +121,15 @@ export class VlModal extends VlElement(HTMLElement) {
     }
   }
 
+  /**
+   * Mogelijkheid om functies toe te voegen op events die op de dialog voorkomen.
+   * @param event
+   * @param callback
+   */
+  on(event, callback) {
+    this._dialogElement.addEventListener(event, callback);
+  }
+
   _getCloseButtonTemplate() {
     return this._template(`
             <button type="button" class="vl-modal-dialog__close" data-vl-modal-close>
@@ -149,6 +160,12 @@ export class VlModal extends VlElement(HTMLElement) {
       if (this._titleElement) {
         this._titleElement.remove();
       }
+    }
+  }
+
+  _cancellableChangedCallback(oldValue, newValue) {
+    if (!(newValue === "true") && this._cancelElement) {
+      this._cancelElement.remove();
     }
   }
 

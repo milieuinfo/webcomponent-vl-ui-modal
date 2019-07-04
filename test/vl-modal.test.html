@@ -23,7 +23,6 @@
 <test-fixture id="vl-modal-zonder-actions-fixture">
   <template>
     <vl-modal id="modal-2" title="al-een-title">
-      <div slot="actions"></div>
     </vl-modal>
   </template>
 </test-fixture>
@@ -135,11 +134,11 @@
       assert.isAbove(modal._element.querySelector('button').offsetWidth, 0);
     });
 
-    test('de annuleer knop is niet beschikbaar als er geen actions gedefineerd zijn', () => {
+    test('de annuleer knop is niet beschikbaar als cancellable false is', () => {
+      modal2.setAttribute("cancellable", "false");
       modal2._dialogElement.setAttribute('open', '');
 
-      assert.strictEqual(modal2._element.querySelector('button').offsetHeight, 0);
-      assert.strictEqual(modal2._element.querySelector('button').offsetWidth, 0);
+      should.not.exist(modal2._element.querySelector('button'));
     });
 
     test('verander de title attribute van de modal meerdere keren', () => {

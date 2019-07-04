@@ -6,6 +6,8 @@
     
     <script type="module" src="../vl-modal.src.js"></script>
     <script type="module" src="../node_modules/vl-ui-button/vl-button.js"></script>
+    <script type="module" src="../node_modules/vl-ui-action-group/vl-action-group.js"></script>
+    <script type="module" src="../node_modules/vl-ui-icon/vl-icon.js"></script>
     <script type="module" src="demo.js"></script>
 
 
@@ -16,7 +18,7 @@
         </p>
 
         <div>
-            <h2>Modal</h2>
+            <h2>Modal, zonder button en content</h2>
             <pre>
                 <code class="line-numbers language-markup">
                     &lt;button is="vl-button" data-vl-modal-open="modal-1"&gt;Open&lt;/button&gt;
@@ -30,77 +32,81 @@
         </div>
 
         <div>
-            <h2>Modal closable</h2>
+            <h2>Modal, closable</h2>
             <pre>
                 <code class="line-numbers language-markup">
                     &lt;button is="vl-button" data-vl-modal-open="modal-2"&gt;Open&lt;/button&gt;
-                    &lt;vl-modal id="modal-2" title="Modal 2" closable&gt;
-                        &lt;span slot="content"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/span&gt;
-                        &lt;button is="vl-button" slot="button"&gt;aanvraag starten&lt;/button&gt;
-                    &lt;/vl-modal&gt;
+                    &lt;vl-modal id="modal-2" title="Modal 2" closable&gt;&lt;/vl-modal&gt;
                 </code>
             </pre>
             <div class="demo">
                 <button is="vl-button" data-vl-modal-open="modal-2">Open</button>
-                <vl-modal id="modal-2" title="Modal 2" closable>
-                    <span slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                    <button is="vl-button" slot="button">aanvraag starten</button>
-                </vl-modal>
+                <vl-modal id="modal-2" title="Modal 2" closable></vl-modal>
             </div>
         </div>
 
         <div>
-            <h2>Modal closable met lege action-group</h2>
+            <h2>Modal, closable en niet cancellable</h2>
             <pre>
                 <code class="line-numbers language-markup">
                     &lt;button is="vl-button" data-vl-modal-open="modal-3"&gt;Open&lt;/button&gt;
-                    &lt;vl-modal id="modal-3" title="Modal 3" closable&gt;
-                        &lt;span slot="content"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/span&gt;
-                        &lt;div slot="action-group"&gt;&lt;/div&gt;
-                    &lt;/vl-modal&gt;
+                    &lt;vl-modal id="modal-3" title="Modal 3" closable cancellable="false"&gt;&lt;/vl-modal&gt;
                 </code>
             </pre>
             <div class="demo">
                 <button is="vl-button" data-vl-modal-open="modal-3">Open</button>
-                <vl-modal id="modal-3" title="Modal 3" closable>
-                    <span slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                    <div slot="action-group"></div>
-                </vl-modal>
+                <vl-modal id="modal-3" title="Modal 3" closable cancellable="false"></vl-modal>
             </div>
         </div>
 
         <div>
-            <h2>Modal closable met andere action</h2>
+            <h2>Modal, closable, niet cancellable, met button en content</h2>
             <pre>
                 <code class="line-numbers language-markup">
                     &lt;button is="vl-button" data-vl-modal-open="modal-4"&gt;Open&lt;/button&gt;
-                    &lt;vl-modal id="modal-4" title="Modal 4" closable&gt;
+                    &lt;vl-modal id="modal-4" title="Modal 4" closable cancellable=false&gt;
                         &lt;span slot="content"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/span&gt;
-                        &lt;div slot="actions"&gt;
-                          &lt;button is="vl-button"&gt;Andere actie&lt;/button&gt;
-                        &lt;/div&gt;
+                        &lt;button is="vl-button-link" slot="button"&gt;Andere actie&lt;/button&gt;
                     &lt;/vl-modal&gt;
                 </code>
             </pre>
             <div class="demo">
                 <button is="vl-button" data-vl-modal-open="modal-4">Open</button>
-                <vl-modal id="modal-4" title="Modal 4" closable>
+                <vl-modal id="modal-4" title="Modal 4" closable cancellable="false">
                     <span slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                    <div slot="actions">
-                      <button is="vl-button">Andere actie</button>
-                    </div>
+                    <button is="vl-button" slot="button">Andere actie</button>
                 </vl-modal>
             </div>
         </div>
 
         <div>
-            <h2>Modal manual open/close (te gebruiken bij elementen met shadowroot)</h2>
+            <h2>Modal, closable, niet cancellable, met link en icon in plaats van button, en content</h2>
             <pre>
                 <code class="line-numbers language-markup">
-                    &lt;button is="vl-button" onclick="openModal('modal-5')"&gt;Open&lt;/button&gt;
-                    &lt;vl-modal id="modal-5" title="Modal 5" closable&gt;
+                    &lt;button is="vl-button" data-vl-modal-open="modal-5"&gt;Open&lt;/button&gt;
+                    &lt;vl-modal id="modal-5" title="Modal 5" closable cancellable=false&gt;
                         &lt;span slot="content"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/span&gt;
-                        &lt;button is="vl-button" slot="button" onclick="closeModal('modal-5')"&gt;aanvraag starten&lt;/button&gt;
+                        &lt;button is="vl-button-link" slot="button"&gt;Andere actie&lt;/button&gt;
+                    &lt;/vl-modal&gt;
+                </code>
+            </pre>
+            <div class="demo">
+                <button is="vl-button" data-vl-modal-open="modal-5">Open</button>
+                <vl-modal id="modal-5" title="Modal 5" closable cancellable="false">
+                    <span slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                    <button is="vl-button-link" slot="button"><span is="vl-icon" icon="cross" before data-vl-modal-close></span>Andere actie</button>
+                </vl-modal>
+            </div>
+        </div>
+
+        <div>
+            <h2>Modal, manual open/close (te gebruiken bij elementen met shadowroot)</h2>
+            <pre>
+                <code class="line-numbers language-markup">
+                    &lt;button is="vl-button" onclick="openModal('modal-6')"&gt;Open&lt;/button&gt;
+                    &lt;vl-modal id="modal-6" title="Modal 6"&gt;
+                        &lt;span slot="content"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/span&gt;
+                        &lt;button is="vl-button" slot="button" onclick="closeModal('modal-6')"&gt;aanvraag starten&lt;/button&gt;
                     &lt;/vl-modal&gt;
 
                     &lt;script type="text/javascript"&gt;
@@ -114,10 +120,10 @@
                 </code>
             </pre>
             <div class="demo">
-                <button is="vl-button" onclick="openModal('modal-5')">Open</button>
-                <vl-modal id="modal-5" title="Modal 5" closable>
+                <button is="vl-button" onclick="openModal('modal-6')">Open</button>
+                <vl-modal id="modal-6" title="Modal 6">
                     <span slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                    <button is="vl-button" slot="button" onclick="closeModal('modal-5')">aanvraag starten</button>
+                    <button is="vl-button" slot="button" onclick="closeModal('modal-6')">aanvraag starten</button>
                 </vl-modal>
 
                 <script type="text/javascript">
@@ -126,6 +132,49 @@
                     }
                     function closeModal(id) {
                         document.querySelector("vl-modal[id=\""+id+"\"]").close();
+                    }
+                </script>
+            </div>
+        </div>
+
+        <div>
+            <h2>Modal met functie op sluit actie</h2>
+            "Voeg listener toe" button is voor demo doeleinden.
+            <pre>
+                <code class="line-numbers language-markup">
+                    &lt;div is="vl-action-group"&gt;
+                        &lt;button is="vl-button" data-vl-modal-open="modal-7"&gt;Open&lt;/button&gt;
+                        &lt;button is="vl-button" onclick="voegCloseListenerToe()"&gt;Voeg listener toe&lt;/button&gt;
+                    &lt;/div&gt;
+
+                    &lt;vl-modal id="modal-7" title="Modal 7" closable&gt;
+                        &lt;span slot="content"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/span&gt;
+                        &lt;button is="vl-button" slot="button"&gt;aanvraag starten&lt;/button&gt;
+                    &lt;/vl-modal&gt;
+
+                    &lt;script type="text/javascript"&gt;
+                        function voegCloseListenerToe() {
+                            document.querySelector("vl-modal[id=\"modal-7\"]").on('close',
+                                event =&gt; alert("closed"));
+                        }
+                    &lt;/script&gt;
+                </code>
+            </pre>
+            <div class="demo">
+                <div is="vl-action-group">
+                    <button is="vl-button" data-vl-modal-open="modal-7">Open</button>
+                    <button is="vl-button" onclick="voegCloseListenerToe()">Voeg listener toe</button>
+                </div>
+
+                <vl-modal id="modal-7" title="Modal 7" closable>
+                    <span slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                    <button is="vl-button" slot="button">aanvraag starten</button>
+                </vl-modal>
+
+                <script type="text/javascript">
+                    function voegCloseListenerToe() {
+                        document.querySelector("vl-modal[id=\"modal-7\"]").on('close',
+                            event => alert("closed"));
                     }
                 </script>
             </div>

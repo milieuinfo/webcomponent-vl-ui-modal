@@ -956,7 +956,7 @@
               var dialogBounds = element.getBoundingClientRect(),
                   isInDialog = event.clientY > dialogBounds.top && event.clientY < dialogBounds.top + dialogBounds.height && event.clientX > dialogBounds.left && event.clientX < dialogBounds.left + dialogBounds.width;
 
-              if (!isInDialog && (event.target.tagName === 'DIALOG' || vl.util.hasClass(event.target, mFallbackBackdropClass))) {
+              if (!isInDialog && (event.target.tagName === 'VL-MODAL' || vl.util.hasClass(event.target, mFallbackBackdropClass))) {
                 self.toggle(element);
               }
             }

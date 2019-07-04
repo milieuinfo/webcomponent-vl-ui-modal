@@ -17,6 +17,7 @@
     "prepare": "npm run prepare:util",
     "prepare:util": "npm explore vl-ui-util -- npm run util",
     "test": "wct -l chrome,firefox --npm",
+    "test-debug": "wct -l chrome,firefox --npm -p",
     "release": "np",
     "release:prepare": "npm run release:prepare:build && npm run release:prepare:imports && npm run release:prepare:css && npm run release:prepare:commit",
     "release:prepare:build": "uglifyjs --compress --mangle --output vl-modal.js -- *.src.js",
@@ -26,19 +27,19 @@
     "release:prepare:css": "replace '\\.\\./style.css' '/node_modules/vl-ui-modal/style.css' vl-modal.js",
     "release:prepare:commit": "git add -f vl-modal.js && git commit --amend --no-edit && git pull",
     "release:testless": "np --yolo",
-    "demo": "http-server -a local.milieuinfo.be"
+    "demo": "http-server"
   },
   "dependencies": {
     "vl-ui-core": "1.4.2",
     "vl-ui-button": "1.0.8",
     "vl-ui-icon": "2.0.4",
-    "vl-ui-action-group": "1.0.2"
+    "vl-ui-action-group": "1.0.5"
   },
   "peerDependencies": {
     "vl-ui-core": "^1.4.2",
     "vl-ui-button": "^1.0.8",
     "vl-ui-icon": "^2.0.4",
-    "vl-ui-action-group": "^1.0.2"
+    "vl-ui-action-group": "^1.0.5"
   },
   "devDependencies": {
     "@govflanders/vl-ui-core": "3.7.2",
