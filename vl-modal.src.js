@@ -54,14 +54,12 @@ export class VlModal extends VlElement(HTMLElement) {
                     <div class="vl-modal-dialog__content" id="modal-toggle-1-description">
                         <slot name="content">Modal content</slot>
                     </div>
-                      <slot name="action-group">
-                        <div is="vl-action-group" id="modal-action-group">
-                          <slot name="button"></slot>
-                          <button is="vl-button-link" data-vl-modal-close id="modal-toggle-1-cancellable">
-                              <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
-                          </button>
-                        </div>
-                      </slot>
+                      <div is="vl-action-group" id="modal-action-group">
+                        <slot name="button"></slot>
+                        <button is="vl-button-link" data-vl-modal-close id="modal-toggle-1-cancellable">
+                            <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
+                        </button>
+                      </div>
                 </dialog>
             </div>
         `);
