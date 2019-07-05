@@ -22,7 +22,7 @@
 
 <test-fixture id="vl-modal-zonder-actions-fixture">
   <template>
-    <vl-modal id="modal-2" title="al-een-title">
+    <vl-modal id="modal-2" title="al-een-title" cancellable="false">
     </vl-modal>
   </template>
 </test-fixture>
@@ -102,6 +102,26 @@
       assert.isTrue(modal._dialogElement.hasAttribute('open'));
     });
 
+    test('verander de cancellable attribute van de modal', () => {
+      should.not.exist(modal2._cancelElement);
+
+      modal2.removeAttribute('cancellable');
+
+      should.exist(modal2._cancelElement);
+    });
+
+    test('verander de cancellable attribute van de modal twee keer', () => {
+      should.not.exist(modal2._cancelElement);
+
+      modal2.removeAttribute('cancellable');
+
+      should.exist(modal2._cancelElement);
+
+      modal2.setAttribute('cancellable', 'false');
+
+      should.not.exist(modal2._cancelElement);
+    });
+
     test('verander de title attribute van de modal', () => {
       assert.isNull(modal._titleElement);
 
@@ -135,7 +155,6 @@
     });
 
     test('de annuleer knop is niet beschikbaar als cancellable false is', () => {
-      modal2.setAttribute("cancellable", "false");
       modal2._dialogElement.setAttribute('open', '');
 
       should.not.exist(modal2._element.querySelector('button'));

@@ -79,6 +79,10 @@ export class VlModal extends VlElement(HTMLElement) {
     return this._element.querySelector('#modal-toggle-1-title');
   }
 
+  get _actionGroupElement() {
+    return this._element.querySelector('#modal-action-group');
+  }
+
   get _cancelElement() {
     return this._element.querySelector('#modal-toggle-1-cancellable');
   }
@@ -145,6 +149,13 @@ export class VlModal extends VlElement(HTMLElement) {
         `);
   }
 
+  _getCancelTemplate() {
+    return this._template(`
+        <button is="vl-button-link" data-vl-modal-close id="modal-toggle-1-cancellable">
+            <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
+        </button>`);
+  }
+
   _idChangedCallback(oldValue, newValue) {
     this._dialogElement.id = newValue;
   }
@@ -164,8 +175,10 @@ export class VlModal extends VlElement(HTMLElement) {
   }
 
   _cancellableChangedCallback(oldValue, newValue) {
-    if (!(newValue === "true") && this._cancelElement) {
+    if (newValue !== "true" && this._cancelElement) {
       this._cancelElement.remove();
+    } else if (newValue === "true" || newValue === null) {
+      this._actionGroupElement.append(this._getCancelTemplate());
     }
   }
 
