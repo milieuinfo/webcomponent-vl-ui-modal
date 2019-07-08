@@ -125,7 +125,7 @@
     test('verander de title attribute van de modal', () => {
       assert.isNull(modal._titleElement);
 
-      modal.setAttribute('title', 'title');
+      modal.setAttribute('data-title', 'title');
 
       assert.isTrue(modal._dialogElement.querySelector('#modal-toggle-1-title').innerText === 'title');
     });
@@ -133,7 +133,7 @@
     test('verander de title attribute van de modal als er al een title gedefineerd was', () => {
       assert.isDefined(modal2._titleElement);
 
-      modal2.setAttribute('title', 'andere-titel');
+      modal2.setAttribute('data-title', 'andere-titel');
 
       assert.strictEqual(modal2._dialogElement.querySelector('#modal-toggle-1-title').innerText, 'andere-titel');
       assert.strictEqual(modal2._titleElement.innerText, 'andere-titel');
@@ -142,7 +142,7 @@
     test('verander de title attribute van de modal terug naar undefined en titleElement wordt leeggemaakt', () => {
       assert.isDefined(modal2._titleElement);
 
-      modal2.setAttribute('title', '');
+      modal2.setAttribute('data-title', '');
 
       assert.isNull(modal2._titleElement);
     });
@@ -163,20 +163,20 @@
     test('verander de title attribute van de modal meerdere keren', () => {
       assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-1-title'));
 
-      modal.setAttribute('title', 'title');
+      modal.setAttribute('data-title', 'title');
       assert.equal(modal.shadowRoot.querySelector('#modal-toggle-1-title').innerText, 'title');
 
-      modal.removeAttribute("title");
+      modal.removeAttribute("data-title");
       assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-1-title'));
 
-      modal.setAttribute('title', 'title2');
+      modal.setAttribute('data-title', 'title2');
       assert.equal(modal.shadowRoot.querySelector('#modal-toggle-1-title').innerText, 'title2');
 
-      modal.setAttribute('title', 'title update3');
+      modal.setAttribute('data-title', 'title update3');
       assert.equal(modal.shadowRoot.querySelector('#modal-toggle-1-title').innerText,
           'title update3');
 
-      modal.removeAttribute("title");
+      modal.removeAttribute("data-title");
       assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-1-title'));
     });
 
