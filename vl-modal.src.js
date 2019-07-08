@@ -30,13 +30,13 @@ import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js
  *
  * @extends VlElement
  *
- * @property {boolean} title - Attribuut wordt gebruikt om de titel (in een h2) te zetten. Indien leeg of weggelaten, wordt er geen titel element gezet.
+ * @property {boolean} data-title - Attribuut wordt gebruikt om de titel (in een h2) te zetten. Indien leeg of weggelaten, wordt er geen titel element gezet.
  * @property {boolean} open - Attribuut wordt gebruikt om aan te duiden dat de modal onmiddellijk geopend moet worden na het renderen.
  * @property {boolean} closable - Attribuut wordt gebruikt om aan te duiden dat de modal sluitbaar is.
  */
 export class VlModal extends VlElement(HTMLElement) {
   static get _observedAttributes() {
-    return ['id', 'title', 'closable', 'cancellable', 'open'];
+    return ['id', 'data-title', 'closable', 'cancellable', 'open'];
   }
 
   constructor() {
@@ -158,7 +158,7 @@ export class VlModal extends VlElement(HTMLElement) {
     this._dialogElement.id = newValue;
   }
 
-  _titleChangedCallback(oldValue, newValue) {
+  _data_titleChangedCallback(oldValue, newValue) {
     if (newValue) {
       if (this._titleElement) {
         this._titleElement.innerText = newValue;
