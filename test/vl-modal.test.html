@@ -6,7 +6,6 @@
   <script src="../../@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../web-component-tester/browser.js"></script>
 
-  <script type="module" src="../node_modules/vl-ui-button/vl-button.js"></script>
   <script type="module" src="../vl-modal.src.js"></script>
   <script src="../node_modules/sinon/pkg/sinon.js"></script>
 </head>
@@ -22,7 +21,14 @@
 
 <test-fixture id="vl-modal-zonder-actions-fixture">
   <template>
-    <vl-modal id="modal-2" title="al-een-title" cancellable="false">
+    <vl-modal id="modal-2" title="al-een-title" not-cancellable></vl-modal>
+  </template>
+</test-fixture>
+
+<test-fixture id="vl-modal-met-button-fixture">
+  <template>
+    <vl-modal id="modal-1">
+      <button id="button-1" is="vl-button" slot="button">Actie</button>
     </vl-modal>
   </template>
 </test-fixture>
@@ -40,15 +46,10 @@
           toggle: sinon.fake()
         }
       };
-    // });
-    //
-    // setup(() => {
+      
       let parent = fixture('vl-modal-fixture');
       modal = parent.filter(element => element.id === "modal-1")[0];
       button = parent.filter(element => element.id === "button-1")[0];
-    // });
-    //
-    // setup(() => {
       modal2 = fixture('vl-modal-zonder-actions-fixture');
     });
 
@@ -83,9 +84,7 @@
     test('verander de closable attribute van de modal', () => {
       assert.isFalse(modal._dialogElement.hasAttribute('data-vl-modal-closable'));
       should.not.exist(modal._dialogElement.querySelector('.vl-modal-dialog__close'));
-
       modal.setAttribute('closable', '');
-
       assert.isTrue(modal._dialogElement.hasAttribute('data-vl-modal-closable'));
       should.exist(modal._dialogElement.querySelector('.vl-modal-dialog__close'));
     });
@@ -104,82 +103,71 @@
 
     test('verander de cancellable attribute van de modal', () => {
       should.not.exist(modal2._cancelElement);
-
-      modal2.removeAttribute('cancellable');
-
-      should.exist(modal2._cancelElement);
-    });
-
-    test('verander de cancellable attribute van de modal twee keer', () => {
+      modal2.setAttribute('not-cancellable', '');
       should.not.exist(modal2._cancelElement);
-
-      modal2.removeAttribute('cancellable');
-
-      should.exist(modal2._cancelElement);
-
-      modal2.setAttribute('cancellable', 'false');
-
+      modal2.setAttribute('not-cancellable', 'false');
+      should.not.exist(modal2._cancelElement);
+      modal2.setAttribute('not-cancellable', 'true');
+      should.not.exist(modal2._cancelElement);
+      modal2.setAttribute('not-cancellable', 'not-cancellable');
       should.not.exist(modal2._cancelElement);
     });
 
     test('verander de title attribute van de modal', () => {
       assert.isNull(modal._titleElement);
-
       modal.setAttribute('data-title', 'title');
-
-      assert.isTrue(modal._dialogElement.querySelector('#modal-toggle-1-title').innerText === 'title');
+      assert.isTrue(modal._dialogElement.querySelector('#modal-toggle-title').innerText === 'title');
     });
 
     test('verander de title attribute van de modal als er al een title gedefineerd was', () => {
       assert.isDefined(modal2._titleElement);
-
       modal2.setAttribute('data-title', 'andere-titel');
-
-      assert.strictEqual(modal2._dialogElement.querySelector('#modal-toggle-1-title').innerText, 'andere-titel');
+      assert.strictEqual(modal2._dialogElement.querySelector('#modal-toggle-title').innerText, 'andere-titel');
       assert.strictEqual(modal2._titleElement.innerText, 'andere-titel');
     });
 
     test('verander de title attribute van de modal terug naar undefined en titleElement wordt leeggemaakt', () => {
       assert.isDefined(modal2._titleElement);
-
       modal2.setAttribute('data-title', '');
-
       assert.isNull(modal2._titleElement);
     });
 
     test('de annuleer knop is beschikbaar als de standaard actions gedefineerd zijn', () => {
       modal._dialogElement.setAttribute('open', '');
-
       assert.isAbove(modal._element.querySelector('button').offsetHeight, 0);
       assert.isAbove(modal._element.querySelector('button').offsetWidth, 0);
     });
 
     test('de annuleer knop is niet beschikbaar als cancellable false is', () => {
       modal2._dialogElement.setAttribute('open', '');
-
       should.not.exist(modal2._element.querySelector('button'));
     });
 
     test('verander de title attribute van de modal meerdere keren', () => {
-      assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-1-title'));
+      assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-title'));
 
       modal.setAttribute('data-title', 'title');
-      assert.equal(modal.shadowRoot.querySelector('#modal-toggle-1-title').innerText, 'title');
+      assert.equal(modal.shadowRoot.querySelector('#modal-toggle-title').innerText, 'title');
 
       modal.removeAttribute("data-title");
-      assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-1-title'));
+      assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-title'));
 
       modal.setAttribute('data-title', 'title2');
-      assert.equal(modal.shadowRoot.querySelector('#modal-toggle-1-title').innerText, 'title2');
+      assert.equal(modal.shadowRoot.querySelector('#modal-toggle-title').innerText, 'title2');
 
       modal.setAttribute('data-title', 'title update3');
-      assert.equal(modal.shadowRoot.querySelector('#modal-toggle-1-title').innerText,
+      assert.equal(modal.shadowRoot.querySelector('#modal-toggle-title').innerText,
           'title update3');
 
       modal.removeAttribute("data-title");
-      assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-1-title'));
+      assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-title'));
     });
 
+    test('na het klikken op een button in het button slot zal de modal steeds gesloten worden', () => {
+      const modal = fixture('vl-modal-met-button-fixture');
+      const buttonSlot = modal.shadowRoot.querySelector('slot[name="button"]');
+      assert.isDefined(buttonSlot.getAttribute('data-vl-modal-close'));
+    });
   });
 </script>
 </body>
