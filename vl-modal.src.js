@@ -52,15 +52,17 @@ export class VlModal extends VlElement(HTMLElement) {
 
             <div class="vl-modal">
                 <dialog class="vl-modal-dialog" data-vl-modal tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-toggle-title" aria-describedby="modal-toggle-description">
+                  <form method="dialog">
                     <div class="vl-modal-dialog__content" id="modal-toggle-description">
                         <slot name="content">Modal content</slot>
                     </div>
-                      <div is="vl-action-group" id="modal-action-group">
-                        <slot name="button" data-vl-modal-close></slot>
-                        <button is="vl-button-link" data-vl-modal-close id="modal-toggle-cancellable">
-                            <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
-                        </button>
-                      </div>
+                    <div is="vl-action-group" id="modal-action-group">
+                      <slot name="button" data-vl-modal-close></slot>
+                      <button is="vl-button-link" id="modal-toggle-cancellable" value="cancel">
+                          <span is="vl-icon" icon="cross" before></span>Annuleer
+                      </button>
+                    </div>
+                  </form>
                 </dialog>
             </div>
         `);
