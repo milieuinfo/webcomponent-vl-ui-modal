@@ -99,7 +99,11 @@
             );
           }
 
-          el = el.parentElement;
+          if (el.assignedSlot) {
+            el = el.assignedSlot.parentElement;
+          } else {
+            el = el.parentElement;
+          }
         }
 
         return null;
@@ -306,6 +310,18 @@
 
           if (!target && this.dialog_.tabIndex >= 0) {
             target = this.dialog_;
+          }
+
+          if(!target) {
+            let opts = ['BUTTON', 'INPUT', 'KEYGEN', 'SELECT', 'TEXTAREA'];
+            let slottedTargets = [];
+            this.dialog_.querySelectorAll('slot').forEach(slot => {
+              slottedTargets = slottedTargets.concat(slot.assignedNodes().filter(t => opts.includes(t.nodeName)));
+            });
+    
+            if(slottedTargets.length > 0) {
+              target = slottedTargets[0]
+            }
           }
 
           if (!target) {
