@@ -4,13 +4,11 @@ import {VlButton} from '/node_modules/vl-ui-button/vl-button.js';
 import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js';
 
 (() => {
-  loadScript('util.js',
-      '/node_modules/@govflanders/vl-ui-util/dist/js/util.min.js', () => {
-        loadScript('core.js',
-            '/node_modules/@govflanders/vl-ui-core/dist/js/core.min.js', () => {
-              loadScript('modal.js', '../dist/modal.js');
-            });
-      });
+  loadScript('util.js', '/node_modules/@govflanders/vl-ui-util/dist/js/util.min.js', () => {
+    loadScript('core.js', '/node_modules/@govflanders/vl-ui-core/dist/js/core.min.js', () => {
+      loadScript('modal.js', '../dist/modal.js');
+    });
+  });
 
   function loadScript(id, src, onload) {
     if (!document.head.querySelector('#' + id)) {
@@ -137,10 +135,10 @@ export class VlModal extends VlElement(HTMLElement) {
 
   _getCloseButtonTemplate() {
     return this._template(`
-            <button type="button" class="vl-modal-dialog__close" data-vl-modal-close>
-                <i class="vl-modal-dialog__close__icon vl-vi vl-vi-cross" aria-hidden="true"></i>
-                <span class="vl-u-visually-hidden">Venster sluiten</span>
-            </button>
+          <button type="button" class="vl-modal-dialog__close" data-vl-modal-close>
+            <i class="vl-modal-dialog__close__icon vl-vi vl-vi-cross" aria-hidden="true"></i>
+            <span class="vl-u-visually-hidden">Venster sluiten</span>
+          </button>
         `);
   }
 
