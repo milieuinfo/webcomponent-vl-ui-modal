@@ -33,12 +33,13 @@ import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js
  * @property {boolean} data-title - Attribuut wordt gebruikt om de titel (in een h2) te zetten. Indien leeg of weggelaten, wordt er geen titel element gezet.
  * @property {boolean} open - Attribuut wordt gebruikt om aan te duiden dat de modal onmiddellijk geopend moet worden na het renderen.
  * @property {boolean} closable - Attribuut wordt gebruikt om aan te duiden dat de modal sluitbaar is.
+ * @property {boolean} not-cancellable - Attribuut wordt gebruikt om aan te duiden dat de modal annuleerbaar is.
  */
 export class VlModal extends VlElement(HTMLElement) {
   static get _observedAttributes() {
-    return ['id', 'data-title', 'closable', 'cancellable', 'open'];
+    return ['id', 'data-title', 'closable', 'not-cancellable', 'open'];
   }
-
+  
   constructor() {
     super(`
             <style>
@@ -50,16 +51,18 @@ export class VlModal extends VlElement(HTMLElement) {
             </style>
 
             <div class="vl-modal">
-                <dialog class="vl-modal-dialog" data-vl-modal tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-toggle-1-title" aria-describedby="modal-toggle-1-description">
-                    <div class="vl-modal-dialog__content" id="modal-toggle-1-description">
+                <dialog class="vl-modal-dialog" data-vl-modal tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-toggle-title" aria-describedby="modal-toggle-description">
+                  <form method="dialog">
+                    <div class="vl-modal-dialog__content" id="modal-toggle-description">
                         <slot name="content">Modal content</slot>
                     </div>
-                      <div is="vl-action-group" id="modal-action-group">
-                        <slot name="button"></slot>
-                        <button is="vl-button-link" data-vl-modal-close id="modal-toggle-1-cancellable">
-                            <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
-                        </button>
-                      </div>
+                    <div is="vl-action-group" id="modal-action-group">
+                      <slot name="button" data-vl-modal-close></slot>
+                      <button is="vl-button-link" id="modal-toggle-cancellable" value="cancel">
+                          <span is="vl-icon" icon="cross" before></span>Annuleer
+                      </button>
+                    </div>
+                  </form>
                 </dialog>
             </div>
         `);
@@ -74,7 +77,7 @@ export class VlModal extends VlElement(HTMLElement) {
   }
 
   get _titleElement() {
-    return this._element.querySelector('#modal-toggle-1-title');
+    return this._element.querySelector('#modal-toggle-title');
   }
 
   get _actionGroupElement() {
@@ -82,7 +85,7 @@ export class VlModal extends VlElement(HTMLElement) {
   }
 
   get _cancelElement() {
-    return this._element.querySelector('#modal-toggle-1-cancellable');
+    return this._element.querySelector('#modal-toggle-cancellable');
   }
 
   get _dressed() {
@@ -143,13 +146,13 @@ export class VlModal extends VlElement(HTMLElement) {
 
   _getTitleTemplate(titel) {
     return this._template(`
-      <h2 class="vl-modal-dialog__title" id="modal-toggle-1-title">${titel}</h2>
+      <h2 class="vl-modal-dialog__title" id="modal-toggle-title">${titel}</h2>
         `);
   }
 
   _getCancelTemplate() {
     return this._template(`
-        <button is="vl-button-link" data-vl-modal-close id="modal-toggle-1-cancellable">
+        <button is="vl-button-link" data-vl-modal-close id="modal-toggle-cancellable">
             <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
         </button>`);
   }
@@ -172,11 +175,11 @@ export class VlModal extends VlElement(HTMLElement) {
     }
   }
 
-  _cancellableChangedCallback(oldValue, newValue) {
-    if (newValue !== "true" && this._cancelElement) {
-      this._cancelElement.remove();
-    } else if (newValue === "true" || newValue === null) {
+  _not_cancellableChangedCallback(oldValue, newValue) {
+    if (newValue === undefined && !this._cancelElement) {
       this._actionGroupElement.append(this._getCancelTemplate());
+    } else if (newValue !== undefined && this._cancelElement) {
+      this._cancelElement.remove();
     }
   }
 
@@ -196,7 +199,6 @@ export class VlModal extends VlElement(HTMLElement) {
       }
     }
   }
-
 }
 
 define('vl-modal', VlModal);
