@@ -168,14 +168,6 @@
       const buttonSlot = modal.shadowRoot.querySelector('slot[name="button"]');
       assert.isDefined(buttonSlot.getAttribute('data-vl-modal-close'));
     });
-
-    test('het close cancel event wordt gestuurd bij het klikken op een butotn uit het button slot', () => {
-      const modal = fixture('vl-modal-met-button-fixture');
-      const form = modal.shadowRoot.querySelector('form');
-      const cancel = modal.shadowRoot.querySelector('#modal-toggle-cancellable');
-      assert.equal(form.getAttribute('method'), 'dialog');
-      assert.equal(cancel.getAttribute('value'), 'cancel');
-    });
   });
 </script>
 </body>
