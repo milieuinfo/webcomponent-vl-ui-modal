@@ -5,6 +5,7 @@
     </head>
     
     <script type="module" src="../vl-modal.src.js"></script>
+    <script type="module" src="../vl-test.js"></script>
     <script type="module" src="../node_modules/vl-ui-button/vl-button.js"></script>
     <script type="module" src="../node_modules/vl-ui-action-group/vl-action-group.js"></script>
     <script type="module" src="../node_modules/vl-ui-icon/vl-icon.js"></script>
@@ -42,6 +43,7 @@
             <div class="demo">
                 <button is="vl-button" data-vl-modal-open="modal-2">Open</button>
                 <vl-modal id="modal-2" data-title="Modal 2" closable></vl-modal>
+
             </div>
         </div>
 
@@ -179,5 +181,18 @@
                 </script>
             </div>
         </div>
+
+      <h2>Safari bug</h2>
+
+      <vl-test></vl-test>
+
+      <script type="text/javascript">
+          function openModalTest(it, id) {
+              it.nextSibling.nextElementSibling.open();
+          }
+          function closeModalTest(it) {
+              it.closest('vl-modal').close();
+          }
+      </script>
     </body>
 </html>
