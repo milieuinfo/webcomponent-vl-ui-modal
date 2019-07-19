@@ -31,7 +31,7 @@ import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js
  * @property {boolean} data-title - Attribuut wordt gebruikt om de titel (in een h2) te zetten. Indien leeg of weggelaten, wordt er geen titel element gezet.
  * @property {boolean} open - Attribuut wordt gebruikt om aan te duiden dat de modal onmiddellijk geopend moet worden na het renderen.
  * @property {boolean} closable - Attribuut wordt gebruikt om aan te duiden dat de modal sluitbaar is.
- * @property {boolean} not-cancellable - Attribuut wordt gebruikt om aan te duiden dat de modal annuleerbaar is.
+ * @property {boolean} not-cancellable - Attribuut wordt gebruikt om aan te duiden dat de modal niet annuleerbaar is.
  */
 export class VlModal extends VlElement(HTMLElement) {
   static get _observedAttributes() {
