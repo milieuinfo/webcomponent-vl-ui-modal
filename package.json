@@ -14,8 +14,7 @@
     "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
   },
   "scripts": {
-    "prepare": "npm run prepare:util",
-    "prepare:util": "npm explore vl-ui-util -- npm run util",
+    "postinstall": "npm explore vl-ui-util -- npm run util",
     "test": "wct -l chrome,firefox --npm",
     "test-debug": "wct -l chrome,firefox --npm -p",
     "release": "np",
