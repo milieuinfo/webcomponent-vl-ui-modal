@@ -21,7 +21,7 @@
 
 <test-fixture id="vl-modal-zonder-actions-fixture">
   <template>
-    <vl-modal id="modal-2" title="al-een-title" not-cancellable></vl-modal>
+    <vl-modal id="modal-2" title="al-een-title" not-cancellable not-auto-closable></vl-modal>
   </template>
 </test-fixture>
 
@@ -111,6 +111,22 @@
       should.not.exist(modal2._cancelElement);
       modal2.setAttribute('not-cancellable', 'not-cancellable');
       should.not.exist(modal2._cancelElement);
+      modal2.removeAttribute('not-cancellable');
+      should.exist(modal2._cancelElement);
+    });
+
+    test('verander de auto-closable attribute van de modal', () => {
+      assert.isFalse(modal2._slotButtonElement.hasAttribute('data-vl-modal-close'));
+      modal2.setAttribute('not-auto-closable', '');
+      assert.isFalse(modal2._slotButtonElement.hasAttribute('data-vl-modal-close'));
+      modal2.setAttribute('not-auto-closable', 'false');
+      assert.isFalse(modal2._slotButtonElement.hasAttribute('data-vl-modal-close'));
+      modal2.setAttribute('not-auto-closable', 'true');
+      assert.isFalse(modal2._slotButtonElement.hasAttribute('data-vl-modal-close'));
+      modal2.setAttribute('not-auto-closable', 'not-auto-closable');
+      assert.isFalse(modal2._slotButtonElement.hasAttribute('data-vl-modal-close'));
+      modal2.removeAttribute('not-auto-closable');
+      assert.isTrue(modal2._slotButtonElement.hasAttribute('data-vl-modal-close'));
     });
 
     test('verander de title attribute van de modal', () => {
