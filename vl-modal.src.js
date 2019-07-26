@@ -14,11 +14,12 @@ import '/node_modules/vl-ui-action-group/vl-action-group.js';
  * @property {boolean} open - Attribuut wordt gebruikt om aan te duiden dat de modal onmiddellijk geopend moet worden na het renderen.
  * @property {boolean} closable - Attribuut wordt gebruikt om aan te duiden dat de modal sluitbaar is.
  * @property {boolean} not-cancellable - Attribuut wordt gebruikt om aan te duiden dat de modal niet annuleerbaar is.
+ * @property {boolean} not-auto-closable - Attribuut wordt gebruikt om aan te duiden dat de modal niet sluit bij het uitvoeren van een actie in de button slot.
  */
 export class VlModal extends VlElement(HTMLElement) {
 
   static get _observedAttributes() {
-    return ['id', 'data-title', 'closable', 'not-cancellable', 'open'];
+    return ['id', 'data-title', 'closable', 'not-cancellable', 'open', 'not-auto-closable'];
   }
 
   constructor() {
@@ -72,6 +73,10 @@ export class VlModal extends VlElement(HTMLElement) {
 
   get _cancelElement() {
     return this._element.querySelector('#modal-toggle-cancellable');
+  }
+
+  get _slotButtonElement() {
+    return this._element.querySelector('slot[name="button"]');
   }
 
   get _dressed() {
@@ -157,10 +162,18 @@ export class VlModal extends VlElement(HTMLElement) {
   }
 
   _not_cancellableChangedCallback(oldValue, newValue) {
-    if (newValue === undefined && !this._cancelElement) {
+    if (newValue == undefined && !this._cancelElement) {
       this._actionGroupElement.append(this._getCancelTemplate());
-    } else if (newValue !== undefined && this._cancelElement) {
+    } else if (newValue != undefined && this._cancelElement) {
       this._cancelElement.remove();
+    }
+  }
+
+  _not_auto_closableChangedCallback(oldValue, newValue) {
+    if (newValue == undefined && !this._slotButtonElement.hasAttribute('data-vl-modal-close')) {
+      this._slotButtonElement.setAttribute('data-vl-modal-close', '');
+    } else if (newValue != undefined && this._slotButtonElement.hasAttribute('data-vl-modal-close')) {
+      this._slotButtonElement.removeAttribute('data-vl-modal-close');
     }
   }
 
@@ -169,7 +182,7 @@ export class VlModal extends VlElement(HTMLElement) {
   }
 
   _closableChangedCallback(oldValue, newValue) {
-    if (newValue !== undefined) {
+    if (newValue != undefined) {
       this._closeButtonElement = this._getCloseButtonTemplate();
       this._dialogElement.setAttribute('data-vl-modal-closable', '');
       this._dialogElement.appendChild(this._closeButtonElement);
