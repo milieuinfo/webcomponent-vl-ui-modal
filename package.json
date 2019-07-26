@@ -39,7 +39,7 @@
     "vl-ui-core": "^1.4.2",
     "vl-ui-button": "^1.0.8",
     "vl-ui-icon": "^2.0.4",
-    "vl-ui-action-group": "^1.0.7"
+    "vl-ui-action-group": "^1.0.9"
   },
   "devDependencies": {
     "@govflanders/vl-ui-core": "3.7.2",
@@ -51,6 +51,7 @@
     "sinon": "7.3.2",
     "uglify-es": "github:mishoo/UglifyJS2#harmony",
     "vl-ui-util": "1.1.3",
+    "vl-ui-input-field": "^1.0.4",
     "wct-browser-legacy": "1.0.2",
     "web-component-tester": "6.9.2"
   }
