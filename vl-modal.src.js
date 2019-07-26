@@ -93,7 +93,6 @@ export class VlModal extends VlElement(HTMLElement) {
   open() {
     vl.modal.lastClickedToggle = this._dialogElement;
     if (!this._dialogElement.hasAttribute("open")) {
-      console.log('open toggling ...');
       vl.modal.toggle(this._dialogElement);
     }
   }
@@ -103,7 +102,6 @@ export class VlModal extends VlElement(HTMLElement) {
    */
   close() {
     if (this._dialogElement.hasAttribute("open")) {
-      console.log('close toggling ...');
       vl.modal.toggle(this._dialogElement);
     }
   }
