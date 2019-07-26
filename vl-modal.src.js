@@ -1,25 +1,7 @@
 import {VlElement, define} from '/node_modules/vl-ui-core/vl-core.js';
-import {VlIcon} from '/node_modules/vl-ui-icon/vl-icon.js';
-import {VlButton} from '/node_modules/vl-ui-button/vl-button.js';
-import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js';
-
-(() => {
-  loadScript('util.js', '/node_modules/@govflanders/vl-ui-util/dist/js/util.min.js', () => {
-    loadScript('core.js', '/node_modules/@govflanders/vl-ui-core/dist/js/core.min.js', () => {
-      loadScript('modal.js', '../dist/modal.js');
-    });
-  });
-
-  function loadScript(id, src, onload) {
-    if (!document.head.querySelector('#' + id)) {
-      let script = document.createElement('script');
-      script.setAttribute('id', id);
-      script.setAttribute('src', src);
-      script.onload = onload;
-      document.head.appendChild(script);
-    }
-  }
-})();
+import '/node_modules/vl-ui-icon/vl-icon.js';
+import '/node_modules/vl-ui-button/vl-button.js';
+import '/node_modules/vl-ui-action-group/vl-action-group.js';
 
 /**
  * VlModal
@@ -34,34 +16,42 @@ import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js
  * @property {boolean} not-cancellable - Attribuut wordt gebruikt om aan te duiden dat de modal niet annuleerbaar is.
  */
 export class VlModal extends VlElement(HTMLElement) {
+
   static get _observedAttributes() {
     return ['id', 'data-title', 'closable', 'not-cancellable', 'open'];
   }
-  
+
   constructor() {
     super(`
-            <style>
-                @import '../style.css';
-                @import '/node_modules/vl-ui-icon/style.css';
-                @import '/node_modules/vl-ui-link/style.css';
-                @import '/node_modules/vl-ui-action-group/style.css';
-                @import '/node_modules/vl-ui-button/style.css';
-            </style>
+      <style>
+        @import '../style.css';
+        @import '/node_modules/vl-ui-icon/style.css';
+        @import '/node_modules/vl-ui-link/style.css';
+        @import '/node_modules/vl-ui-action-group/style.css';
+        @import '/node_modules/vl-ui-button/style.css';
+      </style>
 
-            <div class="vl-modal">
-                <dialog class="vl-modal-dialog" data-vl-modal tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-toggle-title" aria-describedby="modal-toggle-description">
-                  <div class="vl-modal-dialog__content" id="modal-toggle-description">
-                      <slot name="content">Modal content</slot>
-                  </div>
-                  <div is="vl-action-group" id="modal-action-group">
-                    <slot name="button" data-vl-modal-close></slot>
-                    <button is="vl-button-link" id="modal-toggle-cancellable" data-vl-modal-close>
-                        <span is="vl-icon" icon="cross" before></span>Annuleer
-                    </button>
-                  </div>
-                </dialog>
-            </div>
-        `);
+      <div class="vl-modal">
+        <dialog 
+          class="vl-modal-dialog" 
+          data-vl-modal 
+          tabindex="-1" 
+          role="dialog" 
+          aria-modal="true" 
+          aria-hidden="true"
+          aria-labelledby="modal-toggle-title"
+          aria-describedby="modal-toggle-description">
+          <div class="vl-modal-dialog__content" id="modal-toggle-description">
+            <slot name="content">Modal content</slot>
+          </div>
+          <div is="vl-action-group" id="modal-action-group">
+            <slot name="button" data-vl-modal-close></slot>
+            <button is="vl-button-link" id="modal-toggle-cancellable" data-vl-modal-close>
+              <span is="vl-icon" icon="cross" before></span>Annuleer
+            </button>
+          </div>
+        </dialog>
+      </div>`);
   }
 
   connectedCallback() {
@@ -92,15 +82,9 @@ export class VlModal extends VlElement(HTMLElement) {
    * Initialiseer de modal config.
    */
   dress() {
-    (async () => {
-      while (!window.vl || !window.vl.modal) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-
-      if (!this._dressed) {
-        vl.modal.dress(this._dialogElement);
-      }
-    })();
+    if (!this._dressed) {
+      vl.modal.dress(this._dialogElement);
+    }
   }
 
   /**
@@ -109,6 +93,7 @@ export class VlModal extends VlElement(HTMLElement) {
   open() {
     vl.modal.lastClickedToggle = this._dialogElement;
     if (!this._dialogElement.hasAttribute("open")) {
+      console.log('open toggling ...');
       vl.modal.toggle(this._dialogElement);
     }
   }
@@ -118,6 +103,7 @@ export class VlModal extends VlElement(HTMLElement) {
    */
   close() {
     if (this._dialogElement.hasAttribute("open")) {
+      console.log('close toggling ...');
       vl.modal.toggle(this._dialogElement);
     }
   }
@@ -133,24 +119,25 @@ export class VlModal extends VlElement(HTMLElement) {
 
   _getCloseButtonTemplate() {
     return this._template(`
-          <button type="button" class="vl-modal-dialog__close" data-vl-modal-close>
-            <i class="vl-modal-dialog__close__icon vl-vi vl-vi-cross" aria-hidden="true"></i>
-            <span class="vl-u-visually-hidden">Venster sluiten</span>
-          </button>
-        `);
+      <button type="button" class="vl-modal-dialog__close" data-vl-modal-close>
+        <i class="vl-modal-dialog__close__icon vl-vi vl-vi-cross" aria-hidden="true"></i>
+        <span class="vl-u-visually-hidden">Venster sluiten</span>
+      </button>
+    `);
   }
 
   _getTitleTemplate(titel) {
     return this._template(`
       <h2 class="vl-modal-dialog__title" id="modal-toggle-title">${titel}</h2>
-        `);
+    `);
   }
 
   _getCancelTemplate() {
     return this._template(`
-        <button is="vl-button-link" data-vl-modal-close id="modal-toggle-cancellable">
-            <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
-        </button>`);
+      <button is="vl-button-link" data-vl-modal-close id="modal-toggle-cancellable">
+        <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
+      </button>
+    `);
   }
 
   _idChangedCallback(oldValue, newValue) {
@@ -197,4 +184,48 @@ export class VlModal extends VlElement(HTMLElement) {
   }
 }
 
-define('vl-modal', VlModal);
+(() => {
+
+  // cfr https://www.html5rocks.com/en/tutorials/speed/script-loading/
+  // download as fast as possible in the provided order
+
+  const awaitScript = (id, src) => {
+    if (document.head.querySelector('#' + id)) {
+      console.log(`script with id '${id}' is already loaded`);
+      return Promise.resolve();
+    }
+
+    let script = document.createElement('script');
+    script.id = id;
+    script.src = src;
+    script.async = false;
+
+    const promise = new Promise((resolve, reject) => {
+      script.onload = () => {
+        resolve();
+      };
+    });
+
+    document.head.appendChild(script);
+    return promise;
+  };
+
+  const awaitUntil = (condition) => {
+    return new Promise((resolve, reject) => {
+      (async () => {
+        while (!condition()) {
+          await new Promise(r => setTimeout(r, 50));
+        }
+        resolve();
+      })();
+    });
+  };
+
+  Promise.all([
+    awaitScript('util', '/node_modules/@govflanders/vl-ui-util/dist/js/util.min.js'),
+    awaitScript('core', '/node_modules/@govflanders/vl-ui-core/dist/js/core.min.js'),
+    awaitScript('modal', '../dist/modal.js'),
+    awaitUntil(() => window.vl && window.vl.modal)]
+  ).then(() => {
+    define('vl-modal', VlModal);  });
+})();

@@ -39,14 +39,16 @@
 
     let modal, modal2, button;
 
-    setup(() => {
+    setup((done) => {
+      window.customElements.whenDefined('vl-modal').then(() => done());
+
       window.vl = {
         modal: {
           dress: sinon.fake(),
           toggle: sinon.fake()
         }
       };
-      
+
       let parent = fixture('vl-modal-fixture');
       modal = parent.filter(element => element.id === "modal-1")[0];
       button = parent.filter(element => element.id === "button-1")[0];

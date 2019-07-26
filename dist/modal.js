@@ -535,7 +535,6 @@
           checkDOM([]); // sanity-check DOM
         }.bind(this));
         this.handleKey_ = this.handleKey_.bind(this);
-        this.handleFocus_ = this.handleFocus_.bind(this);
         this.zIndexLow_ = 100000;
         this.zIndexHigh_ = 100000 + 150;
         this.forwardTab_ = undefined;
@@ -565,7 +564,6 @@
 
 
       dialogPolyfill.DialogManager.prototype.blockDocument = function () {
-        document.documentElement.addEventListener('focus', this.handleFocus_, true);
         document.addEventListener('keydown', this.handleKey_);
         this.mo_ && this.mo_.observe(document, {
           childList: true,
@@ -579,7 +577,6 @@
 
 
       dialogPolyfill.DialogManager.prototype.unblockDocument = function () {
-        document.documentElement.removeEventListener('focus', this.handleFocus_, true);
         document.removeEventListener('keydown', this.handleKey_);
         this.mo_ && this.mo_.disconnect();
       };
@@ -624,39 +621,6 @@
           }
 
           candidate = candidate.parentElement;
-        }
-
-        return false;
-      };
-
-      dialogPolyfill.DialogManager.prototype.handleFocus_ = function (event) {
-        if (this.containedByTopDialog_(event.target)) {
-          return;
-        }
-
-        event.preventDefault();
-        event.stopPropagation();
-        safeBlur(
-        /** @type {Element} */
-        event.target);
-
-        if (this.forwardTab_ === undefined) {
-          return;
-        } // move focus only from a tab key
-
-
-        var dpi = this.pendingDialogStack[0];
-        var dialog = dpi.dialog;
-        var position = dialog.compareDocumentPosition(event.target);
-
-        if (position & Node.DOCUMENT_POSITION_PRECEDING) {
-          if (this.forwardTab_) {
-            // forward
-            dpi.focus_();
-          } else {
-            // backwards
-            document.documentElement.focus();
-          }
         }
 
         return false;
@@ -1005,7 +969,7 @@
 
   if (!('modal' in vl)) {
     vl.modal = new Modal();
-    vl.modal.dressAll();
+    // vl.modal.dressAll();
   }
 
   return Modal;
