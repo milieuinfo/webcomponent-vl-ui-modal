@@ -35,7 +35,7 @@ import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js
  */
 export class VlModal extends VlElement(HTMLElement) {
   static get _observedAttributes() {
-    return ['id', 'data-title', 'closable', 'not-cancellable', 'open'];
+    return ['id', 'title', 'closable', 'not-cancellable', 'open'];
   }
   
   constructor() {
@@ -56,7 +56,7 @@ export class VlModal extends VlElement(HTMLElement) {
                   <div is="vl-action-group" id="modal-action-group">
                     <slot name="button" data-vl-modal-close></slot>
                     <button is="vl-button-link" id="modal-toggle-cancellable" data-vl-modal-close>
-                        <span is="vl-icon" icon="cross" before></span>Annuleer
+                        <span is="vl-icon" data-vl-icon="cross" data-vl-before></span>Annuleer
                     </button>
                   </div>
                 </dialog>
@@ -149,7 +149,7 @@ export class VlModal extends VlElement(HTMLElement) {
   _getCancelTemplate() {
     return this._template(`
         <button is="vl-button-link" data-vl-modal-close id="modal-toggle-cancellable">
-            <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
+            <span is="vl-icon" data-vl-icon="cross" data-vl-before data-vl-modal-close></span>Annuleer
         </button>`);
   }
 
@@ -157,7 +157,7 @@ export class VlModal extends VlElement(HTMLElement) {
     this._dialogElement.id = newValue;
   }
 
-  _data_titleChangedCallback(oldValue, newValue) {
+  _titleChangedCallback(oldValue, newValue) {
     if (newValue) {
       if (this._titleElement) {
         this._titleElement.innerText = newValue;
