@@ -48,7 +48,7 @@
     "http-server": "0.11.1",
     "np": "3.0.4",
     "replace": "1.1.0",
-    "sinon": "7.3.2",
+    "sinon": "7.4.1",
     "uglify-es": "github:mishoo/UglifyJS2#harmony",
     "vl-ui-util": "^1.2.3",
     "wct-browser-legacy": "1.0.2",
