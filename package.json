@@ -32,7 +32,7 @@
   "dependencies": {
     "vl-ui-action-group": "1.0.9",
     "vl-ui-button": "1.0.10",
-    "vl-ui-core": "1.4.3",
+    "vl-ui-core": "1.4.4",
     "vl-ui-icon": "2.0.5"
   },
   "peerDependencies": {
