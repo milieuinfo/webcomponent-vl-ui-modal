@@ -32,6 +32,8 @@ import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js
  * @property {boolean} open - Attribuut wordt gebruikt om aan te duiden dat de modal onmiddellijk geopend moet worden na het renderen.
  * @property {boolean} closable - Attribuut wordt gebruikt om aan te duiden dat de modal sluitbaar is.
  * @property {boolean} not-cancellable - Attribuut wordt gebruikt om aan te duiden dat de modal niet annuleerbaar is.
+ * 
+ * @version <a href="http://www.github.com/milieuinfo/webcomponent-vl-ui-modal/releases/latest">Release notes</a>
  */
 export class VlModal extends VlElement(HTMLElement) {
   static get _observedAttributes() {
