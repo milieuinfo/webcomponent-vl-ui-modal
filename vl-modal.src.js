@@ -33,7 +33,8 @@ import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js
  * @property {boolean} closable - Attribuut wordt gebruikt om aan te duiden dat de modal sluitbaar is.
  * @property {boolean} not-cancellable - Attribuut wordt gebruikt om aan te duiden dat de modal niet annuleerbaar is.
  * 
- * @version <a href="http://www.github.com/milieuinfo/webcomponent-vl-ui-modal/releases/latest">Release notes</a>
+ * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-modal/releases/latest|Release notes}
+ * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-modal/issues|Issues}
  */
 export class VlModal extends VlElement(HTMLElement) {
   static get _observedAttributes() {
