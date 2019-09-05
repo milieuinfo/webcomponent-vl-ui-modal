@@ -35,7 +35,7 @@ import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js
  * 
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-modal/releases/latest|Release notes}
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-modal/issues|Issues}
- * @see {@link https://webcomponenten.omgeving.vlaanderen.be/demo/vl-ui-modal.html|Demo}
+ * @see {@link https://webcomponenten.omgeving.vlaanderen.be/demo/vl-modal.html|Demo}
  */
 export class VlModal extends VlElement(HTMLElement) {
   static get _observedAttributes() {
