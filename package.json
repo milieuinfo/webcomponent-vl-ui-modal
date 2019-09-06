@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-modal",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "description": "Gebruik de modal dialoog om de gebruiker te informeren over onbewaarde wijzigingen wanneer hij de pagina verlaat. Een modal dialoog vraagt de aandacht van e gebruiker en verplicht de gebruiker om actie te ondernemen voordat de site verder gebruikt kan worden.",
   "main": "vl-modal.js",
   "author": "DIDM",
@@ -14,7 +14,7 @@
     "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
   },
   "scripts": {
-    "prepare": "npm run prepare:util",
+    "prepare": "npm update --dev vl-ui-util && npm run prepare:util",
     "prepare:util": "npm explore vl-ui-util -- npm run util",
     "test": "wct -l chrome,firefox --npm",
     "test-debug": "wct -l chrome,firefox --npm -p",
