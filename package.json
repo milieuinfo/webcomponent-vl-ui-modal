@@ -30,27 +30,27 @@
     "demo": "http-server"
   },
   "dependencies": {
-    "vl-ui-action-group": "1.0.12",
-    "vl-ui-button": "1.0.10",
-    "vl-ui-core": "1.4.4",
-    "vl-ui-icon": "2.0.6"
+    "vl-ui-action-group": "1.0.17",
+    "vl-ui-button": "1.1.9",
+    "vl-ui-core": "milieuinfo/webcomponent-vl-ui-core#UIG-190_migratie_naar_3_9_0",
+    "vl-ui-icon": "2.0.11"
   },
   "peerDependencies": {
-    "vl-ui-core": "^1.4.2",
-    "vl-ui-button": "^1.0.8",
-    "vl-ui-icon": "^2.0.4",
-    "vl-ui-action-group": "^1.0.7"
+    "vl-ui-core": "milieuinfo/webcomponent-vl-ui-core#UIG-190_migratie_naar_3_9_0",
+    "vl-ui-button": "^1.1.9",
+    "vl-ui-icon": "^2.0.11",
+    "vl-ui-action-group": "^1.0.17"
   },
   "devDependencies": {
-    "@govflanders/vl-ui-core": "3.7.2",
-    "@govflanders/vl-ui-modal": "3.7.2",
-    "@govflanders/vl-ui-util": "3.7.2",
+    "@govflanders/vl-ui-core": "3.9.0",
+    "@govflanders/vl-ui-modal": "3.9.0",
+    "@govflanders/vl-ui-util": "3.9.0",
     "http-server": "0.11.1",
     "np": "3.0.4",
     "replace": "1.1.0",
-    "sinon": "7.3.2",
+    "sinon": "7.4.2",
     "uglify-es": "github:mishoo/UglifyJS2#harmony",
-    "vl-ui-util": "^1.2.22",
+    "vl-ui-util": "milieuinfo/webcomponent-vl-ui-util#UIG-190_migrate",
     "wct-browser-legacy": "1.0.2",
     "web-component-tester": "6.9.2"
   }
