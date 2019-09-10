@@ -47,7 +47,7 @@
     "@govflanders/vl-ui-util": "3.7.2",
     "http-server": "0.11.1",
     "np": "3.1.0",
-    "replace": "1.1.0",
+    "replace": "1.1.1",
     "sinon": "7.4.1",
     "uglify-es": "github:mishoo/UglifyJS2#harmony",
     "vl-ui-util": "^1.2.23",
