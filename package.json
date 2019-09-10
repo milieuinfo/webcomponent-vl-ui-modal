@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-modal",
-  "version": "1.0.1",
+  "version": "1.0.6",
   "description": "Gebruik de modal dialoog om de gebruiker te informeren over onbewaarde wijzigingen wanneer hij de pagina verlaat. Een modal dialoog vraagt de aandacht van e gebruiker en verplicht de gebruiker om actie te ondernemen voordat de site verder gebruikt kan worden.",
   "main": "vl-modal.js",
   "author": "DIDM",
@@ -14,7 +14,7 @@
     "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
   },
   "scripts": {
-    "prepare": "npm run prepare:util",
+    "prepare": "npm update --dev vl-ui-util && npm run prepare:util",
     "prepare:util": "npm explore vl-ui-util -- npm run util",
     "test": "wct -l chrome,firefox --npm",
     "test-debug": "wct -l chrome,firefox --npm -p",
@@ -30,10 +30,10 @@
     "demo": "http-server"
   },
   "dependencies": {
-    "vl-ui-action-group": "1.0.9",
+    "vl-ui-action-group": "1.0.12",
     "vl-ui-button": "1.0.10",
-    "vl-ui-core": "1.4.3",
-    "vl-ui-icon": "2.0.5"
+    "vl-ui-core": "1.4.4",
+    "vl-ui-icon": "2.0.6"
   },
   "peerDependencies": {
     "vl-ui-core": "^1.4.2",
@@ -50,7 +50,7 @@
     "replace": "1.1.0",
     "sinon": "7.3.2",
     "uglify-es": "github:mishoo/UglifyJS2#harmony",
-    "vl-ui-util": "1.1.3",
+    "vl-ui-util": "^1.2.22",
     "wct-browser-legacy": "1.0.2",
     "web-component-tester": "6.9.2"
   }
