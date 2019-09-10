@@ -32,8 +32,8 @@
   "dependencies": {
     "vl-ui-action-group": "1.0.12",
     "vl-ui-button": "1.0.10",
-    "vl-ui-core": "1.4.4",
-    "vl-ui-icon": "2.0.6"
+    "vl-ui-core": "1.4.6",
+    "vl-ui-icon": "2.0.11"
   },
   "peerDependencies": {
     "vl-ui-core": "^1.4.2",
@@ -48,7 +48,7 @@
     "http-server": "0.11.1",
     "np": "3.1.0",
     "replace": "1.1.1",
-    "sinon": "7.4.1",
+    "sinon": "7.4.2",
     "uglify-es": "github:mishoo/UglifyJS2#harmony",
     "vl-ui-util": "^1.2.23",
     "wct-browser-legacy": "1.0.2",
