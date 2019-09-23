@@ -7,8 +7,8 @@ assignees: coemans
 
 ---
 
-**Functionele beschrijving**
-Een korte en duidelijke uitleg over wat je wil toevoegen.
+**Beschrijving**
+Een korte en duidelijke uitleg over wat er moet gebeuren.
 
 **Extra info**
 Extra info, indien nodig.
