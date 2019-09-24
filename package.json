@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-modal",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Gebruik de modal dialoog om de gebruiker te informeren over onbewaarde wijzigingen wanneer hij de pagina verlaat. Een modal dialoog vraagt de aandacht van e gebruiker en verplicht de gebruiker om actie te ondernemen voordat de site verder gebruikt kan worden.",
   "main": "vl-modal.js",
   "author": "DIDM",
@@ -46,8 +46,8 @@
     "@govflanders/vl-ui-modal": "3.9.1",
     "@govflanders/vl-ui-util": "3.9.1",
     "http-server": "0.11.1",
-    "np": "3.0.4",
-    "replace": "1.1.0",
+    "np": "3.1.0",
+    "replace": "1.1.1",
     "sinon": "7.4.2",
     "uglify-es": "github:mishoo/UglifyJS2#harmony",
     "vl-ui-util": "^2.0.4",
