@@ -1,8 +1,8 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global.modal = factory());
-}(this, (function () { 'use strict';
+  global.modal = factory();
+}(typeof self !== 'undefined' ? self : this, function () { 'use strict';
 
   function _typeof(obj) {
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
@@ -920,7 +920,10 @@
         var visible = element.hasAttribute('open');
 
         if (visible || forceClose) {
+          if (visible) {
           element.close();
+          }
+
           this.lastClickedToggle.focus();
           vl.util.removeClass(document.body, noOverflowClass);
         } else {
@@ -1010,4 +1013,4 @@
 
   return Modal;
 
-})));
+}));
