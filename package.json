@@ -30,16 +30,16 @@
     "demo": "http-server"
   },
   "dependencies": {
-    "vl-ui-action-group": "^1.0.17",
-    "vl-ui-button": "^1.1.9",
+    "vl-ui-action-group": "^1.0.18",
+    "vl-ui-button": "^1.1.12",
     "vl-ui-core": "^2.0.0",
-    "vl-ui-icon": "^2.0.11"
+    "vl-ui-icon": "^2.1.0"
   },
   "peerDependencies": {
     "vl-ui-core": "^2.0.0",
-    "vl-ui-button": "^1.1.9",
-    "vl-ui-icon": "^2.0.11",
-    "vl-ui-action-group": "^1.0.17"
+    "vl-ui-button": "^1.1.12",
+    "vl-ui-icon": "^2.1.0",
+    "vl-ui-action-group": "^1.0.18"
   },
   "devDependencies": {
     "@govflanders/vl-ui-core": "3.9.1",
@@ -50,7 +50,7 @@
     "replace": "1.1.1",
     "sinon": "7.4.2",
     "uglify-es": "github:mishoo/UglifyJS2#harmony",
-    "vl-ui-util": "^2.0.4",
+    "vl-ui-util": "^2.0.5",
     "wct-browser-legacy": "1.0.2",
     "web-component-tester": "6.9.2"
   }
