@@ -30,7 +30,7 @@
     "demo": "http-server"
   },
   "dependencies": {
-    "vl-ui-action-group": "^1.0.17",
+    "vl-ui-action-group": "^1.0.18",
     "vl-ui-button": "^1.1.12",
     "vl-ui-core": "^2.0.0",
     "vl-ui-icon": "^2.1.0"
@@ -39,7 +39,7 @@
     "vl-ui-core": "^2.0.0",
     "vl-ui-button": "^1.1.12",
     "vl-ui-icon": "^2.1.0",
-    "vl-ui-action-group": "^1.0.17"
+    "vl-ui-action-group": "^1.0.18"
   },
   "devDependencies": {
     "@govflanders/vl-ui-core": "3.9.1",
