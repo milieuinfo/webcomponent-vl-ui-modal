@@ -1,25 +1,14 @@
-import {VlElement, define} from '/node_modules/vl-ui-core/vl-core.js';
+import {VlElement, define, awaitScript, awaitUntil} from '/node_modules/vl-ui-core/vl-core.js';
 import {VlIcon} from '/node_modules/vl-ui-icon/vl-icon.js';
 import {VlButton} from '/node_modules/vl-ui-button/vl-button.js';
 import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js';
 
-(() => {
-  loadScript('util.js', '/node_modules/@govflanders/vl-ui-util/dist/js/util.min.js', () => {
-    loadScript('core.js', '/node_modules/@govflanders/vl-ui-core/dist/js/core.min.js', () => {
-      loadScript('modal.js', '../dist/modal.js');
-    });
-  });
-
-  function loadScript(id, src, onload) {
-    if (!document.head.querySelector('#' + id)) {
-      let script = document.createElement('script');
-      script.setAttribute('id', id);
-      script.setAttribute('src', src);
-      script.onload = onload;
-      document.head.appendChild(script);
-    }
-  }
-})();
+Promise.all([
+  awaitScript('util', '/node_modules/@govflanders/vl-ui-util/dist/js/util.min.js'),
+  awaitScript('core', '/node_modules/@govflanders/vl-ui-core/dist/js/core.min.js'),
+  awaitScript('modal', '../dist/modal.js'),
+  awaitUntil(() => window.vl && window.vl.modal)]
+).then(() => define('vl-modal', VlModal));
 
 /**
  * VlModal
@@ -96,15 +85,9 @@ export class VlModal extends VlElement(HTMLElement) {
    * Initialiseer de modal config.
    */
   dress() {
-    (async () => {
-      while (!window.vl || !window.vl.modal) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-
-      if (!this._dressed) {
-        vl.modal.dress(this._dialogElement);
-      }
-    })();
+    if (!this._dressed) {
+      vl.modal.dress(this._dialogElement);
+    }
   }
 
   /**
@@ -200,5 +183,3 @@ export class VlModal extends VlElement(HTMLElement) {
     }
   }
 }
-
-define('vl-modal', VlModal);
