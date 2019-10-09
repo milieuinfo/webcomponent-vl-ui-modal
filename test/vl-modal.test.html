@@ -39,7 +39,7 @@
 
     let modal, modal2, button;
 
-    setup(() => {
+    setup((done) => {
       window.vl = {
         modal: {
           dress: sinon.fake(),
@@ -51,6 +51,8 @@
       modal = parent.filter(element => element.id === "modal-1")[0];
       button = parent.filter(element => element.id === "button-1")[0];
       modal2 = fixture('vl-modal-zonder-actions-fixture');
+
+      customElements.whenDefined('vl-modal').then(done);
     });
 
     test('de dress methode called vl.modal.dress met de dialog', () => {
