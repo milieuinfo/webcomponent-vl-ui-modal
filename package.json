@@ -50,7 +50,7 @@
     "replace": "1.1.1",
     "sinon": "7.5.0",
     "uglify-es": "github:mishoo/UglifyJS2#harmony",
-    "vl-ui-util": "^2.0.7",
+    "vl-ui-util": "^2.0.9",
     "wct-browser-legacy": "1.0.2",
     "web-component-tester": "6.9.2"
   }
