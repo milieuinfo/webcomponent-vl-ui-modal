@@ -17,3 +17,9 @@
 // Util
 // ==========================================================================
 @import "vl-ui-util/src/scss/util";
+
+.vl-modal {
+    .vl-modal-dialog {
+        overflow: visible;
+    }
+}
