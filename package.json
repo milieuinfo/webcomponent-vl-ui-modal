@@ -42,7 +42,7 @@
     "vl-ui-action-group": "^1.0.18"
   },
   "devDependencies": {
-    "@govflanders/vl-ui-core": "3.9.1",
+    "@govflanders/vl-ui-core": "3.9.2",
     "@govflanders/vl-ui-modal": "3.9.1",
     "@govflanders/vl-ui-util": "3.9.1",
     "http-server": "0.11.1",
