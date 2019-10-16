@@ -1,7 +1,7 @@
-import {VlElement, define, awaitScript, awaitUntil} from '/node_modules/vl-ui-core/vl-core.js';
-import {VlIcon} from '/node_modules/vl-ui-icon/vl-icon.js';
-import {VlButton} from '/node_modules/vl-ui-button/vl-button.js';
-import {VlActionGroup} from '/node_modules/vl-ui-action-group/vl-action-group.js';
+import { VlElement, define, awaitScript, awaitUntil } from '/node_modules/vl-ui-core/vl-core.js';
+import { VlIcon } from '/node_modules/vl-ui-icon/vl-icon.js';
+import { VlButton } from '/node_modules/vl-ui-button/vl-button.js';
+import { VlActionGroup } from '/node_modules/vl-ui-action-group/vl-action-group.js';
 
 Promise.all([
   awaitScript('util', '/node_modules/@govflanders/vl-ui-util/dist/js/util.min.js'),
@@ -21,6 +21,7 @@ Promise.all([
  * @property {boolean} open - Attribuut wordt gebruikt om aan te duiden dat de modal onmiddellijk geopend moet worden na het renderen.
  * @property {boolean} closable - Attribuut wordt gebruikt om aan te duiden dat de modal sluitbaar is.
  * @property {boolean} not-cancellable - Attribuut wordt gebruikt om aan te duiden dat de modal niet annuleerbaar is.
+ * @property {boolean} not-auto-closable - Attribuut wordt gebruikt om aan te duiden dat de modal niet sluit bij het uitvoeren van een actie in de button slot.
  * 
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-modal/releases/latest|Release notes}
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-modal/issues|Issues}
@@ -28,9 +29,17 @@ Promise.all([
  */
 export class VlModal extends VlElement(HTMLElement) {
   static get _observedAttributes() {
-    return ['id', 'data-title', 'closable', 'not-cancellable', 'open'];
+    return ['id', 'data-title', 'closable', 'not-cancellable', 'open', 'not-auto-closable'];
   }
-  
+
+  static get _closableAttribute() {
+    return 'data-vl-modal-closable';
+  }
+
+  static get _closeAttribute() {
+    return 'data-vl-modal-close';
+  }
+
   constructor() {
     super(`
             <style>
@@ -77,6 +86,10 @@ export class VlModal extends VlElement(HTMLElement) {
     return this._element.querySelector('#modal-toggle-cancellable');
   }
 
+  get _slotButtonElement() {
+    return this._element.querySelector('slot[name="button"]');
+  }
+
   get _dressed() {
     return !!this.getAttribute('data-vl-modal-dressed');
   }
@@ -120,24 +133,23 @@ export class VlModal extends VlElement(HTMLElement) {
 
   _getCloseButtonTemplate() {
     return this._template(`
-          <button type="button" class="vl-modal-dialog__close" data-vl-modal-close>
-            <i class="vl-modal-dialog__close__icon vl-vi vl-vi-cross" aria-hidden="true"></i>
-            <span class="vl-u-visually-hidden">Venster sluiten</span>
-          </button>
-        `);
+      <button type="button" class="vl-modal-dialog__close" data-vl-modal-close>
+        <i class="vl-modal-dialog__close__icon vl-vi vl-vi-cross" aria-hidden="true"></i>
+        <span class="vl-u-visually-hidden">Venster sluiten</span>
+      </button>
+    `);
   }
 
   _getTitleTemplate(titel) {
     return this._template(`
-      <h2 class="vl-modal-dialog__title" id="modal-toggle-title">${titel}</h2>
-        `);
+      <h2 class="vl-modal-dialog__title" id="modal-toggle-title">${titel}</h2>`);
   }
 
   _getCancelTemplate() {
     return this._template(`
-        <button is="vl-button-link" data-vl-modal-close id="modal-toggle-cancellable">
-            <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
-        </button>`);
+      <button is="vl-button-link" data-vl-modal-close id="modal-toggle-cancellable">
+          <span is="vl-icon" icon="cross" before data-vl-modal-close></span>Annuleer
+      </button>`);
   }
 
   _idChangedCallback(oldValue, newValue) {
@@ -159,9 +171,9 @@ export class VlModal extends VlElement(HTMLElement) {
   }
 
   _not_cancellableChangedCallback(oldValue, newValue) {
-    if (newValue === undefined && !this._cancelElement) {
+    if (newValue == undefined && !this._cancelElement) {
       this._actionGroupElement.append(this._getCancelTemplate());
-    } else if (newValue !== undefined && this._cancelElement) {
+    } else if (newValue != undefined && this._cancelElement) {
       this._cancelElement.remove();
     }
   }
@@ -171,15 +183,23 @@ export class VlModal extends VlElement(HTMLElement) {
   }
 
   _closableChangedCallback(oldValue, newValue) {
-    if (newValue !== undefined) {
+    if (newValue != undefined) {
       this._closeButtonElement = this._getCloseButtonTemplate();
-      this._dialogElement.setAttribute('data-vl-modal-closable', '');
+      this._dialogElement.setAttribute(VlModal._closableAttribute, '');
       this._dialogElement.appendChild(this._closeButtonElement);
     } else {
       if (this._closeButtonElement) {
         this._closeButtonElement.remove();
-        this._dialogElement.removeAttribute('data-vl-modal-closable');
+        this._dialogElement.removeAttribute(VlModal._closableAttribute);
       }
+    }
+  }
+
+  _not_auto_closableChangedCallback(oldValue, newValue) {
+    if (newValue == undefined && !this._slotButtonElement.hasAttribute(VlModal._closeAttribute)) {
+      this._slotButtonElement.setAttribute(VlModal._closeAttribute, '');
+    } else if (newValue != undefined && this._slotButtonElement.hasAttribute(VlModal._closeAttribute)) {
+      this._slotButtonElement.removeAttribute(VlModal._closeAttribute);
     }
   }
 }
