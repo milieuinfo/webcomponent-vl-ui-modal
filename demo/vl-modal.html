@@ -46,6 +46,20 @@
         </div>
 
         <div>
+            <h2>Modal, closable maar niet automatisch closable</h2>
+            <pre>
+                <code class="line-numbers language-markup">
+                    &lt;button is="vl-button" data-vl-modal-open="modal-2"&gt;Open&lt;/button&gt;
+                    &lt;vl-modal id="modal-2" data-title="Modal 2" closable not-auto-closable&gt;&lt;/vl-modal&gt;
+                </code>
+            </pre>
+            <div class="demo">
+                <button is="vl-button" data-vl-modal-open="modal-2">Open</button>
+                <vl-modal id="modal-2" data-title="Modal 2" closable not-auto-closable></vl-modal>
+            </div>
+        </div>
+
+        <div>
             <h2>Modal, closable en niet cancellable</h2>
             <pre>
                 <code class="line-numbers language-markup">
@@ -100,7 +114,7 @@
         </div>
 
         <div>
-            <h2>Modal, manual open/close (te gebruiken bij elementen met shadowroot)</h2>
+            <h2>Modal, manual open/close</h2>
             <pre>
                 <code class="line-numbers language-markup">
                     &lt;script type="text/javascript"&gt;
