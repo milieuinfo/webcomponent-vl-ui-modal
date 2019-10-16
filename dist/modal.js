@@ -630,7 +630,8 @@
       };
 
       dialogPolyfill.DialogManager.prototype.handleFocus_ = function (event) {
-        if (this.containedByTopDialog_(event.target)) {
+        var target = document.activeElement.shadowRoot ? document.activeElement.shadowRoot.activeElement : event.target;
+        if (this.containedByTopDialog_(target)) {
           return;
         }
 
