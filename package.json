@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-modal",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Gebruik de modal dialoog om de gebruiker te informeren over onbewaarde wijzigingen wanneer hij de pagina verlaat. Een modal dialoog vraagt de aandacht van e gebruiker en verplicht de gebruiker om actie te ondernemen voordat de site verder gebruikt kan worden.",
   "main": "vl-modal.js",
   "author": "DIDM",
