@@ -7,7 +7,7 @@ export class VlModalTest extends VlElement(HTMLElement) {
   constructor() {
     super(`
       <style>
-          @import '../style.css';
+          @import '/node_modules/vl-ui-modal/style.css';
           @import '/node_modules/vl-ui-button/style.css';
           @import '/node_modules/vl-ui-input-field/style.css';
       </style>
