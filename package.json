@@ -51,7 +51,7 @@
     "sinon": "7.5.0",
     "uglify-es": "github:mishoo/UglifyJS2#harmony",
     "vl-ui-input-field": "^1.1.1",
-    "vl-ui-util": "^2.0.11",
+    "vl-ui-util": "^2.0.13",
     "wct-browser-legacy": "1.0.2",
     "web-component-tester": "6.9.2"
   }
