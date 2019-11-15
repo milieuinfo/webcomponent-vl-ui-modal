@@ -44,6 +44,10 @@
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
 
+  function activeElement(element) {
+    return element.shadowRoot ? activeElement(element.shadowRoot.activeElement) : element;
+  }
+
   var dialogPolyfill = createCommonjsModule(function (module) {
     (function () {
       // nb. This is for IE10 and lower _only_.
@@ -337,7 +341,7 @@
             target = this.dialog_.querySelector(query.join(', '));
           }
 
-          safeBlur(document.activeElement);
+          safeBlur(activeElement(document.activeElement));
           target && target.focus();
         },
 
@@ -630,7 +634,7 @@
       };
 
       dialogPolyfill.DialogManager.prototype.handleFocus_ = function (event) {
-        var target = document.activeElement.shadowRoot ? document.activeElement.shadowRoot.activeElement : event.target;
+        var target = activeElement(document.activeElement);
         if (this.containedByTopDialog_(target)) {
           return;
         }
