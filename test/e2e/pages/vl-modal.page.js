@@ -9,14 +9,19 @@ class VlModalPage extends Page {
         return new VlModal(this.driver, selector);
     }
 
+    async openModal(selector) {
+        const openButton = await this.driver.findElement(By.css(selector));
+        return openButton.click();
+    }
+
     async getModalZonderButtonEnContent() {
         const modal = await this._getModal('#modal-zb');
         const shadowRoot = await modal.shadowRoot()
         return shadowRoot.findElement(By.css('#modal-zb'));
     }
 
-    async getModalZonderButtonEnContentOpenKnop() {
-        return this.driver.findElement(By.css('#modal-zb-open'));
+    async openModalZonderButtonEnContent() {
+        return this.openModal('#modal-zb-open');
     }
 
     async getModalZonderButtonEnContentAnnuleerKnop() {

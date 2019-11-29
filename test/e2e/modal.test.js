@@ -11,8 +11,7 @@ describe('vl-modal', async () => {
     });
 
     it('ik kan de modal openen door op open te klikken en sluiten door op annuleer te klikken', async () => {
-        const openButton = await vlModalPage.getModalZonderButtonEnContentOpenKnop();
-        await openButton.click();
+        await vlModalPage.openModalZonderButtonEnContent();
 
         const modal = await vlModalPage.getModalZonderButtonEnContent();
         await assert.eventually.isTrue(modal.isDisplayed());
