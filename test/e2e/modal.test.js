@@ -11,14 +11,11 @@ describe('vl-modal', async () => {
     });
 
     it('ik kan de modal openen door op open te klikken en sluiten door op annuleer te klikken', async () => {
-        await vlModalPage.openModalZonderButtonEnContent();
-
         const modal = await vlModalPage.getModalZonderButtonEnContent();
+        await assert.eventually.isFalse(modal.isDisplayed());
+        await vlModalPage.openModalZonderButtonEnContent();
         await assert.eventually.isTrue(modal.isDisplayed());
-
-        const annuleer = await vlModalPage.getModalZonderButtonEnContentAnnuleerKnop();
-        await annuleer.click();
-
+        await modal.cancel();
         await assert.eventually.isFalse(modal.isDisplayed());
     });
     

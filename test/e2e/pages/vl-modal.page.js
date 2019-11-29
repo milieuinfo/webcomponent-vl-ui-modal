@@ -1,7 +1,5 @@
 const VlModal = require('../components/vl-modal');
-const { Page } = require('vl-ui-core');
-const { Config } = require('vl-ui-core');
-
+const { Page, Config } = require('vl-ui-core');
 const { By } = require('selenium-webdriver');
 
 class VlModalPage extends Page {
@@ -10,23 +8,16 @@ class VlModalPage extends Page {
     }
 
     async openModal(selector) {
-        const openButton = await this.driver.findElement(By.css(selector));
-        return openButton.click();
+        const button = await this.driver.findElement(By.css(selector));
+        return button.click();
     }
 
     async getModalZonderButtonEnContent() {
-        const modal = await this._getModal('#modal-zb');
-        const shadowRoot = await modal.shadowRoot()
-        return shadowRoot.findElement(By.css('#modal-zb'));
+        return await this._getModal('#modal-zb');
     }
 
     async openModalZonderButtonEnContent() {
-        return this.openModal('#modal-zb-open');
-    }
-
-    async getModalZonderButtonEnContentAnnuleerKnop() {
-        const modal = await this.getModalZonderButtonEnContent();
-        return modal.findElement(By.css('#modal-toggle-cancellable'));
+        return this.openModal('#button-open-modal-zb');
     }
 
     async load() {

@@ -26,9 +26,6 @@ export class VlModalTest extends VlElement(HTMLElement) {
 export class VlModalContainerTest extends VlElement(HTMLElement) {
   constructor() {
     super(`
-      <style>
-        @import '/node_modules/vl-ui-input-field/style.css';
-      </style>
       <vl-modal-test></vl-modal-test>
     `);
   }
