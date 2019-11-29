@@ -16,7 +16,7 @@ class VlModalPage extends Page {
     }
 
     async getModalZonderButtonEnContentOpenKnop() {
-        return this._getModal('#modal-zb-open');
+        return this.driver.findElement(By.css('#modal-zb-open'));
     }
 
     async getModalZonderButtonEnContentAnnuleerKnop() {
