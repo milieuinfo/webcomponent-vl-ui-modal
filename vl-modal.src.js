@@ -6,7 +6,7 @@ import { VlActionGroup } from '/node_modules/vl-ui-action-group/vl-action-group.
 Promise.all([
   awaitScript('util', '/node_modules/@govflanders/vl-ui-util/dist/js/util.min.js'),
   awaitScript('core', '/node_modules/@govflanders/vl-ui-core/dist/js/core.min.js'),
-  awaitScript('modal', '../dist/modal.js'),
+  awaitScript('modal', '/dist/modal.js'),
   awaitUntil(() => window.vl && window.vl.modal)]
 ).then(() => define('vl-modal', VlModal));
 
