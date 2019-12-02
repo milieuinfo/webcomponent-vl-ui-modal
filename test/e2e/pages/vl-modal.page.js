@@ -1,6 +1,6 @@
 const VlModal = require('../components/vl-modal');
 const { Page, Config } = require('vl-ui-core');
-const { By, until } = require('selenium-webdriver');
+const { By } = require('selenium-webdriver');
 
 class VlModalPage extends Page {
     async _getModal(selector) {
