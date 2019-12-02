@@ -133,7 +133,7 @@ export class VlModal extends VlElement(HTMLElement) {
 
   _getCloseButtonTemplate() {
     return this._template(`
-      <button type="button" class="vl-modal-dialog__close" data-vl-modal-close>
+      <button id="close" type="button" class="vl-modal-dialog__close" data-vl-modal-close>
         <i class="vl-modal-dialog__close__icon vl-vi vl-vi-cross" aria-hidden="true"></i>
         <span class="vl-u-visually-hidden">Venster sluiten</span>
       </button>

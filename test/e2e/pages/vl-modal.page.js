@@ -1,13 +1,13 @@
 const VlModal = require('../components/vl-modal');
 const { Page, Config } = require('vl-ui-core');
-const { By } = require('selenium-webdriver');
+const { By, until } = require('selenium-webdriver');
 
 class VlModalPage extends Page {
     async _getModal(selector) {
         return new VlModal(this.driver, selector);
     }
 
-    async openModal(selector) {
+    async _openModal(selector) {
         const button = await this.driver.findElement(By.css(selector));
         return button.click();
     }
@@ -16,8 +16,85 @@ class VlModalPage extends Page {
         return await this._getModal('#modal-zb');
     }
 
+    async getModalClosable() {
+        return await this._getModal('#modal-cl');
+    }
+
+    async getModalClosableNietAutomatisch() {
+        return await this._getModal('#modal-cl-na');
+    }
+
+    async getModalClosableNietCancellable() {
+        return await this._getModal('#modal-cl-nc');
+    }
+
+    async getModalClosableNietCancellableMetButtonEnContent() {
+        return await this._getModal('#modal-cl-nc-bc');
+    }
+
+    async getModalClosableNietCancellableMetLinkEnIcon() {
+        return await this._getModal('#modal-cl-nc-li');
+    }
+
+    async getModalManual() {
+        return await this._getModal('#modal-ma');
+    }
+
+    async getModalListener() {
+        return await this._getModal('#modal-lis');
+    }
+
+    async getModalTest() {
+        return await this._getModal('#modal-test');
+    }
+
     async openModalZonderButtonEnContent() {
-        return this.openModal('#button-open-modal-zb');
+        return this._openModal('#button-open-modal-zb');
+    }
+
+    async openModalClosable() {
+        return this._openModal('#button-open-modal-cl')
+    }
+
+    async openModalClosableNietAutomatisch() {
+        return this._openModal('#button-open-modal-cl-na');
+    }
+
+    async openModalClosableNietCancellable() {
+        return this._openModal('#button-open-modal-cl-nc');
+    }
+
+    async openModalClosableNietCancellableMetButtonEnContent() {
+        return this._openModal('#button-open-modal-cl-nc-bc');
+    }
+    
+    async openModalClosableNietCancellableMetLinkEnIcon() {
+        return this._openModal('#button-open-modal-cl-nc-li');
+    }
+
+    async openModalManual() {
+        return this._openModal('#button-open-modal-ma');
+    }
+
+    async openModalListener() {
+        return this._openModal('#button-open-modal-lis');
+    }
+
+    async openModalSafari() {
+        return this._openModal('#safari');
+    }
+
+    async klikVoegListenerToe() {
+        return this.driver.findElement(By.css('#add-listener')).click();
+    }
+
+    async getListenerText() {
+        const button = await this.driver.findElement(By.css('#button-open-modal-lis'));
+        return button.getText();
+    }
+
+    async hasFocus() {
+        return this.driver.executeScript('return document.querySelector("vl-modal-container-test").shadowRoot.querySelector("vl-modal-test").shadowRoot.querySelector("vl-modal input") === document.activeElement');
     }
 
     async load() {
