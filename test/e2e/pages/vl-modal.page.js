@@ -1,10 +1,10 @@
 const VlModal = require('../components/vl-modal');
-const { Page, Config } = require('vl-ui-core');
+const { Page, Config, VlElement } = require('vl-ui-core');
 const { By } = require('selenium-webdriver');
 
 class VlModalPage extends Page {
-    async _getModal(selector) {
-        return new VlModal(this.driver, selector);
+    async _getModal(identifier) {
+        return new VlModal(this.driver, identifier);
     }
 
     async _openModal(selector) {
@@ -44,8 +44,10 @@ class VlModalPage extends Page {
         return await this._getModal('#modal-lis');
     }
 
-    async getModalTest() {
-        return await this._getModal('#modal-test');
+    async getModalSafari() {
+        const container = await new VlElement(this.driver, 'vl-modal-container-test');
+        const parent = container.shadowRoot;
+        return await this._getModal(parent.shadowRoot);
     }
 
     async openModalZonderButtonEnContent() {
@@ -81,7 +83,7 @@ class VlModalPage extends Page {
     }
 
     async openModalSafari() {
-        return this._openModal('#safari');
+        return this._openModal('#button-open-modal-safari');
     }
 
     async klikVoegListenerToe() {
@@ -91,10 +93,6 @@ class VlModalPage extends Page {
     async getListenerText() {
         const button = await this.driver.findElement(By.css('#button-open-modal-lis'));
         return button.getText();
-    }
-
-    async hasFocus() {
-        return this.driver.executeScript('return document.querySelector("vl-modal-container-test").shadowRoot.querySelector("vl-modal-test").shadowRoot.querySelector("vl-modal input") === document.activeElement');
     }
 
     async load() {

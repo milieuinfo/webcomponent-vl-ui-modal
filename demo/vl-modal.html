@@ -56,7 +56,7 @@
             <div class="demo">
                 <button id="button-open-modal-cl-na" is="vl-button" data-vl-modal-open="modal-cl-na">Open</button>
                 <vl-modal id="modal-cl-na" data-title="Modal 2" closable not-auto-closable>
-                    <button id="actie" is="vl-button" slot="button">Andere actie</button>
+                    <button is="vl-button" slot="button">Andere actie</button>
                 </vl-modal>
             </div>
         </div>
@@ -90,7 +90,7 @@
                 <button id="button-open-modal-cl-nc-bc" is="vl-button" data-vl-modal-open="modal-cl-nc-bc">Open</button>
                 <vl-modal id="modal-cl-nc-bc" data-title="Modal 4" closable not-cancellable>
                     <span slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                    <button id="actie" is="vl-button" slot="button">Andere actie</button>
+                    <button is="vl-button" slot="button">Andere actie</button>
                 </vl-modal>
             </div>
         </div>
@@ -110,7 +110,7 @@
                 <button id="button-open-modal-cl-nc-li" is="vl-button" data-vl-modal-open="modal-cl-nc-li">Open</button>
                 <vl-modal id="modal-cl-nc-li" data-title="Modal 5" closable not-cancellable>
                     <span slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                    <button id="actie" is="vl-button-link" slot="button"><span is="vl-icon" icon="cross" before data-vl-modal-close></span>Andere actie</button>
+                    <button is="vl-button-link" slot="button"><span is="vl-icon" icon="cross" before data-vl-modal-close></span>Andere actie</button>
                 </vl-modal>
             </div>
         </div>
@@ -128,7 +128,7 @@
                     &lt;button id="button-open-modal-ma" is="vl-button" onclick="openModal('modal-ma')"&gt;Open&lt;/button&gt;
                     &lt;vl-modal id="modal-ma" data-title="Modal 6"&gt;
                         &lt;span slot="content"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/span&gt;
-                        &lt;button id="actie-ma" is="vl-button" slot="button"&gt;Aanvraag starten&lt;/button&gt;
+                        &lt;button is="vl-button" slot="button"&gt;Aanvraag starten&lt;/button&gt;
                     &lt;/vl-modal&gt;
                 </code>
             </pre>
@@ -142,7 +142,7 @@
                 <button id="button-open-modal-ma" is="vl-button" onclick="openModal('modal-ma')">Open</button>
                 <vl-modal id="modal-ma" data-title="Modal 6">
                     <span slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                    <button id="actie" is="vl-button" slot="button">Aanvraag starten</button>
+                    <button is="vl-button" slot="button">Aanvraag starten</button>
                 </vl-modal>
             </div>
         </div>
@@ -159,13 +159,12 @@
 
                     &lt;vl-modal id="modal-lis" data-title="Modal 7" closable&gt;
                         &lt;span slot="content"&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/span&gt;
-                        &lt;button id="actie" is="vl-button" slot="button"&gt;Aanvraag starten&lt;/button&gt;
+                        &lt;button is="vl-button" slot="button"&gt;Aanvraag starten&lt;/button&gt;
                     &lt;/vl-modal&gt;
 
                     &lt;script type="text/javascript"&gt;
                         function voegCloseListenerToe() {
-                            document.querySelector("vl-modal[id=\"modal-lis\"]").on('close',
-                                event =&gt; alert("closed"));
+                            document.querySelector("vl-modal[id=\"modal-lis\"]").on('close', event =&gt; document.querySelector("#button-open-modal-lis").innerText = 'Lach de lach der dwazen');
                         }
                     &lt;/script&gt;
                 </code>
@@ -178,13 +177,12 @@
 
                 <vl-modal id="modal-lis" data-title="Modal 7" closable>
                     <span slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                    <button id="actie" is="vl-button" slot="button">Aanvraag starten</button>
+                    <button is="vl-button" slot="button">Aanvraag starten</button>
                 </vl-modal>
 
                 <script type="text/javascript">
                     function voegCloseListenerToe() {
-                        document.querySelector("vl-modal[id=\"modal-lis\"]").on('close',
-                            event => document.querySelector("#button-open-modal-lis").innerText = 'Lach de lach der dwazen');
+                        document.querySelector("vl-modal[id=\"modal-lis\"]").on('close', event => document.querySelector("#button-open-modal-lis").innerText = 'Lach de lach der dwazen');
                     }
                 </script>
             </div>
@@ -194,7 +192,7 @@
             <h2>Safari shadow DOM focus</h2>
             <pre>
                 <code class="line-numbers language-markup">
-                    &lt;vl-modal-test id="modal-test"&gt;&lt;/vl-modal-test&gt;
+                    &lt;vl-modal-container-test id="modal-safari"&gt;&lt;/vl-modal-container-test&gt;
                 </code>
             </pre>
             <div class="demo">
@@ -205,7 +203,7 @@
                 </script>
  
                 <div is="vl-action-group">
-                    <button id="safari" is="vl-button" onclick="openModalTest('modal-safari')">Open</button>
+                    <button id="button-open-modal-safari" is="vl-button" onclick="openModalTest('modal-safari')">Open</button>
                 </div>
 
                 <vl-modal-container-test id="modal-safari"></vl-modal-container-test>

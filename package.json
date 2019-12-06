@@ -35,7 +35,7 @@
     "release:prepare:build": "uglifyjs --compress --mangle --output vl-modal.js -- *.src.js",
     "release:prepare:imports": "npm run release:prepare:imports:core && npm run release:prepare:imports:dist",
     "release:prepare:imports:core": "replace '/node_modules/vl-ui-core/vl-core.src.js' '/node_modules/vl-ui-core/vl-core.js' vl-modal.js",
-    "release:prepare:imports:dist": "replace '../dist/modal.js' '/node_modules/vl-ui-modal/dist/modal.js' vl-modal.js",
+    "release:prepare:imports:dist": "replace '/dist/modal.js' '/node_modules/vl-ui-modal/dist/modal.js' vl-modal.js",
     "release:prepare:css": "replace '\\.\\./style.css' '/node_modules/vl-ui-modal/style.css' vl-modal.js",
     "release:prepare:commit": "git add -f vl-modal.js && git commit --amend --no-edit && git pull",
     "release:testless": "np --yolo",
@@ -44,7 +44,7 @@
   "dependencies": {
     "vl-ui-action-group": "^1.0.18",
     "vl-ui-button": "^1.3.2",
-    "vl-ui-core": "^2.2.3",
+    "vl-ui-core": "^2.2.5",
     "vl-ui-icon": "^2.1.1"
   },
   "peerDependencies": {

@@ -2,17 +2,13 @@ const { VlElement } = require('vl-ui-core');
 const { By } = require('selenium-webdriver');
 
 class VlModal extends VlElement {  
-    constructor(driver, selector) {
-        super(driver, selector);
-    }
-
     async isDisplayed() {
         const dialog = await this._getDialog();
         return dialog.isDisplayed();
     }
 
     async isCancellable() {
-        return this.shadowRoot.findElements(By.css('#modal-toggle-cancellable')).size > 0;   
+        return this._exists(() => this._getCancelButton());
     }
 
     async cancel() {
@@ -20,14 +16,26 @@ class VlModal extends VlElement {
         return button.click();
     }
 
+    async isClosable() {
+        return this._exists(() => this._getCloseButton());
+    }
+
     async close() {
         const button = await this._getCloseButton();
         return button.click();
     }
 
-    async klikButtonInModal() {
+    async isSubmittable() {
+        return this._exists(() => this._getActionButton());
+    }
+
+    async submit() {
         const button = await this._getActionButton();
         return button.click();
+    }
+
+    async getContent() {
+        return await this._getContent();
     }
 
     async _getDialog() {
@@ -42,8 +50,21 @@ class VlModal extends VlElement {
         return this.shadowRoot.findElement(By.css('#close'));
     }
 
+    async _getContent() {
+        return this.findElement(By.css('[slot="content"]'));
+    }
+
     async _getActionButton() {
-        return this.findElement(By.css('#actie'));
+        return this.findElement(By.css('[slot="button"]'));
+    }
+
+    async _exists(getter) {
+        try {
+            await getter();
+            return true;
+        } catch (error) {
+            return false;
+        }
     }
 }
 
