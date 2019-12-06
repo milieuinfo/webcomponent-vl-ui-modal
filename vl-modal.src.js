@@ -6,7 +6,7 @@ import { VlActionGroup } from '/node_modules/vl-ui-action-group/vl-action-group.
 Promise.all([
   awaitScript('util', '/node_modules/@govflanders/vl-ui-util/dist/js/util.min.js'),
   awaitScript('core', '/node_modules/@govflanders/vl-ui-core/dist/js/core.min.js'),
-  awaitScript('modal', '../dist/modal.js'),
+  awaitScript('modal', '/dist/modal.js'),
   awaitUntil(() => window.vl && window.vl.modal)]
 ).then(() => define('vl-modal', VlModal));
 
@@ -133,7 +133,7 @@ export class VlModal extends VlElement(HTMLElement) {
 
   _getCloseButtonTemplate() {
     return this._template(`
-      <button type="button" class="vl-modal-dialog__close" data-vl-modal-close>
+      <button id="close" type="button" class="vl-modal-dialog__close" data-vl-modal-close>
         <i class="vl-modal-dialog__close__icon vl-vi vl-vi-cross" aria-hidden="true"></i>
         <span class="vl-u-visually-hidden">Venster sluiten</span>
       </button>

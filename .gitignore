@@ -1,6 +1,5 @@
 node_modules
 .sass-cache
-vl-modal.js
 *.css.map
 *.iml
 .idea/

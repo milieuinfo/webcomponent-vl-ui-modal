@@ -13,7 +13,7 @@ export class VlModalTest extends VlElement(HTMLElement) {
 
       <vl-modal data-title="Modal" closable not-cancellable>
         <button is="vl-button" slot="button">aanvraag starten</button>
-        <input is="vl-input-field" slot="content" block></input>
+        <input id="input-safari" is="vl-input-field" slot="content" block></input>
       </vl-modal>
     `);
   }
@@ -26,9 +26,6 @@ export class VlModalTest extends VlElement(HTMLElement) {
 export class VlModalContainerTest extends VlElement(HTMLElement) {
   constructor() {
     super(`
-      <style>
-        @import '/node_modules/vl-ui-input-field/style.css';
-      </style>
       <vl-modal-test></vl-modal-test>
     `);
   }
