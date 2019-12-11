@@ -104,6 +104,4 @@ describe('vl-modal', async () => {
         const content = await modal.getContent();
         await assert.eventually.isTrue(content.hasFocus());
     });
-
-    after(() => driver && driver.quit());
 });
