@@ -55,6 +55,6 @@
     "@govflanders/vl-ui-modal": "3.9.1",
     "@govflanders/vl-ui-util": "3.9.1",
     "vl-ui-input-field": "^1.1.2",
-    "vl-ui-util": "^3.4.1"
+    "vl-ui-util": "^3.4.2"
   }
 }
