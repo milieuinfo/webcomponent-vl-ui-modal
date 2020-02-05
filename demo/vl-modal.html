@@ -8,6 +8,7 @@
     <script type="module" src="/node_modules/vl-ui-button/vl-button.js"></script>
     <script type="module" src="/node_modules/vl-ui-action-group/vl-action-group.js"></script>
     <script type="module" src="/node_modules/vl-ui-icon/vl-icon.js"></script>
+    <script type="module" src="/node_modules/vl-ui-datepicker/vl-datepicker.js"></script>
     <script type="module" src="vl-modal-test.js"></script>
     <script type="module" src="demo.js"></script>
 
@@ -209,6 +210,27 @@
                 <vl-modal-container-test id="modal-safari"></vl-modal-container-test>
             </div>
         </div>
+
+        <div>
+            <h2>Modal met datepicker</h2>
+            <pre>
+                <code class="line-numbers language-markup">
+                    &lt;vl-modal id="modal-datepicker"&gt;
+                        &lt;div slot="content"&gt;
+                            &lt;vl-datepicker&gt;&lt;/vl-datepicker&gt;
+                        &lt;/div&gt;
+                    &lt;/vl-modal&gt;
+                </code>
+            </pre>
+            <div class="demo">
+                <button id="button-open-modal-datepicker" is="vl-button" data-vl-modal-open="modal-datepicker">Open</button>
+                <vl-modal id="modal-datepicker">
+                    <div slot="content">
+                        <vl-datepicker></vl-datepicker>
+                    </div>
+                </vl-modal>
+            </div>
+        </div>     
 
         <div>
             <h2>Modal met veel tekst</h2>
