@@ -1,14 +1,10 @@
-import { VlElement, define, awaitScript, awaitUntil } from '/node_modules/vl-ui-core/vl-core.js';
-import { VlIcon } from '/node_modules/vl-ui-icon/vl-icon.js';
-import { VlButton } from '/node_modules/vl-ui-button/vl-button.js';
-import { VlActionGroup } from '/node_modules/vl-ui-action-group/vl-action-group.js';
-
-Promise.all([
-  awaitScript('util', '/node_modules/@govflanders/vl-ui-util/dist/js/util.min.js'),
-  awaitScript('core', '/node_modules/@govflanders/vl-ui-core/dist/js/core.min.js'),
-  awaitScript('modal', '/dist/modal.js'),
-  awaitUntil(() => window.vl && window.vl.modal)]
-).then(() => define('vl-modal', VlModal));
+import { VlElement } from 'vl-ui-core';
+import 'vl-ui-icon';
+import 'vl-ui-button';
+import 'vl-ui-action-group';
+import 'vl-ui-ui-util/dist/js/util.min.js';
+import 'vl-ui-ui-core/dist/js/core.min.js';
+import "/dist/modal.js";
 
 /**
  * VlModal
@@ -208,3 +204,4 @@ export class VlModal extends VlElement(HTMLElement) {
     }
   }
 }
+

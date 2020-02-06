@@ -1,5 +1,4 @@
-
-const { assert, driver } = require('vl-ui-core').Test;
+const { assert, driver } = require('vl-ui-core').Test.Setup;
 const VlModalPage = require('./pages/vl-modal.page');
 const { By } = require('selenium-webdriver')
 
