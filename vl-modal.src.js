@@ -1,10 +1,10 @@
-import { VlElement } from 'vl-ui-core';
+import { VlElement, define } from 'vl-ui-core';
 import 'vl-ui-icon';
 import 'vl-ui-button';
 import 'vl-ui-action-group';
-import 'vl-ui-ui-util/dist/js/util.min.js';
-import 'vl-ui-ui-core/dist/js/core.min.js';
-import "/dist/modal.js";
+import 'vl-ui-util/dist/js/util.min.js';
+import 'vl-ui-core/dist/js/core.min.js';
+import 'vl-ui-modal/dist/modal.js';
 
 /**
  * VlModal
@@ -205,3 +205,4 @@ export class VlModal extends VlElement(HTMLElement) {
   }
 }
 
+define('vl-modal', VlModal);
