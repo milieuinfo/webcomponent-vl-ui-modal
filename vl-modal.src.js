@@ -2,8 +2,8 @@ import { VlElement, define } from 'vl-ui-core';
 import 'vl-ui-icon';
 import 'vl-ui-button';
 import 'vl-ui-action-group';
-import 'vl-ui-util/dist/js/util.min.js';
-import 'vl-ui-core/dist/js/core.min.js';
+import '@govflanders/vl-ui-util/dist/js/util.min.js';
+import '@govflanders/vl-ui-core/dist/js/core.min.js';
 import 'vl-ui-modal/dist/modal.js';
 
 /**
