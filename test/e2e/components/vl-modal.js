@@ -1,4 +1,4 @@
-const { VlElement } = require('vl-ui-core');
+const { VlElement } = require('vl-ui-core').Test;
 const { By } = require('selenium-webdriver');
 
 class VlModal extends VlElement {  

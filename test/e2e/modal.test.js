@@ -1,13 +1,15 @@
-
-const { assert, driver } = require('vl-ui-core').Test;
+const { assert, driver } = require('vl-ui-core').Test.Setup;
 const VlModalPage = require('./pages/vl-modal.page');
-const { By } = require('selenium-webdriver')
 
 describe('vl-modal', async () => {
     const vlModalPage = new VlModalPage(driver);
 
     before(() => {
         return vlModalPage.load();
+    });
+
+    after(async () => {
+        return driver.quit();
     });
 
     it('als gebruiker kan ik de modal zonder button en content openen en sluiten via de annuleer knop', async () => {
