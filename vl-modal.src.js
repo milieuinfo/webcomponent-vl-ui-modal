@@ -4,7 +4,7 @@ import 'vl-ui-button';
 import 'vl-ui-action-group';
 import '@govflanders/vl-ui-util/dist/js/util.min.js';
 import '@govflanders/vl-ui-core/dist/js/core.min.js';
-import "/dist/modal.js";
+import 'vl-ui-modal/dist/modal.js';
 
 /**
  * VlModal
