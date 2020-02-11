@@ -50,6 +50,10 @@ class VlModalPage extends Page {
         return await this._getModal(parent.shadowRoot);
     }
 
+    async getModalMetVeelTekst() {
+        return await this._getModal('#modal-vt');
+    }
+
     async openModalZonderButtonEnContent() {
         return this._openModal('#button-open-modal-zb');
     }
@@ -84,6 +88,10 @@ class VlModalPage extends Page {
 
     async openModalSafari() {
         return this._openModal('#button-open-modal-safari');
+    }
+
+    async openModalMetVeelTekst() {
+        return await this._openModal('#button-open-modal-vt');
     }
 
     async klikVoegListenerToe() {

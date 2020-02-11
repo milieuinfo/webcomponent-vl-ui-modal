@@ -81,6 +81,7 @@
     "@govflanders/vl-ui-modal": "3.9.1",
     "@govflanders/vl-ui-util": "3.9.1",
     "vl-ui-input-field": "^2.0.0",
+    "vl-ui-datepicker": "^1.1.0",
     "vl-ui-util": "^4.0.0"
   }
 }
