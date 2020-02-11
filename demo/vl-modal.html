@@ -213,12 +213,12 @@
                 <vl-modal-container-test id="modal-safari"></vl-modal-container-test>
             </div>
         </div>
-        
+
         <div>
             <h2>Modal met datepicker</h2>
             <pre>
                 <code class="line-numbers language-markup">
-                    &lt;vl-modal id="modal-datepicker"&gt;
+                    &lt;vl-modal id="modal-datepicker" allow-overflow&gt;
                         &lt;div slot="content"&gt;
                             &lt;vl-datepicker&gt;&lt;/vl-datepicker&gt;
                         &lt;/div&gt;
@@ -227,7 +227,7 @@
             </pre>
             <div class="demo">
                 <button id="button-open-modal-datepicker" is="vl-button" data-vl-modal-open="modal-datepicker">Open</button>
-                <vl-modal id="modal-datepicker">
+                <vl-modal id="modal-datepicker" allow-overflow>
                     <div slot="content">
                         <vl-datepicker></vl-datepicker>
                     </div>

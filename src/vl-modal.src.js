@@ -18,6 +18,7 @@ import "/dist/modal.js";
  * @property {boolean} closable - Attribuut wordt gebruikt om aan te duiden dat de modal sluitbaar is.
  * @property {boolean} not-cancellable - Attribuut wordt gebruikt om aan te duiden dat de modal niet annuleerbaar is.
  * @property {boolean} not-auto-closable - Attribuut wordt gebruikt om aan te duiden dat de modal niet sluit bij het uitvoeren van een actie in de button slot.
+ * @property {boolean} allow-overflow - Attribuut wordt gebruikt om aan te duiden de inhoud van de modal uit de modal mag treden.
  * 
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-modal/releases/latest|Release notes}
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-modal/issues|Issues}
@@ -25,7 +26,7 @@ import "/dist/modal.js";
  */
 export class VlModal extends VlElement(HTMLElement) {
   static get _observedAttributes() {
-    return ['id', 'data-title', 'closable', 'not-cancellable', 'open', 'not-auto-closable'];
+    return ['id', 'data-title', 'closable', 'not-cancellable', 'open', 'not-auto-closable', 'allow-overflow'];
   }
 
   static get _closableAttribute() {
@@ -202,6 +203,10 @@ export class VlModal extends VlElement(HTMLElement) {
     } else if (newValue != undefined && this._slotButtonElement.hasAttribute(VlModal._closeAttribute)) {
       this._slotButtonElement.removeAttribute(VlModal._closeAttribute);
     }
+  }
+
+  _allow_overflowChangedCallback(oldValue, newValue) {
+    this._dialogElement.style.overflow = (newValue != undefined ? 'visible' : '');
   }
 }
 

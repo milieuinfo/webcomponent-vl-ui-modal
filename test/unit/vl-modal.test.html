@@ -196,6 +196,16 @@
         modal.removeAttribute('not-auto-closable');
         assert.isTrue(modal._slotButtonElement.hasAttribute('data-vl-modal-close'));
       });
+
+      test('verander allow-overflow attribuut van modal', () => {
+        const modal = fixture('vl-modal-zonder-actions-fixture');
+        assert.isNull(modal.getAttribute('allow-overflow'));
+        modal.setAttribute('allow-overflow', '');
+        assert.equal(modal._dialogElement.style.overflow, 'visible');
+        modal.removeAttribute('allow-overflow');
+        assert.equal(modal._dialogElement.style.overflow, '');
+      });
+
     });
   </script>
 </body>
