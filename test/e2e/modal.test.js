@@ -1,5 +1,6 @@
 const { assert, driver } = require('vl-ui-core').Test.Setup;
 const VlModalPage = require('./pages/vl-modal.page');
+const VlDatepicker = require('vl-ui-datepicker').Test;
 
 describe('vl-modal', async () => {
     const vlModalPage = new VlModalPage(driver);
@@ -119,6 +120,13 @@ describe('vl-modal', async () => {
         await vlModalPage.openModalZonderButtonEnContent();
         const modal = await vlModalPage.getModalZonderButtonEnContent();
         await assert.eventually.isTrue(driver.executeScript("return arguments[0].offsetWidth == arguments[0].clientWidth", await modal._getDialog()));
+        await modal.cancel();
+    });
+
+    it('als gebruiker kan ik op een element klikken dat groter is dan de content van de modal als het attribuut allow-overflow gezet is', async() => {
+        // TODO klikken op datum op einde van een maand om te kijken of dat lukt
+        await vlModalPage.openModalMetDatepicker();
+        const modal = await vlModalPage.getModalMetDatepicker();
         await modal.cancel();
     });
 });

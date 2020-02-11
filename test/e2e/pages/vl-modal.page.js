@@ -50,6 +50,10 @@ class VlModalPage extends Page {
         return await this._getModal(parent.shadowRoot);
     }
 
+    async getModalMetDatepicker() {
+        return await this._getModal('#modal-datepicker');
+    }
+
     async getModalMetVeelTekst() {
         return await this._getModal('#modal-vt');
     }
@@ -94,6 +98,10 @@ class VlModalPage extends Page {
         return await this._openModal('#button-open-modal-vt');
     }
 
+    async openModalMetDatepicker() {
+        return await this._openModal('#button-open-modal-datepicker');
+    }
+
     async klikVoegListenerToe() {
         return this.driver.findElement(By.css('#add-listener')).click();
     }
@@ -106,6 +114,7 @@ class VlModalPage extends Page {
     async load() {
         await super.load(Config.baseUrl + '/demo/vl-modal.html');
     }
+
 }
 
 module.exports = VlModalPage;
