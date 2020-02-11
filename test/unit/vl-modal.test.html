@@ -197,15 +197,19 @@
         assert.isTrue(modal._slotButtonElement.hasAttribute('data-vl-modal-close'));
       });
 
-      test('verander allow-overflow attribuut van modal', () => {
+      test('laat alleen overflow toe bij dialog indien het allow-overflow attribuut aanwezig is', (done) => {
         const modal = fixture('vl-modal-zonder-actions-fixture');
         assert.isNull(modal.getAttribute('allow-overflow'));
         modal.setAttribute('allow-overflow', '');
-        assert.equal(modal._dialogElement.style.overflow, 'visible');
-        modal.removeAttribute('allow-overflow');
-        assert.equal(modal._dialogElement.style.overflow, '');
+        setTimeout(() => {
+          assert.equal(getComputedStyle(modal._dialogElement).overflow, 'visible');
+          modal.removeAttribute('allow-overflow');
+          setTimeout(() => {
+            assert.equal(getComputedStyle(modal._dialogElement).overflow, 'auto');
+            done();
+          });
+        });
       });
-
     });
   </script>
 </body>

@@ -39,33 +39,36 @@ export class VlModal extends VlElement(HTMLElement) {
 
   constructor() {
     super(`
-            <style>
-                .vl-modal-dialog {
-                    position: fixed;
-                }
-            </style>
-            <style>
-                @import '../style.css';
-                @import '/node_modules/vl-ui-icon/style.css';
-                @import '/node_modules/vl-ui-link/style.css';
-                @import '/node_modules/vl-ui-action-group/style.css';
-                @import '/node_modules/vl-ui-button/style.css';
-            </style>
+      <style>
+        @import '/style.css';
+        @import '/node_modules/vl-ui-icon/style.css';
+        @import '/node_modules/vl-ui-link/style.css';
+        @import '/node_modules/vl-ui-action-group/style.css';
+        @import '/node_modules/vl-ui-button/style.css';
 
-            <div class="vl-modal">
-                <dialog class="vl-modal-dialog" data-vl-modal tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-toggle-title" aria-describedby="modal-toggle-description">
-                  <div class="vl-modal-dialog__content" id="modal-toggle-description">
-                      <slot name="content">Modal content</slot>
-                  </div>
-                  <div is="vl-action-group" id="modal-action-group">
-                    <slot name="button" data-vl-modal-close></slot>
-                    <button is="vl-button-link" id="modal-toggle-cancellable" data-vl-modal-close>
-                        <span is="vl-icon" icon="cross" before></span>Annuleer
-                    </button>
-                  </div>
-                </dialog>
+        .vl-modal-dialog {
+            position: fixed;
+        }
+
+        :host([allow-overflow]) dialog {
+          overflow: visible;
+        }
+      </style>
+
+      <div class="vl-modal">
+          <dialog class="vl-modal-dialog" data-vl-modal tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-toggle-title" aria-describedby="modal-toggle-description">
+            <div class="vl-modal-dialog__content" id="modal-toggle-description">
+                <slot name="content">Modal content</slot>
             </div>
-        `);
+            <div is="vl-action-group" id="modal-action-group">
+              <slot name="button" data-vl-modal-close></slot>
+              <button is="vl-button-link" id="modal-toggle-cancellable" data-vl-modal-close>
+                  <span is="vl-icon" icon="cross" before></span>Annuleer
+              </button>
+            </div>
+          </dialog>
+      </div>
+    `);
   }
 
   connectedCallback() {
@@ -203,10 +206,6 @@ export class VlModal extends VlElement(HTMLElement) {
     } else if (newValue != undefined && this._slotButtonElement.hasAttribute(VlModal._closeAttribute)) {
       this._slotButtonElement.removeAttribute(VlModal._closeAttribute);
     }
-  }
-
-  _allow_overflowChangedCallback(oldValue, newValue) {
-    this._dialogElement.style.overflow = (newValue != undefined ? 'visible' : '');
   }
 }
 
