@@ -47,7 +47,7 @@ export class VlModal extends VlElement(HTMLElement) {
         @import '/node_modules/vl-ui-button/style.css';
 
         .vl-modal-dialog {
-            position: fixed;
+          position: fixed;
         }
 
         :host([allow-overflow]) dialog {
