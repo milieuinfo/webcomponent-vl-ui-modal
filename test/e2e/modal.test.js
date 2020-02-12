@@ -112,8 +112,7 @@ describe('vl-modal', async () => {
     it('als gebruiker zie ik een verticale scrollbar als er te veel tekst in de modal staat', async() => {
         await vlModalPage.openModalMetVeelTekst();
         const modal = await vlModalPage.getModalMetVeelTekst();
-        const dialog = await modal._getDialog();
-        await driver.executeScript("return arguments[0].scrollTop = 0;", dialog);
+        await modal.scrollToTop();
         await modal.cancel();
     });
 

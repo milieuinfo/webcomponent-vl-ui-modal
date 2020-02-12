@@ -1,3 +1,4 @@
+const { driver } = require('vl-ui-core').Test.Setup;
 const { VlElement } = require('vl-ui-core').Test;
 const { By } = require('selenium-webdriver');
 
@@ -36,6 +37,11 @@ class VlModal extends VlElement {
 
     async getContent() {
         return await this._getContent();
+    }
+
+    async scrollToTop() {
+        const dialog = await this._getDialog()
+        return driver.executeScript("return arguments[0].scrollTop = 0;", dialog);
     }
 
     async _getDialog() {
