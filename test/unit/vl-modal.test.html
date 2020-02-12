@@ -40,8 +40,12 @@
     </template>
   </test-fixture>
 
-  <script>
+  <script type="module">
+    import { awaitUntil } from 'vl-ui-core/vl-core';
+
     suite('<vl-modal>', () => {
+
+
       const should = chai.should();
 
       setup((done) => {
@@ -51,7 +55,7 @@
             toggle: sinon.fake()
           }
         };
-        
+
         customElements.whenDefined('vl-modal').then(done);
       });
 
@@ -201,14 +205,13 @@
         const modal = fixture('vl-modal-zonder-actions-fixture');
         assert.isNull(modal.getAttribute('allow-overflow'));
         modal.setAttribute('allow-overflow', '');
-        setTimeout(() => {
-          assert.equal(getComputedStyle(modal._dialogElement).overflow, 'visible');
-          modal.removeAttribute('allow-overflow');
-          setTimeout(() => {
-            assert.equal(getComputedStyle(modal._dialogElement).overflow, 'auto');
-            done();
+
+        awaitUntil(() =>  getComputedStyle(modal._dialogElement).overflow == 'visible')
+          .then(() => {
+            modal.removeAttribute('allow-overflow');
+            awaitUntil(() => getComputedStyle(modal._dialogElement).overflow == 'auto')
+            .then(() => done());
           });
-        });
       });
     });
   </script>
