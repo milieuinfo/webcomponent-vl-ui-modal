@@ -206,12 +206,10 @@
         assert.isNull(modal.getAttribute('allow-overflow'));
         modal.setAttribute('allow-overflow', '');
 
-        awaitUntil(() =>  getComputedStyle(modal._dialogElement).overflow == 'visible')
-          .then(() => {
-            modal.removeAttribute('allow-overflow');
-            awaitUntil(() => getComputedStyle(modal._dialogElement).overflow == 'auto')
-            .then(() => done());
-          });
+        awaitUntil(() =>  getComputedStyle(modal._dialogElement).overflow == 'visible').then(() => {
+          modal.removeAttribute('allow-overflow');
+          awaitUntil(() => getComputedStyle(modal._dialogElement).overflow == 'auto').then(() => done());
+        });
       });
     });
   </script>
