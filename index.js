@@ -1,3 +1,5 @@
 module.exports = {
-    'VlModal': require('./test/e2e/components/vl-modal')
-}
+    Test: {
+        'VlModal': require('./test/e2e/components/vl-modal')
+    }
+};

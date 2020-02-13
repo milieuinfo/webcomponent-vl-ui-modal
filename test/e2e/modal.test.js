@@ -1,13 +1,16 @@
-
-const { assert, driver } = require('vl-ui-core').Test;
+const { assert, driver } = require('vl-ui-core').Test.Setup;
 const VlModalPage = require('./pages/vl-modal.page');
-const { By } = require('selenium-webdriver')
+const VlDatepicker = require('vl-ui-datepicker').Test;
 
 describe('vl-modal', async () => {
     const vlModalPage = new VlModalPage(driver);
 
     before(() => {
         return vlModalPage.load();
+    });
+
+    after(async () => {
+        return driver.quit();
     });
 
     it('als gebruiker kan ik de modal zonder button en content openen en sluiten via de annuleer knop', async () => {
@@ -103,5 +106,20 @@ describe('vl-modal', async () => {
         await vlModalPage.openModalSafari();
         const content = await modal.getContent();
         await assert.eventually.isTrue(content.hasFocus());
+        await modal.close();
+    });
+
+    it('als gebruiker zie ik een verticale scrollbar als er te veel tekst in de modal staat', async() => {
+        await vlModalPage.openModalMetVeelTekst();
+        const modal = await vlModalPage.getModalMetVeelTekst();
+        await modal.scrollToTop();
+        await modal.cancel();
+    });
+
+    it('als gebruiker kan ik op een element klikken dat groter is dan de content van de modal als het attribuut allow-overflow gezet is', async() => {
+        // TODO klikken op datum op einde van een maand om te kijken of dat lukt
+        await vlModalPage.openModalMetDatepicker();
+        const modal = await vlModalPage.getModalMetDatepicker();
+        await modal.cancel();
     });
 });

@@ -6,7 +6,7 @@
   <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../node_modules/web-component-tester/browser.js"></script>
 
-  <script type="module" src="../../vl-modal.src.js"></script>
+  <script type="module" src="../../src/vl-modal.src.js"></script>
   <script src="../../node_modules/sinon/pkg/sinon.js"></script>
 </head>
 
@@ -40,8 +40,12 @@
     </template>
   </test-fixture>
 
-  <script>
+  <script type="module">
+    import { awaitUntil } from 'vl-ui-core/vl-core';
+
     suite('<vl-modal>', () => {
+
+
       const should = chai.should();
 
       setup((done) => {
@@ -51,7 +55,7 @@
             toggle: sinon.fake()
           }
         };
-        
+
         customElements.whenDefined('vl-modal').then(done);
       });
 
@@ -195,6 +199,19 @@
         assert.isFalse(modal._slotButtonElement.hasAttribute('data-vl-modal-close'));
         modal.removeAttribute('not-auto-closable');
         assert.isTrue(modal._slotButtonElement.hasAttribute('data-vl-modal-close'));
+      });
+
+      test('laat alleen overflow toe bij dialog indien het allow-overflow attribuut aanwezig is', (done) => {
+        const modal = fixture('vl-modal-zonder-actions-fixture');
+        assert.isNull(modal.getAttribute('allow-overflow'));
+        modal.setAttribute('allow-overflow', '');
+
+        awaitUntil(() =>  getComputedStyle(modal._dialogElement).overflow == 'visible')
+          .then(() => {
+            modal.removeAttribute('allow-overflow');
+            awaitUntil(() => getComputedStyle(modal._dialogElement).overflow == 'auto')
+            .then(() => done());
+          });
       });
     });
   </script>

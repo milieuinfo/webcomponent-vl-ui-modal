@@ -1,5 +1,5 @@
 const VlModal = require('../components/vl-modal');
-const { Page, Config, VlElement } = require('vl-ui-core');
+const { Page, Config, VlElement } = require('vl-ui-core').Test;
 const { By } = require('selenium-webdriver');
 
 class VlModalPage extends Page {
@@ -50,6 +50,14 @@ class VlModalPage extends Page {
         return await this._getModal(parent.shadowRoot);
     }
 
+    async getModalMetDatepicker() {
+        return await this._getModal('#modal-datepicker');
+    }
+
+    async getModalMetVeelTekst() {
+        return await this._getModal('#modal-vt');
+    }
+
     async openModalZonderButtonEnContent() {
         return this._openModal('#button-open-modal-zb');
     }
@@ -86,6 +94,14 @@ class VlModalPage extends Page {
         return this._openModal('#button-open-modal-safari');
     }
 
+    async openModalMetVeelTekst() {
+        return await this._openModal('#button-open-modal-vt');
+    }
+
+    async openModalMetDatepicker() {
+        return await this._openModal('#button-open-modal-datepicker');
+    }
+
     async klikVoegListenerToe() {
         return this.driver.findElement(By.css('#add-listener')).click();
     }
@@ -98,6 +114,7 @@ class VlModalPage extends Page {
     async load() {
         await super.load(Config.baseUrl + '/demo/vl-modal.html');
     }
+
 }
 
 module.exports = VlModalPage;

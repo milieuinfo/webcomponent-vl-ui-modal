@@ -1,14 +1,10 @@
-import { VlElement, define, awaitScript, awaitUntil } from '/node_modules/vl-ui-core/vl-core.js';
-import { VlIcon } from '/node_modules/vl-ui-icon/vl-icon.js';
-import { VlButton } from '/node_modules/vl-ui-button/vl-button.js';
-import { VlActionGroup } from '/node_modules/vl-ui-action-group/vl-action-group.js';
-
-Promise.all([
-  awaitScript('util', '/node_modules/@govflanders/vl-ui-util/dist/js/util.min.js'),
-  awaitScript('core', '/node_modules/@govflanders/vl-ui-core/dist/js/core.min.js'),
-  awaitScript('modal', '/dist/modal.js'),
-  awaitUntil(() => window.vl && window.vl.modal)]
-).then(() => define('vl-modal', VlModal));
+import { VlElement, define } from 'vl-ui-core';
+import 'vl-ui-icon';
+import 'vl-ui-button';
+import 'vl-ui-action-group';
+import '@govflanders/vl-ui-util/dist/js/util.min.js';
+import '@govflanders/vl-ui-core/dist/js/core.min.js';
+import 'vl-ui-modal/dist/modal.js';
 
 /**
  * VlModal
@@ -22,6 +18,7 @@ Promise.all([
  * @property {boolean} closable - Attribuut wordt gebruikt om aan te duiden dat de modal sluitbaar is.
  * @property {boolean} not-cancellable - Attribuut wordt gebruikt om aan te duiden dat de modal niet annuleerbaar is.
  * @property {boolean} not-auto-closable - Attribuut wordt gebruikt om aan te duiden dat de modal niet sluit bij het uitvoeren van een actie in de button slot.
+ * @property {boolean} allow-overflow - Attribuut wordt gebruikt om aan te duiden de inhoud van de modal uit de modal mag treden.
  * 
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-modal/releases/latest|Release notes}
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-modal/issues|Issues}
@@ -29,7 +26,7 @@ Promise.all([
  */
 export class VlModal extends VlElement(HTMLElement) {
   static get _observedAttributes() {
-    return ['id', 'data-title', 'closable', 'not-cancellable', 'open', 'not-auto-closable'];
+    return ['id', 'data-title', 'closable', 'not-cancellable', 'open', 'not-auto-closable', 'allow-overflow'];
   }
 
   static get _closableAttribute() {
@@ -42,28 +39,36 @@ export class VlModal extends VlElement(HTMLElement) {
 
   constructor() {
     super(`
-            <style>
-                @import '../style.css';
-                @import '/node_modules/vl-ui-icon/style.css';
-                @import '/node_modules/vl-ui-link/style.css';
-                @import '/node_modules/vl-ui-action-group/style.css';
-                @import '/node_modules/vl-ui-button/style.css';
-            </style>
+      <style>
+        @import '/style.css';
+        @import '/node_modules/vl-ui-icon/style.css';
+        @import '/node_modules/vl-ui-link/style.css';
+        @import '/node_modules/vl-ui-action-group/style.css';
+        @import '/node_modules/vl-ui-button/style.css';
 
-            <div class="vl-modal">
-                <dialog class="vl-modal-dialog" data-vl-modal tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-toggle-title" aria-describedby="modal-toggle-description">
-                  <div class="vl-modal-dialog__content" id="modal-toggle-description">
-                      <slot name="content">Modal content</slot>
-                  </div>
-                  <div is="vl-action-group" id="modal-action-group">
-                    <slot name="button" data-vl-modal-close></slot>
-                    <button is="vl-button-link" id="modal-toggle-cancellable" data-vl-modal-close>
-                        <span is="vl-icon" icon="cross" before></span>Annuleer
-                    </button>
-                  </div>
-                </dialog>
+        .vl-modal-dialog {
+          position: fixed;
+        }
+
+        :host([allow-overflow]) dialog {
+          overflow: visible;
+        }
+      </style>
+
+      <div class="vl-modal">
+          <dialog class="vl-modal-dialog" data-vl-modal tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-toggle-title" aria-describedby="modal-toggle-description">
+            <div class="vl-modal-dialog__content" id="modal-toggle-description">
+                <slot name="content">Modal content</slot>
             </div>
-        `);
+            <div is="vl-action-group" id="modal-action-group">
+              <slot name="button" data-vl-modal-close></slot>
+              <button is="vl-button-link" id="modal-toggle-cancellable" data-vl-modal-close>
+                  <span is="vl-icon" icon="cross" before></span>Annuleer
+              </button>
+            </div>
+          </dialog>
+      </div>
+    `);
   }
 
   connectedCallback() {
@@ -203,3 +208,5 @@ export class VlModal extends VlElement(HTMLElement) {
     }
   }
 }
+
+define('vl-modal', VlModal);
