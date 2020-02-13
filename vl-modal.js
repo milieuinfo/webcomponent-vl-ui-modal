@@ -40,11 +40,11 @@ export class VlModal extends VlElement(HTMLElement) {
   constructor() {
     super(`
       <style>
-        @import '//node_modules/vl-ui-modal/style.css';
-        @import '/node_modules/vl-ui-icon//node_modules/vl-ui-modal/style.css';
-        @import '/node_modules/vl-ui-link//node_modules/vl-ui-modal/style.css';
-        @import '/node_modules/vl-ui-action-group//node_modules/vl-ui-modal/style.css';
-        @import '/node_modules/vl-ui-button//node_modules/vl-ui-modal/style.css';
+        @import '/node_modules/vl-ui-modal/style.css';
+        @import '/node_modules/vl-ui-icon/style.css';
+        @import '/node_modules/vl-ui-link/style.css';
+        @import '/node_modules/vl-ui-action-group/style.css';
+        @import '/node_modules/vl-ui-button/style.css';
 
         .vl-modal-dialog {
           position: fixed;
