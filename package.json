@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-modal",
-  "version": "2.1.1",
+  "version": "2.1.0",
   "description": "Gebruik de modal dialoog om de gebruiker te informeren over onbewaarde wijzigingen wanneer hij de pagina verlaat. Een modal dialoog vraagt de aandacht van de gebruiker en verplicht de gebruiker om actie te ondernemen voordat de site verder gebruikt kan worden.",
   "author": "DIDM",
   "license": "MIT",
@@ -65,6 +65,8 @@
     "demo": "http-server"
   },
   "dependencies": {
+    "@govflanders/vl-ui-core": "3.9.1",
+    "@govflanders/vl-ui-util": "3.9.1",
     "vl-ui-action-group": "^2.0.1",
     "vl-ui-button": "^3.0.1",
     "vl-ui-core": "^4.0.0",
@@ -77,9 +79,7 @@
     "vl-ui-icon": "^3.0.1"
   },
   "devDependencies": {
-    "@govflanders/vl-ui-core": "3.9.1",
     "@govflanders/vl-ui-modal": "3.9.1",
-    "@govflanders/vl-ui-util": "3.9.1",
     "vl-ui-datepicker": "^2.0.1",
     "vl-ui-input-field": "^2.0.1",
     "vl-ui-util": "^4.0.3"
