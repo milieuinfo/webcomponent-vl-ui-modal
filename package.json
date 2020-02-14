@@ -82,6 +82,6 @@
     "@govflanders/vl-ui-util": "3.9.1",
     "vl-ui-datepicker": "^2.0.1",
     "vl-ui-input-field": "^2.0.0",
-    "vl-ui-util": "^4.0.2"
+    "vl-ui-util": "github:milieuinfo/webcomponent-vl-ui-util#change-regex"
   }
 }
