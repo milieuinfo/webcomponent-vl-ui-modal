@@ -40,7 +40,7 @@ export class VlModal extends VlElement(HTMLElement) {
   constructor() {
     super(`
       <style>
-        @import '../style.css';
+        @import '/style.css';
         @import '/node_modules/vl-ui-icon/style.css';
         @import '/node_modules/vl-ui-link/style.css';
         @import '/node_modules/vl-ui-action-group/style.css';
