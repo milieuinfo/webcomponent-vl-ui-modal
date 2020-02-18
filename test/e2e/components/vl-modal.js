@@ -39,6 +39,27 @@ class VlModal extends VlElement {
         return await this._getContent();
     }
 
+    async isInViewport() {
+    	const element = await this._getDialog();
+    	const outOfViewport = await this._elementOutOfViewport(element);
+    	return outOfViewport.any == false;
+    }
+
+    async _elementOutOfViewport(element) {
+    	const bounding = await this.driver.executeScript('return arguments[0].getBoundingClientRect()', element);
+    	const height = await this.driver.executeScript('return (window.innerHeight || document.documentElement.clientHeight)');
+    	const right = await this.driver.executeScript('return (window.innerWidth || document.documentElement.clientWidth)');
+    	var outOfViewport = {
+   			top: bounding.top < 0,
+   			left: bounding.left < 0,
+   			bottom: bounding.bottom > height,
+   			right: bounding.right > right
+    	};
+    	outOfViewport.any = outOfViewport.top || outOfViewport.left || outOfViewport.bottom || outOfViewport.right;
+    	outOfViewport.all = outOfViewport.top && outOfViewport.left && outOfViewport.bottom && outOfViewport.right;
+    	return outOfViewport;
+    }
+    
     async scrollToTop() {
         const dialog = await this._getDialog()
         return driver.executeScript("return arguments[0].scrollTop = 0;", dialog);
