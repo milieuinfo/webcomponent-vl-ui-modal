@@ -1,18 +1,14 @@
 const { assert, driver } = require('vl-ui-core').Test.Setup;
 const VlModalPage = require('./pages/vl-modal.page');
-const VlDatepicker = require('vl-ui-datepicker').Test;
+const VlModalAutoOpenPage = require('./pages/vl-modal-auto-open.page');
 
 describe('vl-modal', async () => {
     const vlModalPage = new VlModalPage(driver);
 
-    before(() => {
-        return vlModalPage.load();
+    before(async() => {
+    	return await vlModalPage.load();
     });
-
-    after(async () => {
-        return driver.quit();
-    });
-
+    
     it('als gebruiker kan ik de modal zonder button en content openen en sluiten via de annuleer knop', async () => {
         const modal = await vlModalPage.getModalZonderButtonEnContent();
         await assert.eventually.isFalse(modal.isDisplayed());
@@ -26,7 +22,7 @@ describe('vl-modal', async () => {
     });
 
     it('als gebruiker kan ik de closable modal openen en sluiten via de sluiten knop', async () => {
-        const modal = await vlModalPage.getModalClosable();
+    	const modal = await vlModalPage.getModalClosable();
         await assert.eventually.isFalse(modal.isDisplayed());
         await vlModalPage.openModalClosable();
         await assert.eventually.isTrue(modal.isDisplayed());
@@ -121,5 +117,18 @@ describe('vl-modal', async () => {
         await vlModalPage.openModalMetDatepicker();
         const modal = await vlModalPage.getModalMetDatepicker();
         await modal.cancel();
+    });
+});
+
+describe('vl-modal-auto-open', async () => {
+    const vlModalAutoOpenPage = new VlModalAutoOpenPage(driver);
+
+    before(async() => {
+    	return await vlModalAutoOpenPage.load();
+    });
+    
+    it('een modal die automatisch opent bij het laden van de pagina valt niet buiten het scherm', async () => {
+    	const modal = await vlModalAutoOpenPage.getAutoOpenModal();
+        await assert.eventually.isTrue(modal.isInViewport());
     });
 });
