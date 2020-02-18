@@ -118,7 +118,6 @@ describe('vl-modal', async () => {
         const modal = await vlModalPage.getModalMetDatepicker();
         await modal.cancel();
     });
-
 });
 
 describe('vl-modal-auto-open', async () => {
@@ -132,6 +131,4 @@ describe('vl-modal-auto-open', async () => {
     	const modal = await vlModalAutoOpenPage.getAutoOpenModal();
         await assert.eventually.isTrue(modal.isInViewport());
     });
-
-
 });
