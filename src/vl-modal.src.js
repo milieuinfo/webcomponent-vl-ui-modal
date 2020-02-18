@@ -40,9 +40,9 @@ export class VlModal extends VlElement(HTMLElement) {
   constructor() {
     super(`
       <style>
-   		.vl-modal-dialog {
-    		position: fixed;
-   		}
+        .vl-modal-dialog {
+          position: fixed;
+        }
       </style>
       <style>
         @import '/style.css';

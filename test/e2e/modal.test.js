@@ -5,12 +5,11 @@ const VlModalAutoOpenPage = require('./pages/vl-modal-auto-open.page');
 describe('vl-modal', async () => {
     const vlModalPage = new VlModalPage(driver);
 
-    after(async () => {
-        return driver.quit();
+    before(async() => {
+    	return await vlModalPage.load();
     });
-
+    
     it('als gebruiker kan ik de modal zonder button en content openen en sluiten via de annuleer knop', async () => {
-        await vlModalPage.load();
         const modal = await vlModalPage.getModalZonderButtonEnContent();
         await assert.eventually.isFalse(modal.isDisplayed());
         await vlModalPage.openModalZonderButtonEnContent();
@@ -23,8 +22,7 @@ describe('vl-modal', async () => {
     });
 
     it('als gebruiker kan ik de closable modal openen en sluiten via de sluiten knop', async () => {
-    	await vlModalPage.load();
-        const modal = await vlModalPage.getModalClosable();
+    	const modal = await vlModalPage.getModalClosable();
         await assert.eventually.isFalse(modal.isDisplayed());
         await vlModalPage.openModalClosable();
         await assert.eventually.isTrue(modal.isDisplayed());
@@ -35,7 +33,6 @@ describe('vl-modal', async () => {
     });
 
     it('als gebruiker kan ik de niet automatisch closable modal niet sluiten door op de actie knop te klikken', async () => {
-    	await vlModalPage.load();
         const modal = await vlModalPage.getModalClosableNietAutomatisch();
         await assert.eventually.isFalse(modal.isDisplayed());
         await vlModalPage.openModalClosableNietAutomatisch();
@@ -49,7 +46,6 @@ describe('vl-modal', async () => {
     });
 
     it('als gebruiker kan ik de closable, niet cancellable modal niet sluiten via de annuleer knop', async () => {
-    	await vlModalPage.load();
         const modal = await vlModalPage.getModalClosableNietCancellable();
         await assert.eventually.isFalse(modal.isDisplayed());
         await vlModalPage.openModalClosableNietCancellable();
@@ -61,7 +57,6 @@ describe('vl-modal', async () => {
     })
 
     it('als gebruiker kan ik de automatisch closable modal sluiten door op de actie knop te klikken', async () => {
-    	await vlModalPage.load();
         const modal = await vlModalPage.getModalClosableNietCancellableMetButtonEnContent();
         await assert.eventually.isFalse(modal.isDisplayed());
         await vlModalPage.openModalClosableNietCancellableMetButtonEnContent();
@@ -74,7 +69,6 @@ describe('vl-modal', async () => {
     });
 
     it('als gebruiker kan ik de automatisch closable modal sluiten door op de actie link te klikken', async () => {
-    	await vlModalPage.load();
         const modal = await vlModalPage.getModalClosableNietCancellableMetLinkEnIcon();
         await assert.eventually.isFalse(modal.isDisplayed());
         await vlModalPage.openModalClosableNietCancellableMetLinkEnIcon();
@@ -87,7 +81,6 @@ describe('vl-modal', async () => {
     });
 
     it('als gebruiker kan ik de manuele modal openen en sluiten', async () => {
-    	await vlModalPage.load();
         const modal = await vlModalPage.getModalManual();
         await assert.eventually.isFalse(modal.isDisplayed());
         await vlModalPage.openModalManual();
@@ -96,7 +89,6 @@ describe('vl-modal', async () => {
     });
 
      it('als gebruiker kan ik iets uitvoeren door in de modal op de actie knop te klikken', async () => {
-    	 await vlModalPage.load();
         const modal = await vlModalPage.getModalListener();
         await vlModalPage.klikVoegListenerToe();
         await vlModalPage.openModalListener();
@@ -106,7 +98,6 @@ describe('vl-modal', async () => {
     });
 
     it('als gebruiker kan ik meteen typen in het input-veld in de modal in Safari', async () => {
-    	await vlModalPage.load();
         const modal = await vlModalPage.getModalSafari();
         await vlModalPage.openModalSafari();
         const content = await modal.getContent();
@@ -115,7 +106,6 @@ describe('vl-modal', async () => {
     });
 
     it('als gebruiker zie ik een verticale scrollbar als er te veel tekst in de modal staat', async() => {
-    	await vlModalPage.load();
         await vlModalPage.openModalMetVeelTekst();
         const modal = await vlModalPage.getModalMetVeelTekst();
         await modal.scrollToTop();
@@ -123,16 +113,22 @@ describe('vl-modal', async () => {
     });
 
     it('als gebruiker kan ik op een element klikken dat groter is dan de content van de modal als het attribuut allow-overflow gezet is', async() => {
-    	await vlModalPage.load();
         // TODO klikken op datum op einde van een maand om te kijken of dat lukt
         await vlModalPage.openModalMetDatepicker();
         const modal = await vlModalPage.getModalMetDatepicker();
         await modal.cancel();
     });
 
+});
+
+describe('vl-modal-auto-open', async () => {
+    const vlModalAutoOpenPage = new VlModalAutoOpenPage(driver);
+
+    before(async() => {
+    	return await vlModalAutoOpenPage.load();
+    });
+    
     it('een modal die automatisch opent bij het laden van de pagina valt niet buiten het scherm', async () => {
-        const vlModalAutoOpenPage = new VlModalAutoOpenPage(driver);
-        await vlModalAutoOpenPage.load();
     	const modal = await vlModalAutoOpenPage.getAutoOpenModal();
         await assert.eventually.isTrue(modal.isInViewport());
     });

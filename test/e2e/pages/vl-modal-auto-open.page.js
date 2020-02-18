@@ -1,5 +1,5 @@
 const VlModal = require('../components/vl-modal');
-const { Page, Config, VlElement } = require('vl-ui-core').Test;
+const { Page, Config } = require('vl-ui-core').Test;
 const { By } = require('selenium-webdriver');
 
 class VlModalAutoOpenPage extends Page {
@@ -8,7 +8,7 @@ class VlModalAutoOpenPage extends Page {
     }
 
     async getAutoOpenModal() {
-        return await this._getModal('#modal-vt');
+        return this._getModal('#modal-vt');
     }
 
 	async load() {
