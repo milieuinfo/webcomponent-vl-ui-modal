@@ -47,12 +47,12 @@ class VlModal extends VlElement {
     async _isOutOfViewport(element) {
     	const bounding = await this.driver.executeScript('return arguments[0].getBoundingClientRect()', element);
     	const height = await this.driver.executeScript('return (window.innerHeight || document.documentElement.clientHeight)');
-    	const right = await this.driver.executeScript('return (window.innerWidth || document.documentElement.clientWidth)');
+    	const width = await this.driver.executeScript('return (window.innerWidth || document.documentElement.clientWidth)');
     	var outOfViewport = {
    			top: bounding.top < 0,
    			left: bounding.left < 0,
    			bottom: bounding.bottom > height,
-   			right: bounding.right > right
+   			right: bounding.right > width
     	};
     	return outOfViewport.top || outOfViewport.left || outOfViewport.bottom || outOfViewport.right;
     }
