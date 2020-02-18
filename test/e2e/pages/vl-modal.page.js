@@ -13,49 +13,49 @@ class VlModalPage extends Page {
     }
 
     async getModalZonderButtonEnContent() {
-        return await this._getModal('#modal-zb');
+        return this._getModal('#modal-zb');
     }
 
     async getModalClosable() {
-        return await this._getModal('#modal-cl');
+        return this._getModal('#modal-cl');
     }
 
     async getModalClosableNietAutomatisch() {
-        return await this._getModal('#modal-cl-na');
+        return this._getModal('#modal-cl-na');
     }
 
     async getModalClosableNietCancellable() {
-        return await this._getModal('#modal-cl-nc');
+        return this._getModal('#modal-cl-nc');
     }
 
     async getModalClosableNietCancellableMetButtonEnContent() {
-        return await this._getModal('#modal-cl-nc-bc');
+        return this._getModal('#modal-cl-nc-bc');
     }
 
     async getModalClosableNietCancellableMetLinkEnIcon() {
-        return await this._getModal('#modal-cl-nc-li');
+        return this._getModal('#modal-cl-nc-li');
     }
 
     async getModalManual() {
-        return await this._getModal('#modal-ma');
+        return this._getModal('#modal-ma');
     }
 
     async getModalListener() {
-        return await this._getModal('#modal-lis');
+        return this._getModal('#modal-lis');
     }
 
     async getModalSafari() {
         const container = await new VlElement(this.driver, 'vl-modal-container-test');
         const parent = container.shadowRoot;
-        return await this._getModal(parent.shadowRoot);
+        return this._getModal(parent.shadowRoot);
     }
 
     async getModalMetDatepicker() {
-        return await this._getModal('#modal-datepicker');
+        return this._getModal('#modal-datepicker');
     }
 
     async getModalMetVeelTekst() {
-        return await this._getModal('#modal-vt');
+        return this._getModal('#modal-vt');
     }
 
     async openModalZonderButtonEnContent() {
@@ -95,11 +95,11 @@ class VlModalPage extends Page {
     }
 
     async openModalMetVeelTekst() {
-        return await this._openModal('#button-open-modal-vt');
+        return  this._openModal('#button-open-modal-vt');
     }
 
     async openModalMetDatepicker() {
-        return await this._openModal('#button-open-modal-datepicker');
+        return this._openModal('#button-open-modal-datepicker');
     }
 
     async klikVoegListenerToe() {

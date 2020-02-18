@@ -1,6 +1,5 @@
 const { assert, driver } = require('vl-ui-core').Test.Setup;
 const VlModalPage = require('./pages/vl-modal.page');
-const VlDatepicker = require('vl-ui-datepicker').Test;
 
 describe('vl-modal', async () => {
     const vlModalPage = new VlModalPage(driver);
