@@ -80,7 +80,7 @@
   },
   "devDependencies": {
     "@govflanders/vl-ui-modal": "3.9.1",
-    "vl-ui-datepicker": "^2.0.2",
+    "vl-ui-datepicker": "^2.0.3",
     "vl-ui-input-field": "^2.0.1",
     "vl-ui-util": "^4.0.3"
   }
