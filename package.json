@@ -69,18 +69,18 @@
     "@govflanders/vl-ui-util": "3.9.1",
     "vl-ui-action-group": "^2.0.1",
     "vl-ui-button": "^3.0.1",
-    "vl-ui-core": "^4.0.0",
+    "vl-ui-core": "github:milieuinfo/webcomponent-vl-ui-core#e2e",
     "vl-ui-icon": "^3.0.1"
   },
   "peerDependencies": {
     "vl-ui-action-group": "^2.0.1",
     "vl-ui-button": "^3.0.1",
-    "vl-ui-core": "^4.0.0",
+    "vl-ui-core": "github:milieuinfo/webcomponent-vl-ui-core#e2e",
     "vl-ui-icon": "^3.0.1"
   },
   "devDependencies": {
     "@govflanders/vl-ui-modal": "3.9.1",
-    "vl-ui-datepicker": "^2.0.3",
+    "vl-ui-datepicker": "^2.0.4",
     "vl-ui-input-field": "^2.0.1",
     "vl-ui-util": "^4.0.4"
   }
