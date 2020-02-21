@@ -1,6 +1,7 @@
 const { driver } = require('vl-ui-core').Test.Setup;
 const { VlElement } = require('vl-ui-core').Test;
 const { By } = require('selenium-webdriver');
+const { VlDatepicker } = require('vl-ui-datepicker').Test;
 
 class VlModal extends VlElement {  
     async isDisplayed() {
@@ -60,6 +61,11 @@ class VlModal extends VlElement {
     async scrollToTop() {
         const dialog = await this._getDialog()
         return driver.executeScript("return arguments[0].scrollTop = 0;", dialog);
+    }
+
+    async getDatepicker() {
+        const flatpickr = await this.findElement(By.css('vl-datepicker'));
+        return new VlDatepicker(driver, flatpickr);
     }
 
     async _getDialog() {

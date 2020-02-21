@@ -113,11 +113,15 @@ describe('vl-modal', async () => {
     });
 
     it('als gebruiker kan ik op een element klikken dat groter is dan de content van de modal als het attribuut allow-overflow gezet is', async() => {
-        // TODO klikken op datum op einde van een maand om te kijken of dat lukt
         await vlModalPage.openModalMetDatepicker();
         const modal = await vlModalPage.getModalMetDatepicker();
+        const datepicker = await modal.getDatepicker();
+        await datepicker.selectMonth('mei');
+        await datepicker.selectDay(1);
+        await assert.eventually.equal(datepicker.getInputValue(), '01.05.2020');
         await modal.cancel();
     });
+
 });
 
 describe('vl-modal-auto-open', async () => {
