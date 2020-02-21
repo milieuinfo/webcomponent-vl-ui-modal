@@ -4,8 +4,10 @@
         <title>vl-modal voorbeeld</title>
         <script type="module" src="/src/vl-modal.src.js"></script>
         <script type="module" src="demo.js"></script>
-    
-         <script type="text/javascript">
+
+        <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-button/style.css"/>
+        
+        <script type="text/javascript">
 	       	 customElements.whenDefined('vl-modal').then(() => {
 		        document.querySelector('#modal-vt').open();
 	       	 });
