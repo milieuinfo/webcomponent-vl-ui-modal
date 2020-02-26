@@ -9,10 +9,6 @@ describe('vl-modal', async () => {
         return vlModalPage.load();
     });
 
-    after(async () => {
-        return driver.quit();
-    });
-
     it('als gebruiker kan ik de modal zonder button en content openen en sluiten via de annuleer knop', async () => {
         const modal = await vlModalPage.getModalZonderButtonEnContent();
         await assert.eventually.isFalse(modal.isDisplayed());
@@ -101,7 +97,7 @@ describe('vl-modal', async () => {
         await assert.eventually.equal(vlModalPage.getListenerText(), 'Lach de lach der dwazen');
     });
 
-    it('als gebruiker kan ik meteen typen in het input-veld in de modal in Safari', async () => {
+    it.only('als gebruiker kan ik meteen typen in het input-veld in de modal in Safari', async () => {
         const modal = await vlModalPage.getModalSafari();
         await vlModalPage.openModalSafari();
         const content = await modal.getContent();
