@@ -39,49 +39,28 @@
     "test:e2e:safari": "mocha --safari",
     "test:server:start": "http-server &",
     "release": "np",
-    "release:prepare": "npm run release:prepare:build && npm run release:prepare:commit",
-    "release:prepare:build": "npm run release:prepare:build:es6 && npm run release:prepare:build:es6:min && npm run release:prepare:build:node",
-    "release:prepare:build:es6": "npm run release:prepare:build:es6:copy && npm run release:prepare:build:es6:replace",
-    "release:prepare:build:es6:copy": "cp -R -f ./src/*.src.js ./vl-modal.js",
-    "release:prepare:build:es6:replace": "npm run release:prepare:build:es6:replace:css && npm run release:prepare:build:es6:replace:dist && npm run release:prepare:build:es6:replace:src",
-    "release:prepare:build:es6:replace:css": "replace \"'/style.css'\" \"'/node_modules/vl-ui-modal/style.css'\" vl-modal.js",
-    "release:prepare:build:es6:replace:dist": "replace \"import ['\\\"]/dist/(.*)['\\\"]\" \"import '/node_modules/vl-ui-modal/dist/\\$1'\" vl-modal.js",
-    "release:prepare:build:es6:replace:src": "replace \"from ['\\\"]/src/(.*)['\\\"]\" \"from '/node_modules/vl-ui-modal/src/\\$1'\" vl-modal.js",
-    "release:prepare:build:es6:min": "npm run release:prepare:build:es6:min:copy && npm run release:prepare:build:es6:min:explode && npm run release:prepare:build:es6:min:minify",
-    "release:prepare:build:es6:min:copy": "cp -R -f ./src/*.src.js ./vl-modal.tmp.min.js",
-    "release:prepare:build:es6:min:explode": "npm explore vl-ui-util -- npm run explode -- --fileName=vl-modal.tmp.min.js",
-    "release:prepare:build:es6:min:minify": "minify ./vl-modal.tmp.min.js > ./vl-modal.min.js && rm -rf vl-modal.tmp.min.js",
-    "release:prepare:build:node": "npm run release:prepare:build:node:copy && npm run release:prepare:build:node:replace && npm run release:prepare:build:node:explode",
-    "release:prepare:build:node:copy": "cp -R -f ./src/*.src.js .",
-    "release:prepare:build:node:replace": "npm run release:prepare:build:node:replace:src && npm run release:prepare:build:node:replace:dist",
-    "release:prepare:build:node:replace:src": "replace '/node_modules/vl-ui-(.*)/vl-(.*).js' 'vl-ui-$2' vl-modal.src.js",
-    "release:prepare:build:node:replace:dist": "npm run release:prepare:build:node:replace:dist:third-party && npm run release:prepare:build:node:replace:dist:local && npm run release:prepare:build:node:replace:src:local",
-    "release:prepare:build:node:replace:dist:third-party": "replace '/node_modules/(.+\\.js)' '$1' vl-modal.src.js",
-    "release:prepare:build:node:replace:dist:local": "replace \"import ['\\\"]/dist/(.*)['\\\"]\" \"import 'vl-ui-modal/dist/\\$1'\" vl-modal.src.js",
-    "release:prepare:build:node:replace:src:local": "replace \"from ['\\\"]/src/(.*)['\\\"]\" \"from 'vl-ui-modal/src/\\$1'\" vl-modal.src.js",
-    "release:prepare:build:node:explode": "npm explore vl-ui-util -- npm run explode -- --fileName=vl-modal.src.js",
-    "release:prepare:commit": "git add -f vl-* && git commit --amend --no-edit && git pull",
+    "release:prepare": "npm explore vl-ui-util -- npm run release-component:prepare $(pwd) modal",
     "release:testless": "np --yolo",
     "demo": "http-server"
   },
   "dependencies": {
     "@govflanders/vl-ui-core": "3.9.1",
     "@govflanders/vl-ui-util": "3.9.1",
-    "vl-ui-action-group": "^2.0.1",
-    "vl-ui-button": "^3.0.1",
-    "vl-ui-core": "github:milieuinfo/webcomponent-vl-ui-core#e2e",
-    "vl-ui-icon": "^3.0.1"
+    "vl-ui-action-group": "^3.0.0",
+    "vl-ui-button": "^4.0.0",
+    "vl-ui-core": "^5.0.1",
+    "vl-ui-icon": "^4.0.0"
   },
   "peerDependencies": {
-    "vl-ui-action-group": "^2.0.1",
-    "vl-ui-button": "^3.0.1",
-    "vl-ui-core": "github:milieuinfo/webcomponent-vl-ui-core#e2e",
-    "vl-ui-icon": "^3.0.1"
+    "vl-ui-action-group": "^3.0.0",
+    "vl-ui-button": "^4.0.0",
+    "vl-ui-core": "^5.0.1",
+    "vl-ui-icon": "^4.0.0"
   },
   "devDependencies": {
     "@govflanders/vl-ui-modal": "3.9.1",
-    "vl-ui-datepicker": "^2.0.4",
-    "vl-ui-input-field": "^2.0.1",
-    "vl-ui-util": "^4.0.3"
+    "vl-ui-datepicker": "^3.0.0",
+    "vl-ui-input-field": "^3.0.0",
+    "vl-ui-util": "^5.0.7"
   }
 }
