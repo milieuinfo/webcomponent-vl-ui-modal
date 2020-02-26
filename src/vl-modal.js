@@ -1,10 +1,10 @@
-import { VlElement, define } from '/node_modules/vl-ui-core/vl-core.js';
-import '/node_modules/vl-ui-icon/vl-icon.js';
-import '/node_modules/vl-ui-button/vl-button.js';
-import '/node_modules/vl-ui-action-group/vl-action-group.js';
-import '/node_modules/@govflanders/vl-ui-util/dist/js/util.min.js';
-import '/node_modules/@govflanders/vl-ui-core/dist/js/core.min.js';
-import "/dist/modal.js";
+import { VlElement, define } from '/node_modules/vl-ui-core/dist/vl-core.js';
+import '/node_modules/vl-ui-icon/dist/vl-icon.js';
+import '/node_modules/vl-ui-button/dist/vl-button.js';
+import '/node_modules/vl-ui-action-group/dist/vl-action-group.js';
+import '/node_modules/@govflanders/vl-ui-util/dist/js/util.js';
+import '/node_modules/@govflanders/vl-ui-core/dist/js/core.js';
+import "/lib/modal.js";
 
 /**
  * VlModal
@@ -45,11 +45,11 @@ export class VlModal extends VlElement(HTMLElement) {
         }
       </style>
       <style>
-        @import '/style.css';
-        @import '/node_modules/vl-ui-icon/style.css';
-        @import '/node_modules/vl-ui-link/style.css';
-        @import '/node_modules/vl-ui-action-group/style.css';
-        @import '/node_modules/vl-ui-button/style.css';
+        @import '/src/style.css';
+        @import '/node_modules/vl-ui-icon/dist/style.css';
+        @import '/node_modules/vl-ui-link/dist/style.css';
+        @import '/node_modules/vl-ui-action-group/dist/style.css';
+        @import '/node_modules/vl-ui-button/dist/style.css';
 
         :host([allow-overflow]) dialog {
           overflow: visible;

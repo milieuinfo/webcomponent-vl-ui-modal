@@ -1,14 +1,14 @@
-import { VlElement, define } from '/node_modules/vl-ui-core/vl-core.js';
-import '/node_modules/vl-ui-button/vl-button.js';
-import '/node_modules/vl-ui-input-field/vl-input-field.js';
-import '/src/vl-modal.src.js';
+import { VlElement, define } from '/node_modules/vl-ui-core/dist/vl-core.js';
+import '/node_modules/vl-ui-button/dist/vl-button.js';
+import '/node_modules/vl-ui-input-field/dist/vl-input-field.js';
+import '/src/vl-modal.js';
 
 export class VlModalTest extends VlElement(HTMLElement) {
   constructor() {
     super(`
       <style>
-          @import '/node_modules/vl-ui-button/style.css';
-          @import '/node_modules/vl-ui-input-field/style.css';
+          @import '/node_modules/vl-ui-button/dist/style.css';
+          @import '/node_modules/vl-ui-input-field/dist/style.css';
       </style>
 
       <vl-modal data-title="Modal" closable not-cancellable>
