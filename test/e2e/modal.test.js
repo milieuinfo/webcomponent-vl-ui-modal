@@ -2,7 +2,7 @@ const { assert, driver } = require('vl-ui-core').Test.Setup;
 const VlModalPage = require('./pages/vl-modal.page');
 const VlModalAutoOpenPage = require('./pages/vl-modal-auto-open.page');
 const { By } = require('selenium-webdriver');
-const { VlDatepicker } = require('vl-ui-datepicker').Test;
+// const { VlDatepicker } = require('vl-ui-datepicker').Test;
 
 describe('vl-modal', async () => {
     const vlModalPage = new VlModalPage(driver);
@@ -56,7 +56,7 @@ describe('vl-modal', async () => {
         await assert.eventually.isTrue(modal.isClosable());
         await assert.eventually.isFalse(modal.isSubmittable());
         await modal.close();
-    })
+    });
 
     it('als gebruiker kan ik de automatisch closable modal sluiten door op de actie knop te klikken', async () => {
         const modal = await vlModalPage.getModalClosableNietCancellableMetButtonEnContent();
@@ -114,6 +114,7 @@ describe('vl-modal', async () => {
         await modal.cancel();
     });
 
+    //todo activeer als select van datepicker nieuwste versies heeft
 //    it('als gebruiker kan ik op een element klikken dat groter is dan de content van de modal als het attribuut allow-overflow gezet is', async() => {
 //        await vlModalPage.openModalMetDatepicker();
 //        const modal = await vlModalPage.getModalMetDatepicker();
