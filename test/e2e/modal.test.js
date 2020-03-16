@@ -1,8 +1,8 @@
-const { assert, driver } = require('vl-ui-core').Test.Setup;
+const { assert, driver, By } = require('vl-ui-core').Test.Setup;
 const VlModalPage = require('./pages/vl-modal.page');
 const VlModalAutoOpenPage = require('./pages/vl-modal-auto-open.page');
-const { By } = require('selenium-webdriver');
 const { VlDatepicker } = require('vl-ui-datepicker').Test;
+const { VlInputField } = require('vl-ui-input-field').Test;
 
 describe('vl-modal', async () => {
     const vlModalPage = new VlModalPage(driver);
@@ -45,6 +45,7 @@ describe('vl-modal', async () => {
         await modal.submit();
         await assert.eventually.isTrue(modal.isDisplayed());
         await modal.close();
+        await assert.eventually.isFalse(modal.isDisplayed());
     });
 
     it('als gebruiker kan ik de closable, niet cancellable modal niet sluiten via de annuleer knop', async () => {
@@ -88,6 +89,7 @@ describe('vl-modal', async () => {
         await vlModalPage.openModalManual();
         await assert.eventually.isTrue(modal.isDisplayed());
         await modal.cancel();
+        await assert.eventually.isFalse(modal.isDisplayed());
     });
 
      it('als gebruiker kan ik iets uitvoeren door in de modal op de actie knop te klikken', async () => {
@@ -102,29 +104,29 @@ describe('vl-modal', async () => {
     it('als gebruiker kan ik meteen typen in het input-veld in de modal in Safari', async () => {
         const modal = await vlModalPage.getModalSafari();
         await vlModalPage.openModalSafari();
-        const content = await modal.getContent();
-        await assert.eventually.isTrue(content.hasFocus());
+        const slotElements = await modal.getContentSlotElements();
+        const input = await new VlInputField(driver, slotElements[0]);
+        await assert.eventually.isTrue(input.hasFocus());
         await modal.close();
     });
 
-    it('als gebruiker zie ik een verticale scrollbar als er te veel tekst in de modal staat', async() => {
+    it('als gebruiker kan ik verticaal scrollen als er te veel tekst in de modal staat', async() => {
         await vlModalPage.openModalMetVeelTekst();
         const modal = await vlModalPage.getModalMetVeelTekst();
         await modal.scrollToTop();
         await modal.cancel();
     });
 
-//    it('als gebruiker kan ik op een element klikken dat groter is dan de content van de modal als het attribuut allow-overflow gezet is', async() => {
-//        await vlModalPage.openModalMetDatepicker();
-//        const modal = await vlModalPage.getModalMetDatepicker();
-//        const flatpickr = await modal.findElement(By.css('vl-datepicker'));
-//        const datepicker = new VlDatepicker(driver, flatpickr);
-//        await datepicker.selectMonth('mei');
-//        await datepicker.selectDay(1);
-//        await assert.eventually.equal(datepicker.getInputValue(), '01.05.2020');
-//        await modal.cancel();
-//    });
-
+   it('als gebruiker kan ik op een element klikken dat groter is dan de content van de modal als het attribuut allow-overflow gezet is', async() => {
+       await vlModalPage.openModalMetDatepicker();
+       const modal = await vlModalPage.getModalMetDatepicker();
+       const element = await modal.findElement(By.css('vl-datepicker'));
+       const datepicker = await new VlDatepicker(driver, element);
+       await datepicker.selectMonth('mei');
+       await datepicker.selectDay(1);
+       await assert.eventually.equal(datepicker.getInputValue(), '01.05.2020');
+       await modal.cancel();
+   });
 });
 
 describe('vl-modal-auto-open', async () => {
