@@ -3,6 +3,7 @@ const VlModalPage = require('./pages/vl-modal.page');
 const VlModalAutoOpenPage = require('./pages/vl-modal-auto-open.page');
 const { VlDatepicker } = require('vl-ui-datepicker').Test;
 const { VlInputField } = require('vl-ui-input-field').Test;
+const { Key } = require('selenium-webdriver');
 
 describe('vl-modal', async () => {
     const vlModalPage = new VlModalPage(driver);
@@ -126,6 +127,16 @@ describe('vl-modal', async () => {
        await datepicker.selectDay(1);
        await assert.eventually.equal(datepicker.getInputValue(), '01.05.2020');
        await modal.cancel();
+   });
+    
+   it('als gebruiker kan ik een niet closable modal niet sluiten door op escape te klikken', async () => {
+       const modal = await vlModalPage.getModalZonderButtonEnContent();
+       await assert.eventually.isFalse(modal.isDisplayed());
+       await vlModalPage.openModalZonderButtonEnContent();
+       await assert.eventually.isTrue(modal.isDisplayed());
+       await assert.eventually.isFalse(modal.isClosable());
+       await modal.sendKeys(Key.ESCAPE);
+       await assert.eventually.isTrue(modal.isDisplayed());
    });
 });
 
