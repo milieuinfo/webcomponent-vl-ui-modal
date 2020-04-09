@@ -1,4 +1,4 @@
-import { VlElement, define } from '/node_modules/vl-ui-core/dist/vl-core.js';
+import { VlElement, define, awaitUntil } from '/node_modules/vl-ui-core/dist/vl-core.js';
 import '/node_modules/vl-ui-icon/dist/vl-icon.js';
 import '/node_modules/vl-ui-button/dist/vl-button.js';
 import '/node_modules/vl-ui-action-group/dist/vl-action-group.js';
@@ -115,7 +115,9 @@ export class VlModal extends VlElement(HTMLElement) {
   open() {
     vl.modal.lastClickedToggle = this._dialogElement;
     if (!this._dialogElement.hasAttribute("open")) {
-      vl.modal.toggle(this._dialogElement);
+      awaitUntil(() => this._dialogElement.isConnected).then(() => {
+        vl.modal.toggle(this._dialogElement);
+      });
     }
   }
 

@@ -44,9 +44,8 @@
     import { awaitUntil } from 'vl-ui-core/dist/vl-core';
 
     suite('<vl-modal>', () => {
-
-
       const should = chai.should();
+      const sandbox = sinon.sandbox.create();
 
       setup((done) => {
         window.vl = {
@@ -59,6 +58,10 @@
         customElements.whenDefined('vl-modal').then(done);
       });
 
+      teardown(() => {
+        sandbox.restore();
+      });
+
       function getModal(fixture) {
         return fixture.find(element => element.tagName === 'VL-MODAL');
       }
@@ -69,11 +72,32 @@
         assert(window.vl.modal.dress.calledWith(modal._dialogElement));
       });
 
-      test('de open methode called vl.modal.toggle met de dialog', () => {
+      test('de open methode called vl.modal.toggle met de dialog', (done) => {
         const modal = getModal(fixture('vl-modal-fixture'));
         modal.open();
-        assert(window.vl.modal.toggle.calledWith(modal._dialogElement));
-        assert(window.vl.modal.lastClickedToggle === modal._dialogElement);
+        setTimeout(() => {
+          assert(window.vl.modal.toggle.calledWith(modal._dialogElement));
+          assert(window.vl.modal.lastClickedToggle === modal._dialogElement);
+          done();
+        });
+      });
+
+      test('de open methode wacht tot het dialog element attached is voordat de vl.modal.toggle uitgevoerd wordt', (done) => {
+        const modal = getModal(fixture('vl-modal-fixture'));
+        const dialogElement = { 
+          hasAttribute: () => false,
+          isConnected: false 
+        };
+        const stub = sandbox.stub(modal, '_dialogElement').get(() => dialogElement);
+        modal.open();
+        setTimeout(() => {
+          assert.isFalse(window.vl.modal.toggle.called);
+          awaitUntil(() => dialogElement.isConnected).then(() => {
+            assert(window.vl.modal.toggle.calledWith(modal._dialogElement));
+            done();
+          });
+          dialogElement.isConnected = true;
+        });
       });
 
       test('de open methode called niet vl.modal.toggle met de dialog als al open', () => {
@@ -206,7 +230,7 @@
         assert.isNull(modal.getAttribute('allow-overflow'));
         modal.setAttribute('allow-overflow', '');
 
-        awaitUntil(() =>  getComputedStyle(modal._dialogElement).overflow == 'visible').then(() => {
+        awaitUntil(() => getComputedStyle(modal._dialogElement).overflow == 'visible').then(() => {
           modal.removeAttribute('allow-overflow');
           awaitUntil(() => getComputedStyle(modal._dialogElement).overflow == 'auto').then(() => done());
         });

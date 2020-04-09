@@ -1,4 +1,4 @@
-import { VlElement, define } from 'vl-ui-core';
+import { VlElement, define, awaitUntil } from 'vl-ui-core';
 import 'vl-ui-icon';
 import 'vl-ui-button';
 import 'vl-ui-action-group';
@@ -120,7 +120,9 @@ export class VlModal extends VlElement(HTMLElement) {
   open() {
     vl.modal.lastClickedToggle = this._dialogElement;
     if (!this._dialogElement.hasAttribute("open")) {
-      vl.modal.toggle(this._dialogElement);
+      awaitUntil(() => this._dialogElement.isConnected).then(() => {
+        vl.modal.toggle(this._dialogElement);
+      });
     }
   }
 
