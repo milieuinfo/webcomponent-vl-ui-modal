@@ -55,7 +55,7 @@
     "vl-ui-action-group": "milieuinfo/webcomponent-vl-ui-action-group#index",
     "vl-ui-button": "^4.0.0",
     "vl-ui-core": "^5.4.0",
-    "vl-ui-icon": "^4.0.0"
+    "vl-ui-icon": "^5.0.0"
   },
   "devDependencies": {
     "@govflanders/vl-ui-modal": "3.9.1",
