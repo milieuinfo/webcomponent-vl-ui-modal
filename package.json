@@ -47,9 +47,9 @@
     "@govflanders/vl-ui-core": "3.9.1",
     "@govflanders/vl-ui-util": "3.9.1",
     "vl-ui-action-group": "milieuinfo/webcomponent-vl-ui-action-group#index",
-    "vl-ui-button": "^4.0.0",
+    "vl-ui-button": "^5.0.2",
     "vl-ui-core": "^5.5.0",
-    "vl-ui-icon": "^4.0.0"
+    "vl-ui-icon": "^5.0.1"
   },
   "peerDependencies": {
     "vl-ui-action-group": "milieuinfo/webcomponent-vl-ui-action-group#index",
