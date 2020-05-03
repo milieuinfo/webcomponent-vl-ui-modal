@@ -61,6 +61,6 @@
     "@govflanders/vl-ui-modal": "3.9.1",
     "vl-ui-datepicker": "^3.0.3",
     "vl-ui-input-field": "^3.1.1",
-    "vl-ui-util": "^5.1.6"
+    "vl-ui-util": "github:milieuinfo/webcomponent-vl-ui-util#deleted-demo-code"
   }
 }
