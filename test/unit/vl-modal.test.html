@@ -41,7 +41,7 @@
   </test-fixture>
 
   <script type="module">
-    import { awaitUntil } from 'vl-ui-core/dist/vl-core';
+    import {awaitUntil} from 'vl-ui-core/dist/vl-core';
 
     suite('<vl-modal>', () => {
       const should = chai.should();
@@ -51,8 +51,8 @@
         window.vl = {
           modal: {
             dress: sinon.fake(),
-            toggle: sinon.fake()
-          }
+            toggle: sinon.fake(),
+          },
         };
 
         customElements.whenDefined('vl-modal').then(done);
@@ -63,7 +63,7 @@
       });
 
       function getModal(fixture) {
-        return fixture.find(element => element.tagName === 'VL-MODAL');
+        return fixture.find((element) => element.tagName === 'VL-MODAL');
       }
 
       test('de dress methode called vl.modal.dress met de dialog', () => {
@@ -84,11 +84,11 @@
 
       test('de open methode wacht tot het dialog element attached is voordat de vl.modal.toggle uitgevoerd wordt', (done) => {
         const modal = getModal(fixture('vl-modal-fixture'));
-        const dialogElement = { 
+        const dialogElement = {
           hasAttribute: () => false,
-          isConnected: false 
+          isConnected: false,
         };
-        const stub = sandbox.stub(modal, '_dialogElement').get(() => dialogElement);
+        sandbox.stub(modal, '_dialogElement').get(() => dialogElement);
         modal.open();
         setTimeout(() => {
           assert.isFalse(window.vl.modal.toggle.called);
@@ -196,13 +196,13 @@
         assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-title'));
         modal.setAttribute('data-title', 'title');
         assert.equal(modal.shadowRoot.querySelector('#modal-toggle-title').innerText, 'title');
-        modal.removeAttribute("data-title");
+        modal.removeAttribute('data-title');
         assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-title'));
         modal.setAttribute('data-title', 'title2');
         assert.equal(modal.shadowRoot.querySelector('#modal-toggle-title').innerText, 'title2');
         modal.setAttribute('data-title', 'title update3');
         assert.equal(modal.shadowRoot.querySelector('#modal-toggle-title').innerText, 'title update3');
-        modal.removeAttribute("data-title");
+        modal.removeAttribute('data-title');
         assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-title'));
       });
 
