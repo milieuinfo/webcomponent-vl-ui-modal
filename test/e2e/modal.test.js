@@ -1,8 +1,8 @@
-const {assert, driver, By, Key} = require('vl-ui-core').Test.Setup;
+const { assert, driver, By, Key } = require('vl-ui-core').Test.Setup;
 const VlModalPage = require('./pages/vl-modal.page');
 const VlModalAutoOpenPage = require('./pages/vl-modal-auto-open.page');
-const {VlDatepicker} = require('vl-ui-datepicker').Test;
-const {VlInputField} = require('vl-ui-input-field').Test;
+const { VlDatepicker } = require('vl-ui-datepicker').Test;
+const { VlInputField } = require('vl-ui-input-field').Test;
 
 describe('vl-modal', async () => {
   const vlModalPage = new VlModalPage(driver);

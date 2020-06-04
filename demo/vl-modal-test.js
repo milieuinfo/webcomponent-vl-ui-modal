@@ -1,9 +1,9 @@
-import { VlElement, define } from '/node_modules/vl-ui-core/dist/vl-core.js';
+import {vlElement, define} from '/node_modules/vl-ui-core/dist/vl-core.js';
 import '/node_modules/vl-ui-button/dist/vl-button.js';
 import '/node_modules/vl-ui-input-field/dist/vl-input-field.js';
 import '/src/vl-modal.js';
 
-export class VlModalTest extends VlElement(HTMLElement) {
+export class VlModalTest extends vlElement(HTMLElement) {
   constructor() {
     super(`
       <style>
@@ -23,7 +23,7 @@ export class VlModalTest extends VlElement(HTMLElement) {
   }
 }
 
-export class VlModalContainerTest extends VlElement(HTMLElement) {
+export class VlModalContainerTest extends vlElement(HTMLElement) {
   constructor() {
     super(`
       <vl-modal-test></vl-modal-test>
