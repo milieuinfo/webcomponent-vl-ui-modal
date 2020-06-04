@@ -76,9 +76,10 @@
 
         <vl-demo data-vl-title="Modal, manual open/close">
             <script type="text/javascript">
-                function openModal(id) {
-                    document.querySelector('#' + id).open();
-                }
+                // eslint-disable-next-line no-unused-vars
+                const openModal = (id) => {
+                  document.querySelector('#' + id).open();
+                };
             </script>
 
             <button id="button-open-modal-ma" is="vl-button" onclick="openModal('modal-ma')">Open</button>
@@ -112,17 +113,19 @@
             </vl-modal>
 
             <script type="text/javascript">
-                function voegCloseListenerToe() {
-                    document.querySelector("vl-modal[id=\"modal-lis\"]").on('close', event => document.querySelector("#button-open-modal-lis").innerText = 'Lach de lach der dwazen');
-                }
+                // eslint-disable-next-line no-unused-vars
+                const voegCloseListenerToe = () => {
+                  document.querySelector('vl-modal[id="modal-lis"]').on('close', (event) => document.querySelector('#button-open-modal-lis').innerText = 'Lach de lach der dwazen');
+                };
             </script>
         </vl-demo>
 
         <vl-demo data-vl-title="Safari shadow DOM focus">
             <script type="text/javascript">
-                function openModalTest(id) {
-                    document.querySelector('#' + id).open();
-                }
+                // eslint-disable-next-line no-unused-vars
+                const openModalTest = (id) => {
+                  document.querySelector('#' + id).open();
+                };
             </script>
 
             <div is="vl-action-group">

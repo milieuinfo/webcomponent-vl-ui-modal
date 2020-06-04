@@ -1,6 +1,8 @@
 const VlModal = require('../components/vl-modal');
 const {Page, Config, VlElement} = require('vl-ui-core').Test;
 const {By} = require('selenium-webdriver');
+const {VlHeader} = require('vl-ui-header').Test;
+const {VlFooter} = require('vl-ui-footer').Test;
 
 class VlModalPage extends Page {
   async _getModal(identifier) {
@@ -113,6 +115,10 @@ class VlModalPage extends Page {
 
   async load() {
     await super.load(Config.baseUrl + '/demo/vl-modal.html');
+    const header = await new VlHeader(this.driver);
+    const footer = await new VlFooter(this.driver);
+    await header.remove();
+    await footer.remove();
   }
 }
 
