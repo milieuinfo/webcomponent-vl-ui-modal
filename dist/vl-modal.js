@@ -1,4 +1,4 @@
-import { VlElement, define, awaitUntil } from '/node_modules/vl-ui-core/dist/vl-core.js';
+import {vlElement, define, awaitUntil} from '/node_modules/vl-ui-core/dist/vl-core.js';
 import '/node_modules/vl-ui-icon/dist/vl-icon.js';
 import '/node_modules/vl-ui-button/dist/vl-button.js';
 import '/node_modules/vl-ui-action-group/dist/vl-action-group.js';
@@ -11,7 +11,8 @@ import '/node_modules/vl-ui-modal/lib/modal.js';
  * @class
  * @classdesc Gebruik de modal dialoog om de gebruiker te informeren over onbewaarde wijzigingen wanneer hij de pagina verlaat. Een modal dialoog vraagt de aandacht van de gebruiker en verplicht de gebruiker om actie te ondernemen voordat de site verder gebruikt kan worden.
  *
- * @extends VlElement
+ * @extends HTMLElement
+ * @mixin vlElement
  *
  * @property {boolean} data-title - Attribuut wordt gebruikt om de titel (in een h2) te zetten. Indien leeg of weggelaten, wordt er geen titel element gezet.
  * @property {boolean} open - Attribuut wordt gebruikt om aan te duiden dat de modal onmiddellijk geopend moet worden na het renderen.
@@ -19,12 +20,12 @@ import '/node_modules/vl-ui-modal/lib/modal.js';
  * @property {boolean} not-cancellable - Attribuut wordt gebruikt om aan te duiden dat de modal niet annuleerbaar is.
  * @property {boolean} not-auto-closable - Attribuut wordt gebruikt om aan te duiden dat de modal niet sluit bij het uitvoeren van een actie in de button slot.
  * @property {boolean} allow-overflow - Attribuut wordt gebruikt om aan te duiden de inhoud van de modal uit de modal mag treden.
- * 
+ *
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-modal/releases/latest|Release notes}
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-modal/issues|Issues}
  * @see {@link https://webcomponenten.omgeving.vlaanderen.be/demo/vl-modal.html|Demo}
  */
-export class VlModal extends VlElement(HTMLElement) {
+export class VlModal extends vlElement(HTMLElement) {
   static get _observedAttributes() {
     return ['id', 'data-title', 'closable', 'not-cancellable', 'open', 'not-auto-closable', 'allow-overflow'];
   }
@@ -114,7 +115,7 @@ export class VlModal extends VlElement(HTMLElement) {
    */
   open() {
     vl.modal.lastClickedToggle = this._dialogElement;
-    if (!this._dialogElement.hasAttribute("open")) {
+    if (!this._dialogElement.hasAttribute('open')) {
       awaitUntil(() => this._dialogElement.isConnected).then(() => {
         vl.modal.toggle(this._dialogElement);
       });
@@ -125,15 +126,15 @@ export class VlModal extends VlElement(HTMLElement) {
    * Handmatig sluiten van modal.
    */
   close() {
-    if (this._dialogElement.hasAttribute("open")) {
+    if (this._dialogElement.hasAttribute('open')) {
       vl.modal.toggle(this._dialogElement);
     }
   }
 
   /**
    * Mogelijkheid om functies toe te voegen op events die op de dialog voorkomen.
-   * @param event
-   * @param callback
+   * @param {String} event
+   * @param {Function} callback
    */
   on(event, callback) {
     this._dialogElement.addEventListener(event, callback);
@@ -164,7 +165,7 @@ export class VlModal extends VlElement(HTMLElement) {
     this._dialogElement.id = newValue;
   }
 
-  _data_titleChangedCallback(oldValue, newValue) {
+  _dataTitleChangedCallback(oldValue, newValue) {
     if (newValue) {
       if (this._titleElement) {
         this._titleElement.innerText = newValue;
@@ -178,7 +179,7 @@ export class VlModal extends VlElement(HTMLElement) {
     }
   }
 
-  _not_cancellableChangedCallback(oldValue, newValue) {
+  _notCancellableChangedCallback(oldValue, newValue) {
     if (newValue == undefined && !this._cancelElement) {
       this._actionGroupElement.append(this._getCancelTemplate());
     } else if (newValue != undefined && this._cancelElement) {
@@ -203,7 +204,7 @@ export class VlModal extends VlElement(HTMLElement) {
     }
   }
 
-  _not_auto_closableChangedCallback(oldValue, newValue) {
+  _notAutoClosableChangedCallback(oldValue, newValue) {
     if (newValue == undefined && !this._slotButtonElement.hasAttribute(VlModal._closeAttribute)) {
       this._slotButtonElement.setAttribute(VlModal._closeAttribute, '');
     } else if (newValue != undefined && this._slotButtonElement.hasAttribute(VlModal._closeAttribute)) {
