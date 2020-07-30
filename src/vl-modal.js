@@ -74,6 +74,11 @@ export class VlModal extends vlElement(HTMLElement) {
 
   connectedCallback() {
     this.dress();
+    this._observer = this.__observeDialog(() => this.__processBackdrop());
+  }
+
+  disconnectedCallback() {
+    this._observer.disconnect();
   }
 
   get _dialogElement() {
@@ -94,6 +99,14 @@ export class VlModal extends vlElement(HTMLElement) {
 
   get _slotButtonElement() {
     return this._element.querySelector('slot[name="button"]');
+  }
+
+  get _backdropElement() {
+    return this._element.querySelector('.backdrop');
+  }
+
+  get _overlayElement() {
+    return this._element.querySelector('._dialog_overlay');
   }
 
   get _dressed() {
@@ -208,6 +221,29 @@ export class VlModal extends vlElement(HTMLElement) {
       this._slotButtonElement.setAttribute(VlModal._closeAttribute, '');
     } else if (newValue != undefined && this._slotButtonElement.hasAttribute(VlModal._closeAttribute)) {
       this._slotButtonElement.removeAttribute(VlModal._closeAttribute);
+    }
+  }
+
+  __observeDialog(callback) {
+    const observer = new MutationObserver(callback);
+    observer.observe(this._dialogElement, {attributes: true, attributeFilter: ['open']});
+    return observer;
+  }
+
+  __processBackdrop() {
+    const backdrop = this._backdropElement;
+    const overlay = this._overlayElement;
+    if (backdrop) {
+      const style = getComputedStyle(backdrop);
+      [...getComputedStyle(backdrop)].forEach((key) => backdrop.style.setProperty(key, style.getPropertyValue(key), style.getPropertyPriority(key)));
+      backdrop.style.width = '100%';
+      backdrop.style.height = '100%';
+      document.body.append(backdrop);
+    }
+    if (overlay) {
+      const style = getComputedStyle(overlay);
+      [...style].forEach((key) => overlay.style.setProperty(key, style.getPropertyValue(key), style.getPropertyPriority(key)));
+      document.body.append(overlay);
     }
   }
 }
