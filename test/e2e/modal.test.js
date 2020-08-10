@@ -11,14 +11,14 @@ describe('vl-modal', async () => {
     return await vlModalPage.load();
   });
 
-  it('als gebruiker kan ik de modal zonder button en content openen en sluiten via de annuleer knop', async () => {
-    const modal = await vlModalPage.getModalZonderButtonEnContent();
+  it('als gebruiker kan ik de modal openen en sluiten via de annuleer knop', async () => {
+    const modal = await vlModalPage.getModal();
     await assert.eventually.isFalse(modal.isDisplayed());
-    await vlModalPage.openModalZonderButtonEnContent();
+    await vlModalPage.openModal();
     await assert.eventually.isTrue(modal.isDisplayed());
     await assert.eventually.isTrue(modal.isCancellable());
     await assert.eventually.isFalse(modal.isClosable());
-    await assert.eventually.isFalse(modal.isSubmittable());
+    await assert.eventually.isTrue(modal.isSubmittable());
     await modal.cancel();
     await assert.eventually.isFalse(modal.isDisplayed());
   });
@@ -30,7 +30,7 @@ describe('vl-modal', async () => {
     await assert.eventually.isTrue(modal.isDisplayed());
     await assert.eventually.isTrue(modal.isCancellable());
     await assert.eventually.isTrue(modal.isClosable());
-    await assert.eventually.isFalse(modal.isSubmittable());
+    await assert.eventually.isTrue(modal.isSubmittable());
     await modal.close();
   });
 
@@ -55,17 +55,17 @@ describe('vl-modal', async () => {
     await assert.eventually.isTrue(modal.isDisplayed());
     await assert.eventually.isFalse(modal.isCancellable());
     await assert.eventually.isTrue(modal.isClosable());
-    await assert.eventually.isFalse(modal.isSubmittable());
+    await assert.eventually.isTrue(modal.isSubmittable());
     await modal.close();
   });
 
   it('als gebruiker kan ik de automatisch closable modal sluiten door op de actie knop te klikken', async () => {
-    const modal = await vlModalPage.getModalClosableNietCancellableMetButtonEnContent();
+    const modal = await vlModalPage.getModal();
     await assert.eventually.isFalse(modal.isDisplayed());
-    await vlModalPage.openModalClosableNietCancellableMetButtonEnContent();
+    await vlModalPage.openModal();
     await assert.eventually.isTrue(modal.isDisplayed());
-    await assert.eventually.isFalse(modal.isCancellable());
-    await assert.eventually.isTrue(modal.isClosable());
+    await assert.eventually.isTrue(modal.isCancellable());
+    await assert.eventually.isFalse(modal.isClosable());
     await assert.eventually.isTrue(modal.isSubmittable());
     await modal.submit();
     await assert.eventually.isFalse(modal.isDisplayed());
@@ -129,13 +129,21 @@ describe('vl-modal', async () => {
   });
 
   it('als gebruiker kan ik een niet closable modal niet sluiten door op escape te klikken', async () => {
-    const modal = await vlModalPage.getModalZonderButtonEnContent();
+    const body = await driver.findElement(By.css('body'));
+    let modal = await vlModalPage.getModal();
     await assert.eventually.isFalse(modal.isDisplayed());
-    await vlModalPage.openModalZonderButtonEnContent();
+    await vlModalPage.openModal();
     await assert.eventually.isTrue(modal.isDisplayed());
-    await assert.eventually.isFalse(modal.isClosable());
-    await modal.sendKeys(Key.ESCAPE);
+    await body.sendKeys(Key.ESCAPE);
     await assert.eventually.isTrue(modal.isDisplayed());
+    await modal.cancel();
+
+    modal = await vlModalPage.getModalClosable();
+    await assert.eventually.isFalse(modal.isDisplayed());
+    await vlModalPage.openModalClosable();
+    await assert.eventually.isTrue(modal.isDisplayed());
+    await body.sendKeys(Key.ESCAPE);
+    await assert.eventually.isFalse(modal.isDisplayed());
   });
 });
 

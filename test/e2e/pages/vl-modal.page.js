@@ -3,17 +3,8 @@ const {Page, Config, VlElement} = require('vl-ui-core').Test;
 const {By} = require('selenium-webdriver');
 
 class VlModalPage extends Page {
-  async _getModal(identifier) {
-    return new VlModal(this.driver, identifier);
-  }
-
-  async _openModal(selector) {
-    const button = await this.driver.findElement(By.css(selector));
-    return button.click();
-  }
-
-  async getModalZonderButtonEnContent() {
-    return this._getModal('#modal-zb');
+  getModal() {
+    return this._getModal('#modal');
   }
 
   async getModalClosable() {
@@ -26,10 +17,6 @@ class VlModalPage extends Page {
 
   async getModalClosableNietCancellable() {
     return this._getModal('#modal-cl-nc');
-  }
-
-  async getModalClosableNietCancellableMetButtonEnContent() {
-    return this._getModal('#modal-cl-nc-bc');
   }
 
   async getModalClosableNietCancellableMetLinkEnIcon() {
@@ -58,8 +45,8 @@ class VlModalPage extends Page {
     return this._getModal('#modal-vt');
   }
 
-  async openModalZonderButtonEnContent() {
-    return this._openModal('#button-open-modal-zb');
+  async openModal() {
+    return this._openModal('#button-open-modal');
   }
 
   async openModalClosable() {
@@ -72,10 +59,6 @@ class VlModalPage extends Page {
 
   async openModalClosableNietCancellable() {
     return this._openModal('#button-open-modal-cl-nc');
-  }
-
-  async openModalClosableNietCancellableMetButtonEnContent() {
-    return this._openModal('#button-open-modal-cl-nc-bc');
   }
 
   async openModalClosableNietCancellableMetLinkEnIcon() {
@@ -113,6 +96,15 @@ class VlModalPage extends Page {
 
   async load() {
     await super.load(Config.baseUrl + '/demo/vl-modal.html');
+  }
+
+  async _getModal(identifier) {
+    return new VlModal(this.driver, identifier);
+  }
+
+  async _openModal(selector) {
+    const button = await this.driver.findElement(By.css(selector));
+    return button.click();
   }
 }
 
