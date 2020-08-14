@@ -1,6 +1,6 @@
 const VlModal = require('../components/vl-modal');
 const {Page, Config, VlElement} = require('vl-ui-core').Test;
-const {By} = require('selenium-webdriver');
+const {By} = require('vl-ui-core').Test.Setup;
 
 class VlModalPage extends Page {
   getModal() {

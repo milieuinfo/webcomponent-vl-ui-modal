@@ -4,21 +4,22 @@
 <head>
     <title>vl-modal voorbeeld</title>
     <script type="module" src="/node_modules/vl-ui-demo/dist/vl-demo-all.js"></script>
-
-    <script type="module" src="/src/vl-modal.js"></script>
-    <script type="module" src="vl-modal-test.js"></script>
+    <script type="module" src="/node_modules/vl-ui-body/dist/vl-body.js"></script>
     <script type="module" src="/node_modules/vl-ui-button/dist/vl-button.js"></script>
     <script type="module" src="/node_modules/vl-ui-action-group/dist/vl-action-group.js"></script>
     <script type="module" src="/node_modules/vl-ui-icon/dist/vl-icon.js"></script>
     <script type="module" src="/node_modules/vl-ui-datepicker/dist/vl-datepicker.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-core/dist/style.css" />
+    <script type="module" src="/src/vl-modal.js"></script>
+    <script type="module" src="vl-modal-test.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-body/dist/style.css" />
     <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-button/dist/style.css" />
     <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-action-group/dist/style.css" />
     <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-icon/dist/style.css" />
 </head>
 
-<body>
+<body is="vl-body">
     <vl-demo-page data-vl-webcomponent="vl-modal" data-vl-link="https://overheid.vlaanderen.be/webuniversum/v3/documentation/js-components/vl-ui-modal">
         <vl-demo data-vl-title="Modal">
             <button id="button-open-modal" is="vl-button" data-vl-modal-open="modal">Open</button>

@@ -1,6 +1,5 @@
-const {driver} = require('vl-ui-core').Test.Setup;
+const {driver, By} = require('vl-ui-core').Test.Setup;
 const {VlElement} = require('vl-ui-core').Test;
-const {By} = require('selenium-webdriver');
 
 class VlModal extends VlElement {
   async isDisplayed() {
