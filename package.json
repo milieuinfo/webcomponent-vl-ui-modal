@@ -37,7 +37,7 @@
     "demo": "http-server"
   },
   "dependencies": {
-    "@govflanders/vl-ui-core": "^3.10.1",
+    "@govflanders/vl-ui-core": "^4.0.0",
     "@govflanders/vl-ui-util": "^3.10.1",
     "vl-ui-action-group": "^3.0.5",
     "vl-ui-button": "^5.0.5",
