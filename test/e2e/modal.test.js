@@ -145,17 +145,3 @@ describe('vl-modal', async () => {
     await assert.eventually.isFalse(modal.isDisplayed());
   });
 });
-
-describe('vl-modal-auto-open', async () => {
-  const vlModalAutoOpenPage = new VlModalAutoOpenPage(driver);
-
-  before(async () => {
-    return await vlModalAutoOpenPage.load();
-  });
-
-  it('een modal die automatisch opent bij het laden van de pagina valt niet buiten het scherm', async () => {
-    const modal = await vlModalAutoOpenPage.getAutoOpenModal();
-    await assert.eventually.isTrue(modal.isDisplayed());
-    await assert.eventually.isTrue(modal.isInViewport());
-  });
-});
