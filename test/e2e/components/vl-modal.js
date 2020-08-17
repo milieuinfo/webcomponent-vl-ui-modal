@@ -1,5 +1,5 @@
 const {driver, By} = require('vl-ui-core').Test.Setup;
-const {VlElement} = require('vl-ui-core').Test;
+const {VlElement, Config} = require('vl-ui-core').Test;
 
 class VlModal extends VlElement {
   async isDisplayed() {
@@ -47,6 +47,16 @@ class VlModal extends VlElement {
   async scrollToTop() {
     const dialog = await this._getDialog();
     return dialog.scrollToTop();
+  }
+
+  async sendKeys(key) {
+    let element;
+    if (Config.browserName == 'chrome') {
+      element = await this._getDialog();
+    } else {
+      element = await driver.findElement(By.css('body'));
+    }
+    await element.sendKeys(key);
   }
 
   async _getDialog() {

@@ -129,12 +129,11 @@ describe('vl-modal', async () => {
   });
 
   it('als gebruiker kan ik een niet closable modal niet sluiten door op escape te klikken', async () => {
-    const body = await driver.findElement(By.css('body'));
     let modal = await vlModalPage.getModal();
     await assert.eventually.isFalse(modal.isDisplayed());
     await vlModalPage.openModal();
     await assert.eventually.isTrue(modal.isDisplayed());
-    await body.sendKeys(Key.ESCAPE);
+    await modal.sendKeys(Key.ESCAPE);
     await assert.eventually.isTrue(modal.isDisplayed());
     await modal.cancel();
 
@@ -142,7 +141,7 @@ describe('vl-modal', async () => {
     await assert.eventually.isFalse(modal.isDisplayed());
     await vlModalPage.openModalClosable();
     await assert.eventually.isTrue(modal.isDisplayed());
-    await body.sendKeys(Key.ESCAPE);
+    await modal.sendKeys(Key.ESCAPE);
     await assert.eventually.isFalse(modal.isDisplayed());
   });
 });
