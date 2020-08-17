@@ -96,7 +96,7 @@ describe('vl-modal', async () => {
     const modal = await vlModalPage.getModalListener();
     await vlModalPage.klikVoegListenerToe();
     await vlModalPage.openModalListener();
-    await modal.close();
+    await modal.submit();
     await assert.eventually.isFalse(modal.isDisplayed());
     await assert.eventually.equal(vlModalPage.getListenerText(), 'Lach de lach der dwazen');
   });
