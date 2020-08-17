@@ -37,23 +37,24 @@
     "demo": "http-server"
   },
   "dependencies": {
-    "@govflanders/vl-ui-core": "^3.10.1",
-    "@govflanders/vl-ui-util": "^3.10.1",
-    "vl-ui-action-group": "^3.0.5",
-    "vl-ui-button": "^5.0.5",
-    "vl-ui-core": "^5.6.2",
-    "vl-ui-icon": "^5.1.0"
+    "@govflanders/vl-ui-core": "^4.0.5",
+    "@govflanders/vl-ui-util": "^3.11.5",
+    "vl-ui-action-group": "^3.0.6",
+    "vl-ui-button": "^5.0.6",
+    "vl-ui-core": "^6.0.0",
+    "vl-ui-icon": "^5.2.0"
   },
   "peerDependencies": {
-    "vl-ui-action-group": "^3.0.5",
-    "vl-ui-button": "^5.0.5",
-    "vl-ui-core": "^5.6.2",
-    "vl-ui-icon": "^5.1.0"
+    "vl-ui-action-group": "^3.0.6",
+    "vl-ui-button": "^5.0.6",
+    "vl-ui-core": "^6.0.0",
+    "vl-ui-icon": "^5.2.0"
   },
   "devDependencies": {
-    "@govflanders/vl-ui-modal": "3.11.5",
+    "@govflanders/vl-ui-modal": "^3.11.5",
     "vl-ui-datepicker": "^3.0.5",
     "vl-ui-input-field": "^3.2.0",
-    "vl-ui-util": "^5.2.10"
+    "vl-ui-body": "^1.0.4",
+    "vl-ui-util": "^5.2.12"
   }
 }

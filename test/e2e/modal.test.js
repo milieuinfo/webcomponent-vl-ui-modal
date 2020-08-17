@@ -1,6 +1,5 @@
 const {assert, driver, By, Key} = require('vl-ui-core').Test.Setup;
 const VlModalPage = require('./pages/vl-modal.page');
-const VlModalAutoOpenPage = require('./pages/vl-modal-auto-open.page');
 const {VlDatepicker} = require('vl-ui-datepicker').Test;
 const {VlInputField} = require('vl-ui-input-field').Test;
 
@@ -11,14 +10,14 @@ describe('vl-modal', async () => {
     return await vlModalPage.load();
   });
 
-  it('als gebruiker kan ik de modal zonder button en content openen en sluiten via de annuleer knop', async () => {
-    const modal = await vlModalPage.getModalZonderButtonEnContent();
+  it('als gebruiker kan ik de modal openen en sluiten via de annuleer knop', async () => {
+    const modal = await vlModalPage.getModal();
     await assert.eventually.isFalse(modal.isDisplayed());
-    await vlModalPage.openModalZonderButtonEnContent();
+    await vlModalPage.openModal();
     await assert.eventually.isTrue(modal.isDisplayed());
     await assert.eventually.isTrue(modal.isCancellable());
     await assert.eventually.isFalse(modal.isClosable());
-    await assert.eventually.isFalse(modal.isSubmittable());
+    await assert.eventually.isTrue(modal.isSubmittable());
     await modal.cancel();
     await assert.eventually.isFalse(modal.isDisplayed());
   });
@@ -30,7 +29,7 @@ describe('vl-modal', async () => {
     await assert.eventually.isTrue(modal.isDisplayed());
     await assert.eventually.isTrue(modal.isCancellable());
     await assert.eventually.isTrue(modal.isClosable());
-    await assert.eventually.isFalse(modal.isSubmittable());
+    await assert.eventually.isTrue(modal.isSubmittable());
     await modal.close();
   });
 
@@ -55,17 +54,17 @@ describe('vl-modal', async () => {
     await assert.eventually.isTrue(modal.isDisplayed());
     await assert.eventually.isFalse(modal.isCancellable());
     await assert.eventually.isTrue(modal.isClosable());
-    await assert.eventually.isFalse(modal.isSubmittable());
+    await assert.eventually.isTrue(modal.isSubmittable());
     await modal.close();
   });
 
   it('als gebruiker kan ik de automatisch closable modal sluiten door op de actie knop te klikken', async () => {
-    const modal = await vlModalPage.getModalClosableNietCancellableMetButtonEnContent();
+    const modal = await vlModalPage.getModal();
     await assert.eventually.isFalse(modal.isDisplayed());
-    await vlModalPage.openModalClosableNietCancellableMetButtonEnContent();
+    await vlModalPage.openModal();
     await assert.eventually.isTrue(modal.isDisplayed());
-    await assert.eventually.isFalse(modal.isCancellable());
-    await assert.eventually.isTrue(modal.isClosable());
+    await assert.eventually.isTrue(modal.isCancellable());
+    await assert.eventually.isFalse(modal.isClosable());
     await assert.eventually.isTrue(modal.isSubmittable());
     await modal.submit();
     await assert.eventually.isFalse(modal.isDisplayed());
@@ -96,7 +95,7 @@ describe('vl-modal', async () => {
     const modal = await vlModalPage.getModalListener();
     await vlModalPage.klikVoegListenerToe();
     await vlModalPage.openModalListener();
-    await modal.close();
+    await modal.submit();
     await assert.eventually.isFalse(modal.isDisplayed());
     await assert.eventually.equal(vlModalPage.getListenerText(), 'Lach de lach der dwazen');
   });
@@ -129,25 +128,19 @@ describe('vl-modal', async () => {
   });
 
   it('als gebruiker kan ik een niet closable modal niet sluiten door op escape te klikken', async () => {
-    const modal = await vlModalPage.getModalZonderButtonEnContent();
+    let modal = await vlModalPage.getModal();
     await assert.eventually.isFalse(modal.isDisplayed());
-    await vlModalPage.openModalZonderButtonEnContent();
+    await vlModalPage.openModal();
     await assert.eventually.isTrue(modal.isDisplayed());
-    await assert.eventually.isFalse(modal.isClosable());
     await modal.sendKeys(Key.ESCAPE);
     await assert.eventually.isTrue(modal.isDisplayed());
-  });
-});
+    await modal.cancel();
 
-describe('vl-modal-auto-open', async () => {
-  const vlModalAutoOpenPage = new VlModalAutoOpenPage(driver);
-
-  before(async () => {
-    return await vlModalAutoOpenPage.load();
-  });
-
-  it('een modal die automatisch opent bij het laden van de pagina valt niet buiten het scherm', async () => {
-    const modal = await vlModalAutoOpenPage.getAutoOpenModal();
-    await assert.eventually.isTrue(modal.isInViewport());
+    modal = await vlModalPage.getModalClosable();
+    await assert.eventually.isFalse(modal.isDisplayed());
+    await vlModalPage.openModalClosable();
+    await assert.eventually.isTrue(modal.isDisplayed());
+    await modal.sendKeys(Key.ESCAPE);
+    await assert.eventually.isFalse(modal.isDisplayed());
   });
 });

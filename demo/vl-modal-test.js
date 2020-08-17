@@ -11,8 +11,8 @@ export class VlModalTest extends vlElement(HTMLElement) {
           @import '/node_modules/vl-ui-input-field/dist/style.css';
       </style>
 
-      <vl-modal data-title="Modal" closable not-cancellable>
-        <button is="vl-button" slot="button">aanvraag starten</button>
+      <vl-modal data-vl-title="Modal" data-vl-closable>
+        <button is="vl-button" slot="button">Start aanvraag</button>
         <input id="input-safari" is="vl-input-field" slot="content" block></input>
       </vl-modal>
     `);

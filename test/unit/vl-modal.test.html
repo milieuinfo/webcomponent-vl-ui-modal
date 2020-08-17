@@ -20,7 +20,7 @@
 
   <test-fixture id="vl-modal-zonder-actions-fixture">
     <template>
-      <vl-modal title="al-een-title" not-cancellable></vl-modal>
+      <vl-modal title="al-een-title" data-vl-not-cancellable></vl-modal>
     </template>
   </test-fixture>
 
@@ -34,7 +34,7 @@
 
   <test-fixture id="vl-modal-not-auto-closable">
     <template>
-      <vl-modal not-auto-closable>
+      <vl-modal data-vl-not-auto-closable>
         <button id="button-1" is="vl-button" slot="button">Actie</button>
       </vl-modal>
     </template>
@@ -43,7 +43,7 @@
   <script type="module">
     import {awaitUntil} from 'vl-ui-core/dist/vl-core';
 
-    suite('<vl-modal>', () => {
+    suite('vl-modal', () => {
       const should = chai.should();
       const sandbox = sinon.createSandbox();
 
@@ -102,14 +102,14 @@
 
       test('de open methode called niet vl.modal.toggle met de dialog als al open', () => {
         const modal = getModal(fixture('vl-modal-fixture'));
-        modal.setAttribute('open', '');
+        modal.setAttribute('data-vl-open', '');
         modal.open();
         assert.isFalse(window.vl.modal.toggle.calledWith(modal._dialogElement));
       });
 
       test('de close methode called vl.modal.toggle met de dialog', () => {
         const modal = getModal(fixture('vl-modal-fixture'));
-        modal.setAttribute('open', '');
+        modal.setAttribute('data-vl-open', '');
         modal.close();
         assert(window.vl.modal.toggle.calledWith(modal._dialogElement));
       });
@@ -124,7 +124,7 @@
         const modal = getModal(fixture('vl-modal-fixture'));
         assert.isFalse(modal._dialogElement.hasAttribute('data-vl-modal-closable'));
         should.not.exist(modal._dialogElement.querySelector('.vl-modal-dialog__close'));
-        modal.setAttribute('closable', '');
+        modal.setAttribute('data-vl-closable', '');
         assert.isTrue(modal._dialogElement.hasAttribute('data-vl-modal-closable'));
         should.exist(modal._dialogElement.querySelector('.vl-modal-dialog__close'));
       });
@@ -139,34 +139,34 @@
       test('verander de open attribute van de modal', () => {
         const modal = getModal(fixture('vl-modal-fixture'));
         assert.isFalse(modal._dialogElement.hasAttribute('open'));
-        modal.setAttribute('open', '');
+        modal.setAttribute('data-vl-open', '');
         assert.isTrue(modal._dialogElement.hasAttribute('open'));
       });
 
       test('verander de cancellable attribute van de modal', () => {
         const modal = fixture('vl-modal-zonder-actions-fixture');
         should.not.exist(modal._cancelElement);
-        modal.setAttribute('not-cancellable', '');
+        modal.setAttribute('data-vl-not-cancellable', '');
         should.not.exist(modal._cancelElement);
-        modal.setAttribute('not-cancellable', 'false');
+        modal.setAttribute('data-vl-not-cancellable', 'false');
         should.not.exist(modal._cancelElement);
-        modal.setAttribute('not-cancellable', 'true');
+        modal.setAttribute('data-vl-not-cancellable', 'true');
         should.not.exist(modal._cancelElement);
-        modal.setAttribute('not-cancellable', 'not-cancellable');
+        modal.setAttribute('data-vl-not-cancellable', 'not-cancellable');
         should.not.exist(modal._cancelElement);
       });
 
       test('verander de title attribute van de modal', () => {
         const modal = getModal(fixture('vl-modal-fixture'));
         assert.isNull(modal._titleElement);
-        modal.setAttribute('data-title', 'title');
+        modal.setAttribute('data-vl-title', 'title');
         assert.isTrue(modal._dialogElement.querySelector('#modal-toggle-title').innerText === 'title');
       });
 
       test('verander de title attribute van de modal als er al een title gedefineerd was', () => {
         const modal = fixture('vl-modal-zonder-actions-fixture');
         assert.isDefined(modal._titleElement);
-        modal.setAttribute('data-title', 'andere-titel');
+        modal.setAttribute('data-vl-title', 'andere-titel');
         assert.strictEqual(modal._dialogElement.querySelector('#modal-toggle-title').innerText, 'andere-titel');
         assert.strictEqual(modal._titleElement.innerText, 'andere-titel');
       });
@@ -174,35 +174,34 @@
       test('verander de title attribute van de modal terug naar undefined en titleElement wordt leeggemaakt', () => {
         const modal = fixture('vl-modal-zonder-actions-fixture');
         assert.isDefined(modal._titleElement);
-        modal.setAttribute('data-title', '');
+        modal.setAttribute('data-vl-title', '');
         assert.isNull(modal._titleElement);
       });
 
       test('de annuleer knop is beschikbaar als de standaard actions gedefineerd zijn', () => {
         const modal = getModal(fixture('vl-modal-fixture'));
-        modal._dialogElement.setAttribute('open', '');
-        assert.isAbove(modal._element.querySelector('button').offsetHeight, 0);
-        assert.isAbove(modal._element.querySelector('button').offsetWidth, 0);
+        modal._dialogElement.setAttribute('data-vl-open', '');
+        should.exist(modal._element.querySelector('button'));
       });
 
       test('de annuleer knop is niet beschikbaar als cancellable false is', () => {
         const modal = fixture('vl-modal-zonder-actions-fixture');
-        modal._dialogElement.setAttribute('open', '');
+        modal._dialogElement.setAttribute('data-vl-open', '');
         should.not.exist(modal._element.querySelector('button'));
       });
 
       test('verander de title attribute van de modal meerdere keren', () => {
         const modal = getModal(fixture('vl-modal-fixture'));
         assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-title'));
-        modal.setAttribute('data-title', 'title');
+        modal.setAttribute('data-vl-title', 'title');
         assert.equal(modal.shadowRoot.querySelector('#modal-toggle-title').innerText, 'title');
-        modal.removeAttribute('data-title');
+        modal.removeAttribute('data-vl-title');
         assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-title'));
-        modal.setAttribute('data-title', 'title2');
+        modal.setAttribute('data-vl-title', 'title2');
         assert.equal(modal.shadowRoot.querySelector('#modal-toggle-title').innerText, 'title2');
-        modal.setAttribute('data-title', 'title update3');
+        modal.setAttribute('data-vl-title', 'title update3');
         assert.equal(modal.shadowRoot.querySelector('#modal-toggle-title').innerText, 'title update3');
-        modal.removeAttribute('data-title');
+        modal.removeAttribute('data-vl-title');
         assert.isNull(modal.shadowRoot.querySelector('#modal-toggle-title'));
       });
 
@@ -215,23 +214,23 @@
       test('verander de auto-closable attribute van de modal', () => {
         const modal = fixture('vl-modal-not-auto-closable');
         assert.isFalse(modal._slotButtonElement.hasAttribute('data-vl-modal-close'));
-        modal.setAttribute('not-auto-closable', 'false');
+        modal.setAttribute('data-vl-not-auto-closable', 'false');
         assert.isFalse(modal._slotButtonElement.hasAttribute('data-vl-modal-close'));
-        modal.setAttribute('not-auto-closable', 'true');
+        modal.setAttribute('data-vl-not-auto-closable', 'true');
         assert.isFalse(modal._slotButtonElement.hasAttribute('data-vl-modal-close'));
-        modal.setAttribute('not-auto-closable', 'not-auto-closable');
+        modal.setAttribute('data-vl-not-auto-closable', 'not-auto-closable');
         assert.isFalse(modal._slotButtonElement.hasAttribute('data-vl-modal-close'));
-        modal.removeAttribute('not-auto-closable');
+        modal.removeAttribute('data-vl-not-auto-closable');
         assert.isTrue(modal._slotButtonElement.hasAttribute('data-vl-modal-close'));
       });
 
       test('laat alleen overflow toe bij dialog indien het allow-overflow attribuut aanwezig is', (done) => {
         const modal = fixture('vl-modal-zonder-actions-fixture');
         assert.isNull(modal.getAttribute('allow-overflow'));
-        modal.setAttribute('allow-overflow', '');
+        modal.setAttribute('data-vl-allow-overflow', '');
 
         awaitUntil(() => getComputedStyle(modal._dialogElement).overflow == 'visible').then(() => {
-          modal.removeAttribute('allow-overflow');
+          modal.removeAttribute('data-vl-allow-overflow');
           awaitUntil(() => getComputedStyle(modal._dialogElement).overflow == 'auto').then(() => done());
         });
       });

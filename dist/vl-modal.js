@@ -12,13 +12,14 @@ import '/node_modules/vl-ui-modal/lib/modal.js';
  * @classdesc Gebruik de modal dialoog om de gebruiker te informeren over onbewaarde wijzigingen wanneer hij de pagina verlaat. Een modal dialoog vraagt de aandacht van de gebruiker en verplicht de gebruiker om actie te ondernemen voordat de site verder gebruikt kan worden.
  *
  * @extends HTMLElement
+ * @mixes vlElement
  *
- * @property {boolean} data-title - Attribuut wordt gebruikt om de titel (in een h2) te zetten. Indien leeg of weggelaten, wordt er geen titel element gezet.
- * @property {boolean} open - Attribuut wordt gebruikt om aan te duiden dat de modal onmiddellijk geopend moet worden na het renderen.
- * @property {boolean} closable - Attribuut wordt gebruikt om aan te duiden dat de modal sluitbaar is.
- * @property {boolean} not-cancellable - Attribuut wordt gebruikt om aan te duiden dat de modal niet annuleerbaar is.
- * @property {boolean} not-auto-closable - Attribuut wordt gebruikt om aan te duiden dat de modal niet sluit bij het uitvoeren van een actie in de button slot.
- * @property {boolean} allow-overflow - Attribuut wordt gebruikt om aan te duiden de inhoud van de modal uit de modal mag treden.
+ * @property {boolean} data-vl-title - Attribuut wordt gebruikt om de titel (in een h2) te zetten. Indien leeg of weggelaten, wordt er geen titel element gezet.
+ * @property {boolean} data-vl-open - Attribuut wordt gebruikt om aan te duiden dat de modal onmiddellijk geopend moet worden na het renderen.
+ * @property {boolean} data-vl-closable - Attribuut wordt gebruikt om aan te duiden dat de modal sluitbaar is.
+ * @property {boolean} data-vl-not-cancellable - Attribuut wordt gebruikt om aan te duiden dat de modal niet annuleerbaar is.
+ * @property {boolean} data-vl-not-auto-closable - Attribuut wordt gebruikt om aan te duiden dat de modal niet sluit bij het uitvoeren van een actie in de button slot.
+ * @property {boolean} data-vl-allow-overflow - Attribuut wordt gebruikt om aan te duiden de inhoud van de modal uit de modal mag treden.
  *
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-modal/releases/latest|Release notes}
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-modal/issues|Issues}
@@ -26,7 +27,7 @@ import '/node_modules/vl-ui-modal/lib/modal.js';
  */
 export class VlModal extends vlElement(HTMLElement) {
   static get _observedAttributes() {
-    return ['id', 'data-title', 'closable', 'not-cancellable', 'open', 'not-auto-closable', 'allow-overflow'];
+    return ['id', 'title', 'closable', 'not-cancellable', 'open', 'not-auto-closable', 'allow-overflow'];
   }
 
   static get _closableAttribute() {
@@ -40,34 +41,29 @@ export class VlModal extends vlElement(HTMLElement) {
   constructor() {
     super(`
       <style>
-        .vl-modal-dialog {
-          position: fixed;
-        }
-      </style>
-      <style>
         @import '/node_modules/vl-ui-modal/dist/style.css';
         @import '/node_modules/vl-ui-icon/dist/style.css';
         @import '/node_modules/vl-ui-link/dist/style.css';
         @import '/node_modules/vl-ui-action-group/dist/style.css';
         @import '/node_modules/vl-ui-button/dist/style.css';
 
-        :host([allow-overflow]) dialog {
+        :host([data-vl-allow-overflow]) dialog {
           overflow: visible;
         }
       </style>
 
       <div class="vl-modal">
-          <dialog class="vl-modal-dialog" data-vl-modal tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-toggle-title" aria-describedby="modal-toggle-description">
-            <div class="vl-modal-dialog__content" id="modal-toggle-description">
-                <slot name="content">Modal content</slot>
-            </div>
-            <div is="vl-action-group" id="modal-action-group">
-              <slot name="button" data-vl-modal-close></slot>
-              <button is="vl-button-link" id="modal-toggle-cancellable" data-vl-modal-close>
-                  <span is="vl-icon" icon="cross" before></span>Annuleer
-              </button>
-            </div>
-          </dialog>
+        <dialog class="vl-modal-dialog" data-vl-modal tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-toggle-title" aria-describedby="modal-toggle-description">
+          <div class="vl-modal-dialog__content" id="modal-toggle-description">
+            <slot name="content">Modal content</slot>
+          </div>
+          <div is="vl-action-group" id="modal-action-group">
+            <slot name="button" data-vl-modal-close></slot>
+            <button is="vl-button-link" id="modal-toggle-cancellable" data-vl-modal-close>
+              <span is="vl-icon" icon="cross" before></span>Annuleer
+            </button>
+          </div>
+        </dialog>
       </div>
     `);
   }
@@ -164,7 +160,7 @@ export class VlModal extends vlElement(HTMLElement) {
     this._dialogElement.id = newValue;
   }
 
-  _dataTitleChangedCallback(oldValue, newValue) {
+  _titleChangedCallback(oldValue, newValue) {
     if (newValue) {
       if (this._titleElement) {
         this._titleElement.innerText = newValue;
