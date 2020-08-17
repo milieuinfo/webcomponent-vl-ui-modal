@@ -155,6 +155,7 @@ describe('vl-modal-auto-open', async () => {
 
   it('een modal die automatisch opent bij het laden van de pagina valt niet buiten het scherm', async () => {
     const modal = await vlModalAutoOpenPage.getAutoOpenModal();
+    await assert.eventually.isTrue(modal.isDisplayed());
     await assert.eventually.isTrue(modal.isInViewport());
   });
 });
