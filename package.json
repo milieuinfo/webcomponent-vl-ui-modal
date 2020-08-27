@@ -52,9 +52,9 @@
   },
   "devDependencies": {
     "@govflanders/vl-ui-modal": "^3.11.5",
-    "vl-ui-datepicker": "^3.0.5",
-    "vl-ui-input-field": "^3.2.0",
     "vl-ui-body": "^1.0.4",
-    "vl-ui-util": "^5.2.12"
+    "vl-ui-datepicker": "^3.0.7",
+    "vl-ui-input-field": "^3.2.4",
+    "vl-ui-util": "^5.2.13"
   }
 }
