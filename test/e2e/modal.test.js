@@ -121,9 +121,9 @@ describe('vl-modal', async () => {
     const modal = await vlModalPage.getModalMetDatepicker();
     const element = await modal.findElement(By.css('vl-datepicker'));
     const datepicker = await new VlDatepicker(driver, element);
-    await datepicker.selectMonth('mei');
-    await datepicker.selectDay(1);
-    await assert.eventually.equal(datepicker.getInputValue(), '01.05.2020');
+    await datepicker.scrollIntoView();
+    await datepicker.selectDay(25);
+    await assert.eventually.isDefined(datepicker.getInputValue());
     await modal.cancel();
   });
 
