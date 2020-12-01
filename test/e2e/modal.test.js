@@ -1,13 +1,14 @@
-const {assert, driver, By, Key} = require('vl-ui-core').Test.Setup;
+const {assert, getDriver, By, Key} = require('vl-ui-core').Test.Setup;
 const VlModalPage = require('./pages/vl-modal.page');
 const {VlDatepicker} = require('vl-ui-datepicker').Test;
 const {VlInputField} = require('vl-ui-input-field').Test;
 
 describe('vl-modal', async () => {
-  const vlModalPage = new VlModalPage(driver);
+  let vlModalPage;
 
-  before(async () => {
-    return await vlModalPage.load();
+  before(() => {
+    vlModalPage = new VlModalPage(getDriver());
+    return vlModalPage.load();
   });
 
   it('als gebruiker kan ik de modal openen en sluiten via de annuleer knop', async () => {
