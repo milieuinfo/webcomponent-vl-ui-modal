@@ -4,10 +4,12 @@ const {VlDatepicker} = require('vl-ui-datepicker').Test;
 const {VlInputField} = require('vl-ui-input-field').Test;
 
 describe('vl-modal', async () => {
+  let driver;
   let vlModalPage;
 
   before(() => {
-    vlModalPage = new VlModalPage(getDriver());
+    driver = getDriver();
+    vlModalPage = new VlModalPage(driver);
     return vlModalPage.load();
   });
 
