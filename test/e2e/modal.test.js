@@ -135,6 +135,7 @@ describe('vl-modal', async () => {
     await assert.eventually.isFalse(modal.isDisplayed());
     await vlModalPage.openModal();
     await assert.eventually.isTrue(modal.isDisplayed());
+    await modal.click();
     await modal.sendKeys(Key.ESCAPE);
     await assert.eventually.isTrue(modal.isDisplayed());
     await modal.cancel();
