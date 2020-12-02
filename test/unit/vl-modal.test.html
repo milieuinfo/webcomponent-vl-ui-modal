@@ -55,7 +55,7 @@
           },
         };
 
-        customElements.whenDefined('vl-modal').then(done);
+        customElements.whenDefined('vl-modal').then(() => done());
       });
 
       teardown(() => {

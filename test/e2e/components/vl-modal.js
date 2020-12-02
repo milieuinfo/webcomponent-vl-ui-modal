@@ -1,4 +1,4 @@
-const {driver, By} = require('vl-ui-core').Test.Setup;
+const {By} = require('vl-ui-core').Test.Setup;
 const {VlElement, Config} = require('vl-ui-core').Test;
 
 class VlModal extends VlElement {
@@ -54,14 +54,14 @@ class VlModal extends VlElement {
     if (Config.browserName == 'chrome') {
       element = await this._getDialog();
     } else {
-      element = await driver.findElement(By.css('body'));
+      element = await this.driver.findElement(By.css('body'));
     }
     await element.sendKeys(key);
   }
 
   async _getDialog() {
     const element = await this.shadowRoot.findElement(By.css('dialog'));
-    return new VlElement(driver, element);
+    return new VlElement(this.driver, element);
   }
 
   async _getCancelButton() {

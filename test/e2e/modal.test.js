@@ -1,13 +1,17 @@
-const {assert, driver, By, Key} = require('vl-ui-core').Test.Setup;
+const {Config} = require('vl-ui-core').Test;
+const {assert, getDriver, By, Key} = require('vl-ui-core').Test.Setup;
 const VlModalPage = require('./pages/vl-modal.page');
 const {VlDatepicker} = require('vl-ui-datepicker').Test;
 const {VlInputField} = require('vl-ui-input-field').Test;
 
 describe('vl-modal', async () => {
-  const vlModalPage = new VlModalPage(driver);
+  let driver;
+  let vlModalPage;
 
-  before(async () => {
-    return await vlModalPage.load();
+  before(() => {
+    driver = getDriver();
+    vlModalPage = new VlModalPage(driver);
+    return vlModalPage.load();
   });
 
   it('als gebruiker kan ik de modal openen en sluiten via de annuleer knop', async () => {
@@ -128,19 +132,21 @@ describe('vl-modal', async () => {
   });
 
   it('als gebruiker kan ik een niet closable modal niet sluiten door op escape te klikken', async () => {
-    let modal = await vlModalPage.getModal();
-    await assert.eventually.isFalse(modal.isDisplayed());
-    await vlModalPage.openModal();
-    await assert.eventually.isTrue(modal.isDisplayed());
-    await modal.sendKeys(Key.ESCAPE);
-    await assert.eventually.isTrue(modal.isDisplayed());
-    await modal.cancel();
+    if (Config.browserName != 'edge') {
+      let modal = await vlModalPage.getModal();
+      await assert.eventually.isFalse(modal.isDisplayed());
+      await vlModalPage.openModal();
+      await assert.eventually.isTrue(modal.isDisplayed());
+      await modal.sendKeys(Key.ESCAPE);
+      await assert.eventually.isTrue(modal.isDisplayed());
+      await modal.cancel();
 
-    modal = await vlModalPage.getModalClosable();
-    await assert.eventually.isFalse(modal.isDisplayed());
-    await vlModalPage.openModalClosable();
-    await assert.eventually.isTrue(modal.isDisplayed());
-    await modal.sendKeys(Key.ESCAPE);
-    await assert.eventually.isFalse(modal.isDisplayed());
+      modal = await vlModalPage.getModalClosable();
+      await assert.eventually.isFalse(modal.isDisplayed());
+      await vlModalPage.openModalClosable();
+      await assert.eventually.isTrue(modal.isDisplayed());
+      await modal.sendKeys(Key.ESCAPE);
+      await assert.eventually.isFalse(modal.isDisplayed());
+    }
   });
 });
