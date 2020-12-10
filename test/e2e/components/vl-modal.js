@@ -31,7 +31,8 @@ class VlModal extends VlElement {
 
   async submit() {
     const button = await this._getActionButton();
-    return button.click();
+    await button.scrollIntoView();
+    await button.click();
   }
 
   async getContentSlotElements() {
