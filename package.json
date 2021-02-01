@@ -41,7 +41,7 @@
     "@govflanders/vl-ui-util": "^3.12.3",
     "vl-ui-action-group": "^3.1.2",
     "vl-ui-button": "^5.0.9",
-    "vl-ui-core": "^7.1.0",
+    "vl-ui-core": "^7.1.1",
     "vl-ui-icon": "^5.2.1"
   },
   "peerDependencies": {
