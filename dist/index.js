@@ -1,3 +1,1 @@
-module.exports = {
-  VlModal: require('../dist/vl-modal.src.js').VlModal,
-};
+export * from '../dist/vl-modal.src.js';
