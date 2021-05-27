@@ -1,5 +1,5 @@
 const VlModal = require('../components/vl-modal');
-const {Page, Config, VlElement} = require('vl-ui-core').Test;
+const {Page, Config} = require('vl-ui-core').Test;
 const {By} = require('vl-ui-core').Test.Setup;
 
 class VlModalPage extends Page {
@@ -31,20 +31,6 @@ class VlModalPage extends Page {
     return this._getModal('#modal-lis');
   }
 
-  async getModalSafari() {
-    const container = await new VlElement(this.driver, 'vl-modal-container-test');
-    const parent = container.shadowRoot;
-    return this._getModal(parent.shadowRoot);
-  }
-
-  async getModalMetDatepicker() {
-    return this._getModal('#modal-datepicker');
-  }
-
-  async getModalMetVeelTekst() {
-    return this._getModal('#modal-vt');
-  }
-
   async openModal() {
     return this._openModal('#button-open-modal');
   }
@@ -73,19 +59,7 @@ class VlModalPage extends Page {
     return this._openModal('#button-open-modal-lis');
   }
 
-  async openModalSafari() {
-    return this._openModal('#button-open-modal-safari');
-  }
-
-  async openModalMetVeelTekst() {
-    return this._openModal('#button-open-modal-vt');
-  }
-
-  async openModalMetDatepicker() {
-    return this._openModal('#button-open-modal-datepicker');
-  }
-
-  async klikVoegListenerToe() {
+  async addListener() {
     return this.driver.findElement(By.css('#add-listener')).click();
   }
 

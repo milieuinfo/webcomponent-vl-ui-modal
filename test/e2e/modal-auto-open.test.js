@@ -1,7 +1,7 @@
 const {assert, getDriver} = require('vl-ui-core').Test.Setup;
 const VlModalAutoOpenPage = require('./pages/vl-modal-auto-open.page');
 
-describe('vl-modal-auto-open', async () => {
+describe('vl-modal auto-open', async () => {
   let driver;
   let vlModalAutoOpenPage;
 
