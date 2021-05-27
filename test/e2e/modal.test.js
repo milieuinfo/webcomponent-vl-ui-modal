@@ -1,8 +1,6 @@
 const {Config} = require('vl-ui-core').Test;
-const {assert, getDriver, By, Key} = require('vl-ui-core').Test.Setup;
+const {assert, getDriver, Key} = require('vl-ui-core').Test.Setup;
 const VlModalPage = require('./pages/vl-modal.page');
-const {VlDatepicker} = require('vl-ui-datepicker').Test;
-const {VlInputField} = require('vl-ui-input-field').Test;
 
 describe('vl-modal', async () => {
   let driver;
@@ -12,6 +10,10 @@ describe('vl-modal', async () => {
     driver = getDriver();
     vlModalPage = new VlModalPage(driver);
     return vlModalPage.load();
+  });
+
+  it('WCAG', async () => {
+    await assert.eventually.isFalse(vlModalPage.hasWcagIssues());
   });
 
   it('als gebruiker kan ik de modal openen en sluiten via de annuleer knop', async () => {
@@ -97,38 +99,11 @@ describe('vl-modal', async () => {
 
   it('als gebruiker kan ik iets uitvoeren door in de modal op de actie knop te klikken', async () => {
     const modal = await vlModalPage.getModalListener();
-    await vlModalPage.klikVoegListenerToe();
+    await vlModalPage.addListener();
     await vlModalPage.openModalListener();
     await modal.submit();
     await assert.eventually.isFalse(modal.isDisplayed());
     await assert.eventually.equal(vlModalPage.getListenerText(), 'Lach de lach der dwazen');
-  });
-
-  it('als gebruiker kan ik meteen typen in het input-veld in de modal in Safari', async () => {
-    const modal = await vlModalPage.getModalSafari();
-    await vlModalPage.openModalSafari();
-    const slotElements = await modal.getContentSlotElements();
-    const input = await new VlInputField(driver, slotElements[0]);
-    await assert.eventually.isTrue(input.hasFocus());
-    await modal.close();
-  });
-
-  it('als gebruiker kan ik verticaal scrollen als er te veel tekst in de modal staat', async () => {
-    await vlModalPage.openModalMetVeelTekst();
-    const modal = await vlModalPage.getModalMetVeelTekst();
-    await modal.scrollToTop();
-    await modal.cancel();
-  });
-
-  it('als gebruiker kan ik op een element klikken dat groter is dan de content van de modal als het attribuut allow-overflow gezet is', async () => {
-    await vlModalPage.openModalMetDatepicker();
-    const modal = await vlModalPage.getModalMetDatepicker();
-    const element = await modal.findElement(By.css('vl-datepicker'));
-    const datepicker = await new VlDatepicker(driver, element);
-    await datepicker.scrollIntoView();
-    await datepicker.selectDay(25);
-    await assert.eventually.isDefined(datepicker.getInputValue());
-    await modal.cancel();
   });
 
   it('als gebruiker kan ik een niet closable modal niet sluiten door op escape te klikken', async () => {
