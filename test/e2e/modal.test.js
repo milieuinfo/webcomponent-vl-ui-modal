@@ -12,6 +12,10 @@ describe('vl-modal', async () => {
     return vlModalPage.load();
   });
 
+  it('WCAG', async () => {
+    await assert.eventually.isFalse(vlModalPage.hasWcagIssues());
+  });
+
   it('als gebruiker kan ik de modal openen en sluiten via de annuleer knop', async () => {
     const modal = await vlModalPage.getModal();
     await assert.eventually.isFalse(modal.isDisplayed());

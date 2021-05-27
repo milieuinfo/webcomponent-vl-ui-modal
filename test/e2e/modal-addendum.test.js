@@ -13,6 +13,10 @@ describe('vl-modal addendum', async () => {
     return vlModalPage.load();
   });
 
+  it('WCAG', async () => {
+    await assert.eventually.isFalse(vlModalPage.hasWcagIssues());
+  });
+
   it('als gebruiker kan ik verticaal scrollen als er te veel tekst in de modal staat', async () => {
     await vlModalPage.openModalWithLongText();
     const modal = await vlModalPage.getModalWithLongText();

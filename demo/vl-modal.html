@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 
 <head>
     <title>vl-modal voorbeeld</title>
@@ -65,10 +65,10 @@
 
         <vl-demo data-vl-title="Modal, programmatisch open/close">
             <script type="text/javascript">
-                // eslint-disable-next-line no-unused-vars
                 const openModal = (id) => {
                   document.querySelector('#' + id).open();
                 };
+                openModal;
             </script>
 
             <button id="button-open-modal-ma" is="vl-button" onclick="openModal('modal-ma')">Open</button>
@@ -81,7 +81,7 @@
         <vl-demo data-vl-title="Modal met functie op sluit actie">
             <div is="vl-action-group">
                 <button id="button-open-modal-lis" is="vl-button" data-vl-modal-open="modal-lis">Open</button>
-                <button id="add-listener" is="vl-button" onclick="voegCloseListenerToe()">Voeg listener toe</button>
+                <button id="add-listener" is="vl-button" onclick="addListener()">Voeg listener toe</button>
             </div>
 
             <vl-modal id="modal-lis" data-vl-title="Modal" data-vl-closable>
@@ -90,10 +90,10 @@
             </vl-modal>
 
             <script type="text/javascript">
-                // eslint-disable-next-line no-unused-vars
-                const voegCloseListenerToe = () => {
+                const addListener = () => {
                   document.querySelector('vl-modal[id="modal-lis"]').on('close', (event) => document.querySelector('#button-open-modal-lis').innerText = 'Lach de lach der dwazen');
                 };
+                addListener;
             </script>
         </vl-demo>
     </vl-demo-page>

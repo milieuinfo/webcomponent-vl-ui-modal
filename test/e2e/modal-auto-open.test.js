@@ -3,16 +3,20 @@ const VlModalAutoOpenPage = require('./pages/vl-modal-auto-open.page');
 
 describe('vl-modal auto-open', async () => {
   let driver;
-  let vlModalAutoOpenPage;
+  let vlModalPage;
 
   before(() => {
     driver = getDriver();
-    vlModalAutoOpenPage = new VlModalAutoOpenPage(driver);
-    return vlModalAutoOpenPage.load();
+    vlModalPage = new VlModalAutoOpenPage(driver);
+    return vlModalPage.load();
+  });
+
+  it('WCAG', async () => {
+    await assert.eventually.isFalse(vlModalPage.hasWcagIssues());
   });
 
   it('een modal die automatisch opent bij het laden van de pagina valt niet buiten het scherm', async () => {
-    const modal = await vlModalAutoOpenPage.getAutoOpenModal();
+    const modal = await vlModalPage.getAutoOpenModal();
     await driver.wait(async () => {
       const displayed = await modal.isDisplayed();
       return displayed;
