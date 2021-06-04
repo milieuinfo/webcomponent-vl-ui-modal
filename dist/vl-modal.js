@@ -1,4 +1,5 @@
 import {vlElement, define, awaitUntil} from '/node_modules/vl-ui-core/dist/vl-core.js';
+import '/node_modules/vl-ui-grid/dist/vl-grid.js';
 import '/node_modules/vl-ui-icon/dist/vl-icon.js';
 import '/node_modules/vl-ui-button/dist/vl-button.js';
 import '/node_modules/vl-ui-action-group/dist/vl-action-group.js';
@@ -42,6 +43,7 @@ export class VlModal extends vlElement(HTMLElement) {
     super(`
       <style>
         @import '/node_modules/vl-ui-modal/dist/style.css';
+        @import '/node_modules/vl-ui-grid/dist/style.css';
         @import '/node_modules/vl-ui-icon/dist/style.css';
         @import '/node_modules/vl-ui-link/dist/style.css';
         @import '/node_modules/vl-ui-action-group/dist/style.css';
@@ -54,14 +56,18 @@ export class VlModal extends vlElement(HTMLElement) {
 
       <div class="vl-modal">
         <dialog class="vl-modal-dialog" data-vl-modal tabindex="-1" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-toggle-title" aria-describedby="modal-toggle-description">
-          <div class="vl-modal-dialog__content" id="modal-toggle-description">
-            <slot name="content">Modal content</slot>
-          </div>
-          <div is="vl-action-group" id="modal-action-group">
-            <slot name="button" data-vl-modal-close></slot>
-            <button is="vl-button-link" id="modal-toggle-cancellable" data-vl-modal-close>
-              <span is="vl-icon" icon="cross" before></span>Annuleer
-            </button>
+          <div is="vl-grid" data-vl-is-stacked>
+            <div id="modal-toggle-description" is="vl-column" data-vl-size="12" data-vl-medium-size="12" class="vl-modal-dialog__content">
+              <slot name="content">Modal content</slot>
+            </div>
+            <div is="vl-column" data-vl-size="12" data-vl-medium-size="12">
+              <div id="modal-action-group" is="vl-action-group">
+                <slot name="button" data-vl-modal-close></slot>
+                <button is="vl-button-link" id="modal-toggle-cancellable" data-vl-modal-close>
+                  <span is="vl-icon" icon="cross" before></span>Annuleer
+                </button>
+              </div>
+            </div>
           </div>
         </dialog>
       </div>
