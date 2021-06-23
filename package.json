@@ -39,11 +39,11 @@
   "dependencies": {
     "@govflanders/vl-ui-core": "^4.1.24",
     "@govflanders/vl-ui-util": "^3.12.24",
-    "vl-ui-action-group": "^3.1.3",
-    "vl-ui-button": "^5.0.10",
+    "vl-ui-action-group": "^3.1.4",
+    "vl-ui-button": "^5.0.11",
     "vl-ui-core": "^7.2.4",
-    "vl-ui-grid": "^3.3.0",
-    "vl-ui-icon": "^5.2.2"
+    "vl-ui-grid": "^3.3.1",
+    "vl-ui-icon": "^5.2.3"
   },
   "peerDependencies": {
     "vl-ui-action-group": "^3.1.2",
@@ -53,10 +53,10 @@
   },
   "devDependencies": {
     "@govflanders/vl-ui-modal": "^3.12.7",
-    "vl-ui-alert": "^4.1.1",
+    "vl-ui-alert": "^4.1.2",
     "vl-ui-body": "^1.0.8",
-    "vl-ui-datepicker": "^3.2.7",
-    "vl-ui-input-field": "^3.2.11",
-    "vl-ui-util": "^5.3.13"
+    "vl-ui-datepicker": "^3.2.8",
+    "vl-ui-input-field": "^3.2.12",
+    "vl-ui-util": "^5.4.3"
   }
 }
